@@ -4,14 +4,18 @@ class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
-}
-
-class _LogInPageState extends State<LogInPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: const Text('Probando login'),),
+      appBar: AppBar(title: const Text('Testeando el acceso al login')),
     );
   }
 }
+
+// class _LogInPageState extends State<LogInPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Probando login'),),
+//     );
+//   }
+// }
