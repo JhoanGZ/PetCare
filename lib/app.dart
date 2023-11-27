@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 
-class PetCareApp extends StatelessWidget{
+class PetCareApp extends StatelessWidget {
   const PetCareApp({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Login_page(key: key) 
-    ,)    
+      routes: {
+        '/': (context) => const Login();
+      },
+    );
   }
-};
+}
 
+class Login {
+  const Login();
+}
