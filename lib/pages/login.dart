@@ -32,7 +32,7 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+      body: Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(33, 49, 34, 0),
         child: Column(
@@ -41,7 +41,7 @@ class LogInPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 37, bottom: 59.82),
               child: const Text(
-                'PetCare es financiada de aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.',
+                'PetCare es financiada con aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.',
                 textAlign: TextAlign.center,
                 style: PetCareThemes.statementTextStyle,
               ),
@@ -52,10 +52,10 @@ class LogInPage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 14.82, bottom: 32.63),
-              child: TextField(
-                decoration:
+                child: TextField(
+                  decoration:
                     PetCareInputStyle(labelText: 'Contraseña').regularInput,
-              ),
+                ),
             ),
             const Text('¿Olvidaste la contraseña? Recuperar', style: PetCareThemes.statementTextStyle,)
           ],
