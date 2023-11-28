@@ -2,7 +2,7 @@ class AppRoutes {
   // Si alguna dificultad para reconocer las variables, pregunten y anoten su descripción al lado con el nombre que tenemos en figma.
   AppRoutes._();
   static const String splash = 'splash';
-  static const String logInPage = 'logInPage'; // temporal para testear el login
+  static const String logIn = 'login'; // temporal para testear el login
   static const String home = 'home';
   static const String registerStepOne = 'registerStepOne';
   static const String registerStepTwo = 'registerStepTwo';
