@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PetCareColors {
   PetCareColors._();
 
-  static const Color brandPrimaryColor = Color(0xFFFF6100);
+  static const Color brandPrimaryColor = Color(0xFFFF6100); 
   static const Color brandSecondaryColor = Color(0xFFFFFFFF);
   static const Color brandDisabledColor = Color(0xFF8D8D8D);
   static const Color brandAcceptColor = Color(0xFF038E00);
