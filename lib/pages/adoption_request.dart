@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class AdoptionRequest extends StatelessWidget {
+  const AdoptionRequest({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('AdoptionRequest'),
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a mi Home',
+          'Bienvenido a mi AdoptionRequest',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

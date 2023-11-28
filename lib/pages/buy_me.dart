@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class BuyMe extends StatelessWidget {
+  const BuyMe({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('BuyMe'),
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a mi Home',
+          'Bienvenido a mi BuyMe',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

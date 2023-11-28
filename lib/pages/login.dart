@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
@@ -53,6 +54,8 @@ class LogInPage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
+
+                            Navigator.of(context).pushNamed(AppRoutes.retrievePass);
                             //logica del text buton Logic:
                           },
                           child: const Text(
@@ -125,6 +128,8 @@ class LogInPage extends StatelessWidget {
                         style: PetCareThemes.statementTextStyle),
                     TextButton(
                       onPressed: () {
+
+                        Navigator.of(context).pushNamed(AppRoutes.buyMe);
                         //logica del text buton Toca aquí Logic:
                       },
                       child: const Text(
@@ -142,9 +147,10 @@ class LogInPage extends StatelessWidget {
                     ),
                     const Text('¿No estás registrado?',
                         style: PetCareThemes.statementTextStyle),
-                    TextButton(
+                    TextButton(// =====================================================boton registar============
                       onPressed: () {
-                        //logica del text buton RegistrarseLogic:
+                        Navigator.of(context).pushNamed(AppRoutes.registerStepOne);
+                        //logica del text buton Registrarse Logic:
                       },
                       child: const Text(
                         ' Registrarse ahora',
@@ -165,6 +171,8 @@ class LogInPage extends StatelessWidget {
                         style: PetCareThemes.statementTextStyle),
                     TextButton(
                       onPressed: () {
+
+                        Navigator.of(context).pushNamed(AppRoutes.contact);
                         //logica del text buton contactanos Logic:
                       },
                       child: const Text(
