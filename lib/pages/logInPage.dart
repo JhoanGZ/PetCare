@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({super.key});
-
   @override
   State<LogInPage> createState() => _LogInPageState();
 }
