@@ -10,7 +10,12 @@ class PetCareThemes {//Esta clase nos permite dar estilo a todos los textos de l
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandShadowColor,
   );
-
+static const TextStyle linkTextStyle = TextStyle(//esta atributo es usado para los enunciados
+    fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
+    fontWeight: FontWeight.w200, // esto es el ancho de la linea
+    fontSize: 15, //tamaño de la fuente
+    color: PetCareColors.brandLinkColor,
+  );
   static const TextStyle titleTextStyle = TextStyle(//esta atributo es usado para los titulos escritos en naranjo
     fontFamily: 'Inter', 
     fontWeight: FontWeight.w600, // FontWeight para inter-semibold
@@ -24,12 +29,19 @@ class PetCareThemes {//Esta clase nos permite dar estilo a todos los textos de l
     fontSize: 24,
     color: PetCareColors.brandShadowColor,
   );
-}
+    static const TextStyle buttonTextStyle = TextStyle(//esta atributo es usado para los titulos escritos en naranjo
+    fontFamily: 'Inter', 
+    fontWeight: FontWeight.w600, // FontWeight para inter-semibold
+    fontSize: 15,
+    color: PetCareColors.brandSecondaryColor,
+  );
 
-class PetCareInputStyle {//esta clase da formato a los inputs
+}
+// =====================================================iNPUTS===========================================================
+class PetCareInputStyle {
   final String labelText;
 
-  PetCareInputStyle({required this.labelText});//El parametro label text es requerido pero puede ser recibido como un string vacio
+  PetCareInputStyle({required this.labelText});
 
   InputDecoration get regularInput {
     return InputDecoration(
@@ -37,9 +49,28 @@ class PetCareInputStyle {//esta clase da formato a los inputs
       fillColor: PetCareColors.brandSecondaryColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.0),
+        borderSide: const BorderSide(color: PetCareColors.brandSecondaryColor), // Cambio en el color del borde cuando no está enfocado
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: const BorderSide(color: PetCareColors.brandPrimaryColor), // Color del borde al estar enfocado
       ),
       labelText: labelText,
-      labelStyle: const TextStyle(fontSize: 12.0, color: PetCareColors.brandShadowColor, fontFamily: 'Inter'), // etiqueta del input con su formato correspondiente
+      labelStyle: const TextStyle(fontSize: 12.0, color: PetCareColors.brandShadowColor, fontFamily: 'Inter'),
     );
   }
 }
+//=====================================================BUTTONS===========================================================
+class PetCareButtonStyles {
+  static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
+    minimumSize: const Size(328, 53), //alto y ancho del boton
+    backgroundColor: PetCareColors.brandPrimaryColor, // Color de fondo del botón
+    foregroundColor: Colors.white, // Color del texto del botón
+    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Padding del botón
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(7), // Bordes redondeados del botón
+    ),
+    textStyle: PetCareThemes.buttonTextStyle
+  );
+}
+
