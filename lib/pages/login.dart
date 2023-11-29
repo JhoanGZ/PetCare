@@ -148,7 +148,7 @@ class _LogInPageState extends State<LogInPage> {
                         Navigator.of(context).pushNamed(AppRoutes.home,arguments: userName);
                         //luego cambiar pushNamed por pushReplacementNamed para evitar volver
                       }
-                      // Acción al presionar el botón
+                        //Acción al presionar el botón
                     },
                     style: PetCareButtonStyles.elevatedButtonStyle,
                     child: const Text('Entrar'),
@@ -241,8 +241,7 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(AppRoutes.registerStepOne);
+                        Navigator.of(context).pushNamed(AppRoutes.registerStepOne);
                         //logica del text buton Registrarse Logic:
                       },
                       child: const Text(
