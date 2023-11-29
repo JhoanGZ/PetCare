@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/services/authentication_login.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class LogInPage extends StatefulWidget {
@@ -12,7 +13,17 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   final _formLoginKey = GlobalKey<FormState>();
-  late String userName;//variable que pasara al home
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+  late String userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +65,7 @@ class _LogInPageState extends State<LogInPage> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 0),
                         child: TextFormField(
+                          controller: _emailController,
                           validator: (email) {
                             if (email == null || email.isEmpty) {
                               return 'Campo requerido';
@@ -70,6 +82,7 @@ class _LogInPageState extends State<LogInPage> {
                         margin:
                             const EdgeInsets.only(top: 14.82, bottom: 30.63),
                         child: TextFormField(
+                          controller: _passwordController,
                           validator: (password) {
                             if (password == null || password.isEmpty) {
                               return 'Contraseña requerida';
@@ -137,18 +150,17 @@ class _LogInPageState extends State<LogInPage> {
                 ),
 
                 //Boton entrar
-
                 Container(
                   margin: const EdgeInsets.only(top: 20, bottom: 26),
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_formLoginKey.currentState!.validate()) {
-                        // ignore: avoid_print
-                        
-                        Navigator.of(context).pushNamed(AppRoutes.home,arguments: userName);
-                        //luego cambiar pushNamed por pushReplacementNamed para evitar volver
-                      }
-                        //Acción al presionar el botón
+                    onPressed: () async {
+                      await authenticationLogin(
+                        // TODO::LUIGUI::29-11-23:: Dentro de esta función está la navegación
+                        _formLoginKey,
+                        _emailController,
+                        _passwordController,
+                        context,
+                      );
                     },
                     style: PetCareButtonStyles.elevatedButtonStyle,
                     child: const Text('Entrar'),
@@ -241,7 +253,8 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.registerStepOne);
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.registerStepOne);
                         //logica del text buton Registrarse Logic:
                       },
                       child: const Text(
