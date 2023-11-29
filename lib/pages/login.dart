@@ -12,7 +12,7 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   final _formLoginKey = GlobalKey<FormState>();
-  late String userName;//variable que pasara al home
+  late String userName; //variable que pasara al home
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,11 +144,12 @@ class _LogInPageState extends State<LogInPage> {
                     onPressed: () {
                       if (_formLoginKey.currentState!.validate()) {
                         // ignore: avoid_print
-                        
-                        Navigator.of(context).pushNamed(AppRoutes.home,arguments: userName);
+
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.home, arguments: userName);
                         //luego cambiar pushNamed por pushReplacementNamed para evitar volver
                       }
-                        //Acción al presionar el botón
+                      // Acción al presionar el botón
                     },
                     style: PetCareButtonStyles.elevatedButtonStyle,
                     child: const Text('Entrar'),
@@ -241,7 +242,8 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.registerStepOne);
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.registerStepOne);
                         //logica del text buton Registrarse Logic:
                       },
                       child: const Text(

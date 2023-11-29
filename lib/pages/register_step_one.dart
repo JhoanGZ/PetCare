@@ -16,26 +16,31 @@ class RegisterStepOne extends StatelessWidget {
               Navigator.of(context).pushNamed(AppRoutes.logIn);
             }),
       ),
-      body: 
-        const Padding(
-          padding: EdgeInsets.only(left: 39),
-          child:
-          Column(
-            children: [
-              SizedBox(child: 
-                Text('Registrarse', 
-                  style: PetCareThemes.titleTextStyle, 
-                  textAlign: TextAlign.right,
-                ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 39),
+        child: Column(
+          children: [
+            const SizedBox(
+              child: Text(
+                'Registrarse',
+                style: PetCareThemes.titleTextStyle,
+                textAlign: TextAlign.right,
               ),
-              SizedBox(
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const SetPhotoScreen()));
+              },
+              child: SizedBox(
                 width: 135,
                 height: 138,
-                child: ImageInput(),
-                )
-            ],
-          ),
+                child: Image.asset('assets/images/pic_default_user.png'),
+              ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }
