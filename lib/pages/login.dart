@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/services/authentication_login.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class LogInPage extends StatefulWidget {
@@ -12,7 +13,9 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   final _formLoginKey = GlobalKey<FormState>();
-  late String userName; //variable que pasara al home
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+  late String userName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,15 +144,13 @@ class _LogInPageState extends State<LogInPage> {
                 Container(
                   margin: const EdgeInsets.only(top: 20, bottom: 26),
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_formLoginKey.currentState!.validate()) {
-                        // ignore: avoid_print
-
-                        Navigator.of(context)
-                            .pushNamed(AppRoutes.home, arguments: userName);
-                        //luego cambiar pushNamed por pushReplacementNamed para evitar volver
-                      }
-                      // Acción al presionar el botón
+                    onPressed: () async {
+                      await authenticationLogin(
+                        _formLoginKey,
+                        _emailController,
+                        _passwordController,
+                        context,
+                      );
                     },
                     style: PetCareButtonStyles.elevatedButtonStyle,
                     child: const Text('Entrar'),

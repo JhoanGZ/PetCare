@@ -35,14 +35,15 @@ Future<void> authenticationLogin(
 
         // Guarda los datos que necesitas o realiza otras acciones
         String userToken = responseData['token'];
+        String userAuth = responseData['auth'];
 
         // Puedes almacenar estos datos en algún lugar, por ejemplo, utilizando Provider o SharedPreferences
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
-        Navigator.of(context).pushNamed(
-          AppRoutes.home,
-          arguments: {'userToken': userToken},
-        );
+        if (userAuth == true) {
+          Navigator.of(context)
+              .pushNamed(AppRoutes.home, arguments: {'userToken': userToken});
+        }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
         print('Error en la autenticación: ${response.body}');
