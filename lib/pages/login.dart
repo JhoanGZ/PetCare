@@ -1,71 +1,294 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/widgets/checkbox.dart';
 
-// Define una función para manejar la lógica de autenticación
-Future<void> authenticationLogin(
-  GlobalKey<FormState> formKey,
-  TextEditingController emailController,
-  TextEditingController passwordController,
-  BuildContext context,
-) async {
-  if (formKey.currentState!.validate()) {
-    // Datos del usuario del formulario usando controladores
-    String email = emailController.text;
-    String password = passwordController.text;
+class LogInPage extends StatefulWidget {
+  const LogInPage({super.key});
 
-    try {
-      // Realizar la solicitud a la API
-      final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/login'), // URL correcta
-        body: {
-          'email': email,
-          'password': password,
-        },
-      );
+  @override
+  State<LogInPage> createState() => _LogInPageState();
+}
 
-      // Verificar la respuesta de la API y manejarla según sea necesario
-      if (response.statusCode == 200) {
-        // La autenticación fue exitosa
-        var responseData = json.decode(response.body);
+class _LogInPageState extends State<LogInPage> {
+  final _formLoginKey = GlobalKey<FormState>();
+  late String userName; //variable que pasara al home
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // crea el esqueleto de la pantalla
+      body: SingleChildScrollView(
+        child: Center(
+          //centra el contenido
+          child: Padding(
+            //damos margenes
+            padding: const EdgeInsets.fromLTRB(
+                33, 49, 34, 0), //especificamos los margenes, estos
+            //deben ser sumados a margenes especificos mas abajo
+            child: Column(
+              // columna para distribuir elementos verticalmente
+              children: <Widget>[
+                // se utiliza la etiqueta widget para crear una lista de widgets
 
-        // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
-        print('Respuesta de la API: $responseData');
+                // titulo
+                const Text('Bienvenido', style: PetCareThemes.titleTextStyle),
 
-        // Guarda los datos que necesitas o realiza otras acciones
-        String userToken = responseData['token'];
+                //Enunciado
 
-        // Puedes almacenar estos datos en algún lugar, por ejemplo, utilizando Provider o SharedPreferences
+                Container(
+                  margin: const EdgeInsets.only(top: 37, bottom: 45.82),
+                  child: const Text(
+                    'PetCare es financiada de aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.',
+                    textAlign: TextAlign.center,
+                    style: PetCareThemes.statementTextStyle,
+                  ),
 
-        // Navega a la pantalla de inicio y pasa los datos necesarios
-        Navigator.of(context).pushNamed(
-          AppRoutes.home,
-          arguments: {'userToken': userToken},
-        );
-      } else {
-        // La autenticación falló, puedes mostrar un mensaje de error al usuario
-        print('Error en la autenticación: ${response.body}');
-        // Puedes mostrar un mensaje de error al usuario
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content:
-                Text('Error en la autenticación. Verifica tus credenciales.'),
-            duration: Duration(seconds: 3),
+                  //Formularioo=============================================
+                ),
+
+                Form(
+                  key: _formLoginKey,
+                  child: Column(
+                    children: [
+                      //Input Correo electronico
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 0),
+                        child: TextFormField(
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
+                              return 'Campo requerido';
+                            }
+                            userName = email;
+                            return null;
+                          },
+                          decoration: PetCareInputStyle(
+                                  labelText: ' Correo Electronico')
+                              .regularInput,
+                        ),
+                      ),
+                      Container(
+                        margin:
+                            const EdgeInsets.only(top: 14.82, bottom: 30.63),
+                        child: TextFormField(
+                          validator: (password) {
+                            if (password == null || password.isEmpty) {
+                              return 'Contraseña requerida';
+                            }
+
+                            return null;
+                          },
+                          obscureText: true, //esto hace que no se vea el texto
+                          decoration:
+                              PetCareInputStyle(labelText: ' Contraseña')
+                                  .regularInput,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                //Input Contraseña
+
+                //enunciado olvide la contraseña
+
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 34),
+                    child: Row(
+                      children: <Widget>[
+                        const Text(
+                          '¿Olvidaste la contraseña? ',
+                          style: PetCareThemes.statementTextStyle,
+                        ),
+
+                        //Text buton para recuperar contraseña
+
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.retrievePass);
+                            //logica del text buton Logic:
+                          },
+                          child: const Text(
+                            'Recuperar',
+                            style: PetCareThemes.linkTextStyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+                //Check box Recordarme
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment
+                      .start, //este parametro lo alinea a la izquierda
+                  children: <Widget>[
+                    PetCareCheckBox(
+                      initialValue:
+                          true, // Establecer el valor inicial si es necesario
+                      labelText:
+                          'Recordarme', // Texto que se adjunta al checkbox
+                      onChanged: (value) {
+                        // Hacer algo cuando el valor del checkbox cambie :Logic
+                      },
+                    )
+                  ],
+                ),
+
+                //Boton entrar
+
+                Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 26),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formLoginKey.currentState!.validate()) {
+                        // ignore: avoid_print
+
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.home, arguments: userName);
+                        //luego cambiar pushNamed por pushReplacementNamed para evitar volver
+                      }
+                      // Acción al presionar el botón
+                    },
+                    style: PetCareButtonStyles.elevatedButtonStyle,
+                    child: const Text('Entrar'),
+                  ),
+                ),
+
+                //linea horizontal 1
+
+                Row(
+                  children: [
+                    Container(
+                      // ese container actua como una linea simple sobre la app
+                      width: 138, // Define el ancho de la línea
+                      height: 1, // Grosor de la línea
+                      color: Colors.black, // Color de la línea
+                    ),
+
+                    // texto O
+
+                    Container(
+                      margin: const EdgeInsets.only(left: 11, right: 11),
+                      child: const Text(
+                        'O',
+                        style: PetCareThemes.statementTextStyle,
+                      ),
+                    ),
+
+                    //linea horizontal
+
+                    Container(
+                      width: 138, // Define el ancho de la línea
+                      height: 1, // Grosor de la línea
+                      color: Colors.black, // Color de la línea
+                    )
+                  ],
+                ),
+
+                //caja vacia invisible
+
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 60, // Ancho deseado
+                      height: 50, // Alto deseado
+                    ),
+
+                    //imagen logo petcare
+
+                    Image.asset(
+                      'assets/images/logo_petcare.png',
+                      width: 38, // Ancho deseado
+                      height: 45, // Alto deseado
+                    ),
+
+                    //texto apoyanos
+
+                    const Text('¡Apoyanos!',
+                        style: PetCareThemes.statementTextStyle),
+
+                    //Boton toca aqui
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.buyMe);
+                        //logica del text buton Toca aquí Logic:
+                      },
+                      child: const Text(
+                        'Toca aquí',
+                        style: PetCareThemes.linkTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+
+                //caja invisible
+
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 13, // Ancho deseado
+                      height: 45, // Alto deseado
+                    ),
+
+                    //texto no estas registrado?
+
+                    const Text('¿No estás registrado?',
+                        style: PetCareThemes.statementTextStyle),
+
+                    //boton registrarse
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.registerStepOne);
+                        //logica del text buton Registrarse Logic:
+                      },
+                      child: const Text(
+                        ' Registrarse ahora',
+                        style: PetCareThemes.linkTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+
+                //linea horizontal
+
+                Container(
+                  // ese container actua como una linea simple sobre la app
+                  width: 326, // Define el ancho de la línea
+                  height: 1, // Grosor de la línea
+                  color: Colors.black, // Color de la línea
+                ),
+
+                //texto Eres una ong protectora?
+
+                Row(
+                  children: [
+                    const Text('¿Eres una ONG protectora?',
+                        style: PetCareThemes.statementTextStyle),
+
+                    //boton contactanos
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.contact);
+                        //logica del text buton contactanos Logic:
+                      },
+                      child: const Text(
+                        'Contáctanos',
+                        style: PetCareThemes.linkTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        );
-      }
-    } catch (e) {
-      // Manejar errores de conexión o de la API
-      print('Error al conectar con la API: $e');
-      // Puedes mostrar un mensaje de error al usuario
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
-          duration: Duration(seconds: 3),
         ),
-      );
-    }
+      ),
+    );
   }
 }
