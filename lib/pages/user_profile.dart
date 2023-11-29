@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  final String userValid;  
-  const Home({super.key, required this.userValid});
+class UserProfile extends StatelessWidget {
+  const UserProfile({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(userValid),
+        title: const Text('UserProfile'),
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a mi Home',
+          'Bienvenido a mi UserProfile',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

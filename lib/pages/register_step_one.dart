@@ -13,7 +13,7 @@ class RegisterStepOne extends StatelessWidget {
         leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.home);
+              Navigator.of(context).pushNamed(AppRoutes.logIn);
             }),
       ),
       body: Padding(

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  final String userValid;  
-  const Home({super.key, required this.userValid});
+class DonationConfirm extends StatelessWidget {
+  const DonationConfirm({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(userValid),
+        title: const Text('DonationConfirm'),
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a mi Home',
+          'Bienvenido a mi DonationConfirm',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
-class LogInPage extends StatelessWidget {
+class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
 
+  @override
+  State<LogInPage> createState() => _LogInPageState();
+}
+
+class _LogInPageState extends State<LogInPage> {
+  final _formLoginKey = GlobalKey<FormState>();
+  late String userName;//variable que pasara al home
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +29,12 @@ class LogInPage extends StatelessWidget {
               // columna para distribuir elementos verticalmente
               children: <Widget>[
                 // se utiliza la etiqueta widget para crear una lista de widgets
+
+                // titulo
                 const Text('Bienvenido', style: PetCareThemes.titleTextStyle),
+
+                //Enunciado
+
                 Container(
                   margin: const EdgeInsets.only(top: 37, bottom: 45.82),
                   child: const Text(
@@ -29,19 +42,54 @@ class LogInPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: PetCareThemes.statementTextStyle,
                   ),
+
+                  //Formularioo=============================================
                 ),
-                TextField(
-                  decoration: PetCareInputStyle(labelText: ' Correo Electronico')
-                      .regularInput,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 14.82, bottom: 30.63),
-                  child: TextField(
-                    decoration:
-                        PetCareInputStyle(labelText: ' Contraseña').regularInput,
+
+                Form(
+                  key: _formLoginKey,
+                  child: Column(
+                    children: [
+                      //Input Correo electronico
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 0),
+                        child: TextFormField(
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
+                              return 'Campo requerido';
+                            }
+                            userName = email;
+                            return null;
+                          },
+                          decoration: PetCareInputStyle(
+                                  labelText: ' Correo Electronico')
+                              .regularInput,
+                        ),
+                      ),
+                      Container(
+                        margin:
+                            const EdgeInsets.only(top: 14.82, bottom: 30.63),
+                        child: TextFormField(
+                          validator: (password) {
+                            if (password == null || password.isEmpty) {
+                              return 'Contraseña requerida';
+                            }
+
+                            return null;
+                          },
+                          obscureText: true, //esto hace que no se vea el texto
+                          decoration:
+                              PetCareInputStyle(labelText: ' Contraseña')
+                                  .regularInput,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-        
+                //Input Contraseña
+
+                //enunciado olvide la contraseña
+
                 Center(
                   child: Container(
                     margin: const EdgeInsets.only(left: 34),
@@ -51,8 +99,13 @@ class LogInPage extends StatelessWidget {
                           '¿Olvidaste la contraseña? ',
                           style: PetCareThemes.statementTextStyle,
                         ),
+
+                        //Text buton para recuperar contraseña
+
                         TextButton(
                           onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.retrievePass);
                             //logica del text buton Logic:
                           },
                           child: const Text(
@@ -64,6 +117,9 @@ class LogInPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                //Check box Recordarme
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment
                       .start, //este parametro lo alinea a la izquierda
@@ -71,23 +127,36 @@ class LogInPage extends StatelessWidget {
                     PetCareCheckBox(
                       initialValue:
                           true, // Establecer el valor inicial si es necesario
-                      labelText: 'Recordarme', // Texto que se adjunta al checkbox
+                      labelText:
+                          'Recordarme', // Texto que se adjunta al checkbox
                       onChanged: (value) {
                         // Hacer algo cuando el valor del checkbox cambie :Logic
                       },
                     )
                   ],
                 ),
+
+                //Boton entrar
+
                 Container(
                   margin: const EdgeInsets.only(top: 20, bottom: 26),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Acción al presionar el botón
+                      if (_formLoginKey.currentState!.validate()) {
+                        // ignore: avoid_print
+                        
+                        Navigator.of(context).pushNamed(AppRoutes.home,arguments: userName);
+                        //luego cambiar pushNamed por pushReplacementNamed para evitar volver
+                      }
+                        //Acción al presionar el botón
                     },
                     style: PetCareButtonStyles.elevatedButtonStyle,
                     child: const Text('Entrar'),
                   ),
                 ),
+
+                //linea horizontal 1
+
                 Row(
                   children: [
                     Container(
@@ -96,6 +165,9 @@ class LogInPage extends StatelessWidget {
                       height: 1, // Grosor de la línea
                       color: Colors.black, // Color de la línea
                     ),
+
+                    // texto O
+
                     Container(
                       margin: const EdgeInsets.only(left: 11, right: 11),
                       child: const Text(
@@ -103,6 +175,9 @@ class LogInPage extends StatelessWidget {
                         style: PetCareThemes.statementTextStyle,
                       ),
                     ),
+
+                    //linea horizontal
+
                     Container(
                       width: 138, // Define el ancho de la línea
                       height: 1, // Grosor de la línea
@@ -110,21 +185,34 @@ class LogInPage extends StatelessWidget {
                     )
                   ],
                 ),
+
+                //caja vacia invisible
+
                 Row(
                   children: [
                     const SizedBox(
                       width: 60, // Ancho deseado
                       height: 50, // Alto deseado
                     ),
+
+                    //imagen logo petcare
+
                     Image.asset(
                       'assets/images/logo_petcare.png',
                       width: 38, // Ancho deseado
                       height: 45, // Alto deseado
                     ),
+
+                    //texto apoyanos
+
                     const Text('¡Apoyanos!',
                         style: PetCareThemes.statementTextStyle),
+
+                    //Boton toca aqui
+
                     TextButton(
                       onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.buyMe);
                         //logica del text buton Toca aquí Logic:
                       },
                       child: const Text(
@@ -134,17 +222,27 @@ class LogInPage extends StatelessWidget {
                     ),
                   ],
                 ),
+
+                //caja invisible
+
                 Row(
                   children: [
                     const SizedBox(
                       width: 13, // Ancho deseado
                       height: 45, // Alto deseado
                     ),
+
+                    //texto no estas registrado?
+
                     const Text('¿No estás registrado?',
                         style: PetCareThemes.statementTextStyle),
+
+                    //boton registrarse
+
                     TextButton(
                       onPressed: () {
-                        //logica del text buton RegistrarseLogic:
+                        Navigator.of(context).pushNamed(AppRoutes.registerStepOne);
+                        //logica del text buton Registrarse Logic:
                       },
                       child: const Text(
                         ' Registrarse ahora',
@@ -153,18 +251,28 @@ class LogInPage extends StatelessWidget {
                     ),
                   ],
                 ),
+
+                //linea horizontal
+
                 Container(
                   // ese container actua como una linea simple sobre la app
                   width: 326, // Define el ancho de la línea
                   height: 1, // Grosor de la línea
                   color: Colors.black, // Color de la línea
                 ),
+
+                //texto Eres una ong protectora?
+
                 Row(
                   children: [
                     const Text('¿Eres una ONG protectora?',
                         style: PetCareThemes.statementTextStyle),
+
+                    //boton contactanos
+
                     TextButton(
                       onPressed: () {
+                        Navigator.of(context).pushNamed(AppRoutes.contact);
                         //logica del text buton contactanos Logic:
                       },
                       child: const Text(
