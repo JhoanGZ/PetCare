@@ -33,23 +33,19 @@ Future<void> authenticationLogin(
         // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
         print('Respuesta de la API: $responseData');
 
-        print('Tipo de datos de token: ${responseData['token'].runtimeType}');
-        print('Tipo de datos de auth: ${responseData['auth'].runtimeType}');
-
         // Guarda los datos que necesitas o realiza otras acciones
-        String userToken = responseData['token'].toString();
-        bool userAuth = responseData['auth'] == true;
-
-        // Puedes almacenar estos datos en algún lugar, por ejemplo, utilizando Provider o SharedPreferences
+        String userName = responseData['name']
+            .toString(); // TODO::LUIGUI::29-11-23:: Esta variable debe llegar al home.
+        String userToken = responseData['token']
+            .toString(); // TODO::LUIGUI::29-11-23:: Este token deben ser llevado al home.
+        bool userAuth = responseData['auth'] ==
+            true; // TODO::LUIGUI::29-11-23:: Esto no va a ninguna otra vista
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
           print('LOGIN EXITOSO!');
-          bool parsedToken = userToken
-              .isNotEmpty; // Tratar el token como true si no está vacío
-          // TODO: 29-11-2023 LUIGUI DICE: El error está en la línea del Navigator, al comentarla no se crashea, de resto se envía y recibe la respuesta de la api al enviar los datos.
           Navigator.of(context)
-              .pushNamed(AppRoutes.home, arguments: {'userToken': parsedToken});
+              .pushNamed(AppRoutes.home, arguments: {userName, userToken});
         }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario

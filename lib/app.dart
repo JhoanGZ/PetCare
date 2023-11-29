@@ -29,7 +29,9 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.home:
             return MaterialPageRoute(
                 builder: (context) => Home(
-                      userValid: settings.arguments as String,
+                    // TODO::LUIGUI::29-11-23:: Esto lo dejé comentado porque no supe setearlo sin que me de error.
+                    //userName: settings.arguments as String,
+                    //userToken: settings.arguments as String,
                     ));
 
           case AppRoutes.registerStepOne:

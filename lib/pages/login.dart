@@ -155,6 +155,7 @@ class _LogInPageState extends State<LogInPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       await authenticationLogin(
+                        // TODO::LUIGUI::29-11-23:: Dentro de esta función está la navegación
                         _formLoginKey,
                         _emailController,
                         _passwordController,
