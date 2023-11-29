@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:petcare_app/config/app_routes.dart';
 
 // Define una función para manejar la lógica de autenticación
 Future<void> authenticationLogin(
@@ -9,6 +9,7 @@ Future<void> authenticationLogin(
   TextEditingController emailController,
   TextEditingController passwordController,
   BuildContext context,
+  String userName,
 ) async {
   if (formKey.currentState!.validate()) {
     // Datos del usuario del formulario usando controladores
@@ -29,43 +30,18 @@ Future<void> authenticationLogin(
       if (response.statusCode == 200) {
         // La autenticación fue exitosa
         var responseData = json.decode(response.body);
-
         // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
         print('Respuesta de la API: $responseData');
 
-        // Guarda los datos que necesitas o realiza otras acciones
-        String userToken = responseData['token'];
-
-        // Puedes almacenar estos datos en algún lugar, por ejemplo, utilizando Provider o SharedPreferences
-
-        // Navega a la pantalla de inicio y pasa los datos necesarios
-        Navigator.of(context).pushNamed(
-          AppRoutes.home,
-          arguments: {'userToken': userToken},
-        );
+        Navigator.of(context).pushNamed(AppRoutes.home, arguments: userName);
+        // También puedes almacenar el token de acceso u otra información según sea necesario
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
         print('Error en la autenticación: ${response.body}');
-        // Puedes mostrar un mensaje de error al usuario
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content:
-                Text('Error en la autenticación. Verifica tus credenciales.'),
-            duration: Duration(seconds: 3),
-          ),
-        );
       }
     } catch (e) {
       // Manejar errores de conexión o de la API
       print('Error al conectar con la API: $e');
-      // Puedes mostrar un mensaje de error al usuario
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
-          duration: Duration(seconds: 3),
-        ),
-      );
     }
   }
 }
