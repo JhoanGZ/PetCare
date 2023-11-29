@@ -16,6 +16,14 @@ class _LogInPageState extends State<LogInPage> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late String userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +65,7 @@ class _LogInPageState extends State<LogInPage> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 0),
                         child: TextFormField(
+                          controller: _emailController,
                           validator: (email) {
                             if (email == null || email.isEmpty) {
                               return 'Campo requerido';
@@ -73,6 +82,7 @@ class _LogInPageState extends State<LogInPage> {
                         margin:
                             const EdgeInsets.only(top: 14.82, bottom: 30.63),
                         child: TextFormField(
+                          controller: _passwordController,
                           validator: (password) {
                             if (password == null || password.isEmpty) {
                               return 'Contraseña requerida';
@@ -140,7 +150,6 @@ class _LogInPageState extends State<LogInPage> {
                 ),
 
                 //Boton entrar
-
                 Container(
                   margin: const EdgeInsets.only(top: 20, bottom: 26),
                   child: ElevatedButton(

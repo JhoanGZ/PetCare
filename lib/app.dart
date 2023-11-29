@@ -19,7 +19,6 @@ import 'package:petcare_app/pages/terms.dart';
 import 'package:petcare_app/pages/user_profile.dart';
 import 'package:petcare_app/pages/users_saved_pets.dart';
 
-
 class PetCareApp extends StatelessWidget {
   const PetCareApp({super.key});
   @override
@@ -28,16 +27,22 @@ class PetCareApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            return MaterialPageRoute(builder: (context) => Home(userValid: settings.arguments as String,));
+            return MaterialPageRoute(
+                builder: (context) => Home(
+                      userValid: settings.arguments as String,
+                    ));
 
           case AppRoutes.registerStepOne:
-            return MaterialPageRoute(builder: (context) => const RegisterStepOne()); 
+            return MaterialPageRoute(
+                builder: (context) => const RegisterStepOne());
 
           case AppRoutes.registerStepTwo:
-            return MaterialPageRoute(builder: (context) => const RegisterStepTwo());
+            return MaterialPageRoute(
+                builder: (context) => const RegisterStepTwo());
 
           case AppRoutes.registerStepThree:
-            return MaterialPageRoute(builder: (context) => const RegisterStepThree());  
+            return MaterialPageRoute(
+                builder: (context) => const RegisterStepThree());
 
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
@@ -46,41 +51,48 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const UserProfile());
 
           case AppRoutes.userSavedPets:
-            return MaterialPageRoute(builder: (context) => const UserSavedPets());
+            return MaterialPageRoute(
+                builder: (context) => const UserSavedPets());
 
           case AppRoutes.retrievePass:
-            return MaterialPageRoute(builder: (context) => const RetrievePass());
+            return MaterialPageRoute(
+                builder: (context) => const RetrievePass());
 
           case AppRoutes.retrievePassChange:
-            return MaterialPageRoute(builder: (context) => const RetrievePassChange());
+            return MaterialPageRoute(
+                builder: (context) => const RetrievePassChange());
 
           case AppRoutes.adoptionRequest:
-            return MaterialPageRoute(builder: (context) => const AdoptionRequest());
+            return MaterialPageRoute(
+                builder: (context) => const AdoptionRequest());
 
           case AppRoutes.adoptionConfirm:
-            return MaterialPageRoute(builder: (context) => const AdoptionConfirm());
+            return MaterialPageRoute(
+                builder: (context) => const AdoptionConfirm());
 
           case AppRoutes.adoptionAccept:
-            return MaterialPageRoute(builder: (context) => const AdoptionAccept()); 
+            return MaterialPageRoute(
+                builder: (context) => const AdoptionAccept());
 
           case AppRoutes.donationConfirm:
-            return MaterialPageRoute(builder: (context) => const DonationConfirm()); 
+            return MaterialPageRoute(
+                builder: (context) => const DonationConfirm());
 
           case AppRoutes.ngoProfile:
-            return MaterialPageRoute(builder: (context) => const NgoProfile()); 
+            return MaterialPageRoute(builder: (context) => const NgoProfile());
 
           case AppRoutes.petProfile:
             return MaterialPageRoute(builder: (context) => const PetProfile());
 
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());
-            
+
           case AppRoutes.buyMe:
-            return MaterialPageRoute(builder: (context) => const BuyMe()); 
+            return MaterialPageRoute(builder: (context) => const BuyMe());
 
           default:
             return MaterialPageRoute(builder: (context) => const LogInPage());
-            //return MaterialPageRoute(builder: (context) => const RegisterStepOne());
+          //return MaterialPageRoute(builder: (context) => const RegisterStepOne());
         }
       },
     );

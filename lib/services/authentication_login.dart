@@ -26,23 +26,30 @@ Future<void> authenticationLogin(
       );
 
       // Verificar la respuesta de la API y manejarla según sea necesario
-      if (response.statusCode == 200) {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
         // La autenticación fue exitosa
-        var responseData = json.decode(response.body);
+        var responseData = jsonDecode(response.body);
 
         // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
         print('Respuesta de la API: $responseData');
 
+        print('Tipo de datos de token: ${responseData['token'].runtimeType}');
+        print('Tipo de datos de auth: ${responseData['auth'].runtimeType}');
+
         // Guarda los datos que necesitas o realiza otras acciones
-        String userToken = responseData['token'];
-        String userAuth = responseData['auth'];
+        String userToken = responseData['token'].toString();
+        bool userAuth = responseData['auth'] == true;
 
         // Puedes almacenar estos datos en algún lugar, por ejemplo, utilizando Provider o SharedPreferences
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
-        if (userAuth == true) {
+        if (userAuth) {
+          print('LOGIN EXITOSO!');
+          bool parsedToken = userToken
+              .isNotEmpty; // Tratar el token como true si no está vacío
+          // TODO: 29-11-2023 LUIGUI DICE: El error está en la línea del Navigator, al comentarla no se crashea, de resto se envía y recibe la respuesta de la api al enviar los datos.
           Navigator.of(context)
-              .pushNamed(AppRoutes.home, arguments: {'userToken': userToken});
+              .pushNamed(AppRoutes.home, arguments: {'userToken': parsedToken});
         }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
