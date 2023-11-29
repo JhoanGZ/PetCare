@@ -28,7 +28,7 @@ class PetCareApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            return MaterialPageRoute(builder: (context) => const Home());
+            return MaterialPageRoute(builder: (context) => Home(userValid: settings.arguments as String,));
 
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(builder: (context) => const RegisterStepOne()); 

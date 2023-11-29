@@ -45,6 +45,8 @@ class PetCareInputStyle {
 
   InputDecoration get regularInput {
     return InputDecoration(
+      
+      floatingLabelBehavior: FloatingLabelBehavior.auto,//para la animacion
       filled: true,
       fillColor: PetCareColors.brandSecondaryColor,
       border: OutlineInputBorder(
@@ -57,7 +59,7 @@ class PetCareInputStyle {
       ),
       labelText: labelText,
       labelStyle: const TextStyle(fontSize: 12.0, color: PetCareColors.brandShadowColor, fontFamily: 'Inter'),
-      contentPadding: const EdgeInsets.symmetric(vertical: 10.0), // Ajusta la altura del espacio interno
+      contentPadding: const EdgeInsets.symmetric(vertical: 10.0 ,horizontal: 5.0), // Ajusta la altura del espacio interno
     );
   }
 }

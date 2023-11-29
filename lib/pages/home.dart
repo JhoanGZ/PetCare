@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final String userValid;  
+  const Home({super.key, required this.userValid});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(userValid),
       ),
       body: const Center(
         child: Text(
