@@ -80,7 +80,6 @@ class PetCareApp extends StatelessWidget {
 
           default:
             return MaterialPageRoute(builder: (context) => const LogInPage());
-            //return MaterialPageRoute(builder: (context) => const RegisterStepOne());
         }
       },
     );

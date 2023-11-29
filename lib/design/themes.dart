@@ -44,6 +44,7 @@ class PetCareThemes {
 
   static const TextStyle textStylePopUp = TextStyle(
     // este atributo se utiliza en el texto de los popups
+    // 
     fontFamily: 'Inter',
     fontSize: 24,
     fontWeight: FontWeight.w600,
