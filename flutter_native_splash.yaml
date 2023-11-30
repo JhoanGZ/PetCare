@@ -54,7 +54,7 @@ flutter_native_splash:
     # 640 pixels in diameter.
     # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
     # 768 pixels in diameter.
-    image: assets/images/logo_splash_petcare.png
+    image: assets/images/logo_splash_petcare.png #TODO: Arreglar el splash de tamaño. Tocará hacerlo de cero el logo(?)
 
     # Splash screen background color.
     color: "#FFFFFF"

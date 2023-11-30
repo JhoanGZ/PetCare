@@ -44,6 +44,7 @@ Future<void> authenticationLogin(
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
           print('LOGIN EXITOSO!');
+          // ignore: use_build_context_synchronously
           Navigator.of(context)
               .pushNamed(AppRoutes.home, arguments: {userName, userToken});
         }
@@ -52,7 +53,7 @@ Future<void> authenticationLogin(
         print('Error en la autenticación: ${response.body}');
         // Puedes mostrar un mensaje de error al usuario
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content:
                 Text('Error en la autenticación. Verifica tus credenciales.'),
             duration: Duration(seconds: 3),
@@ -63,8 +64,9 @@ Future<void> authenticationLogin(
       // Manejar errores de conexión o de la API
       print('Error al conectar con la API: $e');
       // Puedes mostrar un mensaje de error al usuario
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
               'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
           duration: Duration(seconds: 3),
