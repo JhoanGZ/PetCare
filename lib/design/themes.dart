@@ -103,3 +103,30 @@ class PetCareButtonStyles {
       ),
       textStyle: PetCareThemes.buttonTextStyle);
 }
+//=====================================================APPBAR USER=======================================================
+class PetCareTitleAppBarUser extends StatelessWidget {
+  const PetCareTitleAppBarUser({super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Image.asset(
+          'assets/images/logo_petcare_blanco.png',
+          width: 21,
+          height: 21,
+        ),
+        const SizedBox(
+          width: 317,
+        ),
+        // TODO: AQUÍ VA LA IMAGEN DE USUARIO
+        Image.asset(
+          'assets/images/pic_default_user.png',
+          width: 21,
+          height: 21,
+        ),
+      ],
+    );
+  }
+}

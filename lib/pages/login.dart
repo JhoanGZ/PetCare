@@ -285,7 +285,7 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.contact);
+                        Navigator.of(context).pushReplacementNamed(AppRoutes.home);//TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
                         //logica del text buton contactanos Logic:
                       },
                       child: const Text(
