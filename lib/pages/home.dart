@@ -5,7 +5,9 @@ import 'package:petcare_app/design/themes.dart';
 class Home extends StatelessWidget {
   final String userName; // TODO::LUIGUI::29-11-23:: Declaro variables
   final String userToken; // TODO::LUIGUI::29-11-23:: Declaro variables
+
   const Home({super.key, required this.userName, required this.userToken});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class Home extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a mi Home🥵🍆',
+          'Bienvenido a mi Home🥵🍆 Ayyy PIJA GORDA',
           style: TextStyle(fontSize: 24.0),
         ),
       ),
