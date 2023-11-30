@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/registration_service.dart';
-import 'package:petcare_app/widgets/upload_image.dart';
+import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
   const RegisterStepOne({super.key});
@@ -152,22 +152,24 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 26),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await registrationService(
-                        _formRegisterStepOneKey,
-                        _emailController,
-                        _rutController,
-                        _firstNameController,
-                        _lastNameController,
-                        context,
-                      );
-                    },
-                    style: PetCareButtonStyles.elevatedButtonStyle,
-                    child: const Text('->'),
-                  ),
+              child: ElevatedButton(
+                onPressed: () async {
+                  Navigator.of(context).pushNamed(AppRoutes.registerStepTwo);
+                  // await registrationService(
+                  //   _formRegisterStepOneKey,
+                  //   _emailController,
+                  //   _rutController,
+                  //   _firstNameController,
+                  //   _lastNameController,
+                  //   context,                  
+                  // );
+                  //FIXME: ::JG:: Trabajado en ello
+                },
+                style: PetCareButtonStyles.elevatedButtonStyle,
+                child: const Text('->'),
+              ),
             ),
-          ],// mark
+          ], // mark
         ),
       ),
     );

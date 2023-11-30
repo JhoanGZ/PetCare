@@ -20,4 +20,5 @@ class AppRoutes {
   static const String petProfile = 'petProfile'; // En figma está cómo Publicación
   static const String contact = 'contact';
   static const String buyMe = 'buyMe'; // No ibamos a dejar las donaciones afuera
+  //TODO: Agregar ruta de vista = nologin_pet
 }

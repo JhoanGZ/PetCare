@@ -19,6 +19,13 @@ class PetCareThemes {
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandLinkColor,
   );
+    static const TextStyle linkTextStyleBold = TextStyle(
+    //esta atributo es usado para los enunciados
+    fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
+    fontWeight: FontWeight.bold, // esto es el ancho de la linea
+    fontSize: 15, //tamaño de la fuente
+    color: PetCareColors.brandLinkColor,
+  );
   static const TextStyle titleTextStyle = TextStyle(
     //esta atributo es usado para los titulos escritos en naranjo
     fontFamily: 'Inter',

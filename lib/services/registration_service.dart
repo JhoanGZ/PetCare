@@ -10,6 +10,14 @@ Future<void> registrationService(
   TextEditingController rutController,
   TextEditingController firstNameController,
   TextEditingController lastNameController,
+  TextEditingController phoneController,
+  TextEditingController addressController,
+  TextEditingController dateBirthController,
+  TextEditingController maleController,
+  TextEditingController femaleController,
+  TextEditingController passwordController,
+  TextEditingController passwordCheckController,
+  TextEditingController termAcceptanceController,
   BuildContext context,
 
 ) async {
@@ -19,7 +27,7 @@ Future<void> registrationService(
     String rut = rutController.text;
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
-    String fullName = firstName+lastName;
+    String fullName = "$firstName $lastName"; //NOTE: Revisar ::LUIGUI:: como van los datos con el nombre.
 
     try {
       // Realizar la solicitud a la API
