@@ -96,7 +96,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                                 .regularInput,
                       ),
                     ),
-                    // Row(
+                    //FIXME: ::JG:: Trabajado en ello
+                    // Row( 
                     //   mainAxisAlignment: MainAxisAlignment.start,
                     //   children: <Widget>[
                     //     CheckboxListTile(
@@ -145,6 +146,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                   //   _femaleController,
                   //   context,
                   // );
+                  //FIXME: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

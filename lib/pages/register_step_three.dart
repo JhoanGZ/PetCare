@@ -115,6 +115,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                   //   _termAcceptanceController,
                   //   context,
                   // );
+                  //FIXME: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
