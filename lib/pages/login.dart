@@ -80,7 +80,7 @@ class _LogInPageState extends State<LogInPage> {
                       ),
                       Container(
                         margin:
-                            const EdgeInsets.only(top: 14.82, bottom: 30.63),
+                        const EdgeInsets.only(top: 14.82, bottom: 30.63),
                         child: TextFormField(
                           controller: _passwordController,
                           validator: (password) {
