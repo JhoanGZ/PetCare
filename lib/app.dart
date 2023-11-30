@@ -27,12 +27,17 @@ class PetCareApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
+            // Asegúrate de que `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+                settings.arguments as Map<String, dynamic>?;
+
             return MaterialPageRoute(
-                builder: (context) => Home(
-                    // TODO::LUIGUI::29-11-23:: Esto lo dejé comentado porque no supe setearlo sin que me de error.
-                    //userName: settings.arguments as String,
-                    //userToken: settings.arguments as String,
-                    ));
+              builder: (context) => Home(
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userName: arguments?['userName'] ?? 'Invitado',
+                userToken: arguments?['userToken'] ?? 'null',
+              ),
+            );
 
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(

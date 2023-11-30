@@ -44,9 +44,10 @@ Future<void> authenticationLogin(
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
           print('LOGIN EXITOSO!');
-          // ignore: use_build_context_synchronously
-          Navigator.of(context)
-              .pushNamed(AppRoutes.home, arguments: {userName, userToken});
+          Navigator.of(context).pushNamed(
+            AppRoutes.home,
+            arguments: {'userName': userName, 'userToken': userToken},
+          );
         }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
