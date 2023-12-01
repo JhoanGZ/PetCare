@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class BuyMe extends StatefulWidget {
-  const BuyMe({super.key});
+  final String photoPet;
+
+  const BuyMe({super.key, required this.photoPet});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -24,7 +26,7 @@ class _BuyMeState extends State<BuyMe> {
           padding: const EdgeInsets.fromLTRB(35, 67, 30, 0),
           child: Column(children: <Widget>[
             Image.asset(
-              'assets/images/logo_petcare.png',
+              widget.photoPet,
               width: 200, // Ancho deseado
               height: 200, // Alto deseado
             ),
@@ -50,7 +52,8 @@ class _BuyMeState extends State<BuyMe> {
                         if (amount == null || amount.isEmpty) {
                           return 'campo requerido';
                         }
-                        donationAmount = amount; //luigui esta variable contiene el monto 
+                        donationAmount =
+                            amount; //luigui esta variable contiene el monto
                         //TODO: aqui sale la varibale con el
                         return null;
                       },

@@ -3,6 +3,7 @@ import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
 import 'package:petcare_app/pages/adoption_request.dart';
+import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 
@@ -17,7 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  bool showDonationSection = false;
+  //bool showDonationSection = false;
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +80,18 @@ class HomeState extends State<Home> {
                     color: PetCareColors.brandPrimaryColor,
                   ),
                   child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        showDonationSection = !showDonationSection;
-                      });
-                    },
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                  
+                                              Navigator.push(context,MaterialPageRoute(
+                              builder: (context) => BuyMe(photoPet: items[index].photo)));
+                      },
                       icon: Image.asset(
                         'assets/images/icon_donation_home.png',
                         width: 30,
                         height: 30,),
                         ),
-                      ),
+                  ),
                     ),
                     //otro boton
                      const SizedBox(
