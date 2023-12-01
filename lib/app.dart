@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/adoption_accept.dart';
 import 'package:petcare_app/pages/adoption_confirm.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
@@ -31,12 +34,17 @@ class PetCareApp extends StatelessWidget {
             // Asegúrate de que `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
+            
+
 
             return MaterialPageRoute(
               builder: (context) => Home(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userName: arguments?['userName'] ?? 'Invitado',
-                userToken: arguments?['userToken'] ?? 'null',
+                userToken: arguments?['userToken'] ?? 'null', 
+                // NOTE: Debemos revisar esto para cambiarlo por 
+                //[x]: 'userName': 'nombreUsuario', 
+                //[x]: 'userToken': 'tokenUsuario',
               ),
             );
 
@@ -46,11 +54,16 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.registerStepTwo:
             return MaterialPageRoute(
-                builder: (context) => const RegisterStepTwo());
+                builder: 
+                  (context){
+                    final DataRegistrationTransfer? storageData = settings.arguments as DataRegistrationTransfer?;
+                    return storageData != null ? RegisterStepTwo(storageData: storageData) : RegisterStepTwo();
+                  },
+                );
 
           case AppRoutes.registerStepThree:
             return MaterialPageRoute(
-                builder: (context) => const RegisterStepThree());
+                builder: (context) => RegisterStepThree(storageData: storageData),);
 
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());

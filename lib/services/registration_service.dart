@@ -46,6 +46,7 @@ Future<void> registrationService(
         var responseData = jsonDecode(response.body);
 
         // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
+        // ignore: avoid_print
         print('Respuesta de la API: $responseData');
 
         // Guarda los datos que necesitas o realiza otras acciones
@@ -58,6 +59,7 @@ Future<void> registrationService(
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
+          // ignore: avoid_print
           print('LOGIN EXITOSO!');
           // ignore: use_build_context_synchronously
           Navigator.of(context)
@@ -65,6 +67,7 @@ Future<void> registrationService(
         }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
+        // ignore: avoid_print
         print('Error en la autenticación: ${response.body}');
         // Puedes mostrar un mensaje de error al usuario
         // ignore: use_build_context_synchronously

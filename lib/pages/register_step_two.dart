@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/services/registration_service.dart';
-
+import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
-  const RegisterStepTwo({super.key});
+  final DataRegistrationTransfer storageData;
+  const RegisterStepTwo({super.key, required this.storageData});
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
@@ -21,7 +22,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
   late bool isMale = false;
   late bool isFemale = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -31,17 +31,16 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
     _maleController = TextEditingController();
     _femaleController = TextEditingController();
   }
-
-  @override
-  Widget build(BuildContext context){
+    Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () =>
-                Navigator.of(context).pushNamed(AppRoutes.registerStepOne)),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(AppRoutes.registerStepOne),
+        ),
       ),
-        //TODO: Montar imagen Ruta => Image.asset('assets/images/dog_corner_register',),
+      //TODO: Montar imagen Ruta => Image.asset('assets/images/dog_corner_register',),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -61,8 +60,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           }
                           return null;
                         },
-                        decoration: PetCareInputStyle(labelText: ' Celular')
-                            .regularInput,
+                        decoration:
+                            PetCareInputStyle(labelText: ' Celular').regularInput,
                       ),
                     ),
                     Container(
@@ -76,8 +75,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           return null;
                         },
                         obscureText: true,
-                        decoration: PetCareInputStyle(labelText: ' Dirección')
-                            .regularInput,
+                        decoration:
+                            PetCareInputStyle(labelText: ' Dirección').regularInput,
                       ),
                     ),
                     Container(
@@ -91,43 +90,44 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           return null;
                         },
                         obscureText: true,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Fecha de Nacimiento')
-                                .regularInput,
+                        decoration: PetCareInputStyle(
+                          labelText: ' Fecha de Nacimiento',
+                        ).regularInput,
                       ),
                     ),
-                    //FIXME: ::JG:: Trabajado en ello
-                    // Row( 
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: <Widget>[
-                    //     CheckboxListTile(
-                    //       title: const Text('Masculino'),
-                    //       value: _maleController.text == 'true',
-                    //       onChanged: (bool? value) {
-                    //         setState(() {
-                    //           if( value != null){
-                    //           _maleController.text = value.toString();
-                    //           _femaleController.text = (!value).toString();
-                    //           }
-                    //         });
-                    //       },
-                    //       controlAffinity: ListTileControlAffinity.leading,
-                    //     ),
-                    //     CheckboxListTile(
-                    //       title: const Text('Femenino'), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                    //       value: _femaleController.text == 'true',
-                    //       onChanged: (bool? value) {
-                    //         setState(() {
-                    //           if(value != null){
-                    //             _femaleController.text = value.toString();
-                    //             _maleController.text = (!value).toString();
-                    //           }                              
-                    //         });
-                    //       },
-                    //       controlAffinity: ListTileControlAffinity.leading,
-                    //     ),
-                    //   ],
-                    // ),
+                    //FIXME: ::Not working:: Trabajado en ello
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        CheckboxListTile(
+                          title: const Text('Masculino'),
+                          value: _maleController.text == 'true',
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value != null) {
+                                _maleController.text = value.toString();
+                                _femaleController.text = (!value).toString();
+                              }
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                        CheckboxListTile(
+                          title: const Text(
+                              'Femenino'), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                          value: _femaleController.text == 'true',
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value != null) {
+                                _femaleController.text = value.toString();
+                                _maleController.text = (!value).toString();
+                              }
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -136,17 +136,19 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  Navigator.of(context).pushNamed(AppRoutes.registerStepThree);
-                  // await registrationService(
-                  //   _formRegisterStepTwoKey,
-                  //   _phoneController,
-                  //   _addressController,
-                  //   _dateBirthController,
-                  //   _maleController,
-                  //   _femaleController,
-                  //   context,
-                  // );
-                  //FIXME: ::JG:: Trabajado en ello
+                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
+                  storageData.phone = _phoneController.text;
+                  storageData.address = _addressController.text;
+                  storageData.dateBirth = _dateBirthController.text;
+                  storageData.female = _femaleController.text.toLowerCase();
+                  storageData.male = _maleController.text.toLowerCase();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          RegisterStepThree(storageData: storageData),
+                    ),
+                  );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

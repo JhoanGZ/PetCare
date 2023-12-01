@@ -12,7 +12,7 @@ class AppRoutes {
   static const String userSavedPets = 'userSavedPets'; // Mock Mascotas guardadas 
   static const String retrievePass = 'retrievePass';
   static const String retrievePassChange = 'retrievePassChange';
-  static const String adoptionRequest = 'adoptionRequest';
+  static const String adoptionRequest = 'adoptionRequest'; 
   static const String adoptionConfirm = 'adoptionConfirm';
   static const String adoptionAccept = 'adoptionAccept';
   static const String donationConfirm = 'donationConfirm';
