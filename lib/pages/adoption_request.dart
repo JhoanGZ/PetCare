@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AdoptionRequest extends StatelessWidget {
-  const AdoptionRequest({super.key});
+  final String itemID;
+
+  const AdoptionRequest({super.key, required this.itemID});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AdoptionRequest'),
+        title: Text(itemID),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'Bienvenido a mi AdoptionRequest',
-          style: TextStyle(fontSize: 24.0),
+          'Bienvenido a la pantalla de solicitud de adopción con el ID: $itemID',
+          style: const TextStyle(fontSize: 24.0),
         ),
       ),
     );
