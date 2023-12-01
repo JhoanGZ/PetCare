@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/services/registration_service.dart';
+import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
+
 
 class RegisterStepOne extends StatefulWidget {
   const RegisterStepOne({super.key});
@@ -60,7 +62,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            const SetPhotoScreen())); // habilitación de usuario para nueva foto
+                            const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
               },
               child: Column(
                 children: [
@@ -73,7 +75,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                         borderRadius: BorderRadius.circular(
                             69), // promedio width x height
                         child: Image.asset(
-                            'assets/images/pic_default_user.png'), // Foto inicial (user anónimo)
+                            'assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
                       ),
                     ),
                   ),
@@ -154,14 +156,25 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  Navigator.of(context).pushNamed(AppRoutes.registerStepTwo);
+                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
+                  storageData.email = _emailController.text;
+                  storageData.rut = _rutController.text;
+                  storageData.firstName = _firstNameController.text;
+                  storageData.lastname = _lastNameController.text;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          RegisterStepTwo(storageData: storageData),
+                    ),
+                  );
                   // await registrationService(
                   //   _formRegisterStepOneKey,
                   //   _emailController,
                   //   _rutController,
                   //   _firstNameController,
                   //   _lastNameController,
-                  //   context,                  
+                  //   context,
                   // );
                   //FIXME: ::JG:: Trabajado en ello
                 },
