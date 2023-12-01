@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_web_libraries_in_flutter
+// ignore_for_file: avoid_web_libraries_in_flutter, unused_import
 import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
@@ -57,13 +57,17 @@ class PetCareApp extends StatelessWidget {
                 builder: 
                   (context){
                     final DataRegistrationTransfer? storageData = settings.arguments as DataRegistrationTransfer?;
-                    return storageData != null ? RegisterStepTwo(storageData: storageData) : RegisterStepTwo();
+                    return storageData != null ? RegisterStepTwo(storageData: storageData) : const RegisterStepTwo();
                   },
                 );
 
           case AppRoutes.registerStepThree:
             return MaterialPageRoute(
-                builder: (context) => RegisterStepThree(storageData: storageData),);
+                  builder: (context){
+                    final DataRegistrationTransfer? storageData = settings.arguments as DataRegistrationTransfer?;
+                    return storageData != null ? RegisterStepThree(storageData: storageData) : RegisterStepThree(storageData: DataRegistrationTransfer());
+                  },
+                );
 
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());

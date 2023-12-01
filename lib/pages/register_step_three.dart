@@ -6,7 +6,7 @@ import 'package:petcare_app/models/storage_transfer.dart';
 class RegisterStepThree extends StatefulWidget {
   final DataRegistrationTransfer storageData;
   const RegisterStepThree({super.key, required this.storageData});
-  
+
   @override
   State<RegisterStepThree> createState() => _RegisterStepThreeState();
 }
@@ -110,10 +110,9 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
-                  storageData.password = _passwordController.text; 
-                  storageData.passwordCheck = _passwordCheckController.text; 
-                  storageData.termAcceptance = _termAcceptanceController.text;
+                  widget.storageData.password = _passwordController.text;
+                  widget.storageData.passwordCheck = _passwordCheckController.text;
+                  widget.storageData.termAcceptance = _termAcceptanceController.text;
                   // Navigator.of(context).pushNamed(AppRoutes.home);
                   // await registrationService(
                   //   _formRegisterStepThreeKey,

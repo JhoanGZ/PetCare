@@ -5,8 +5,8 @@ import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
-  final DataRegistrationTransfer storageData;
-  const RegisterStepTwo({super.key, required this.storageData});
+  final DataRegistrationTransfer? storageData;
+  const RegisterStepTwo({super.key, this.storageData});
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
@@ -31,6 +31,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
     _maleController = TextEditingController();
     _femaleController = TextEditingController();
   }
+
+  @override
     Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
