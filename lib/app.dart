@@ -87,8 +87,13 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => const RetrievePassChange());
 
           case AppRoutes.adoptionRequest:
+  
+              String? itemID = settings.arguments as String?;
+
             return MaterialPageRoute(
-                builder: (context) => const AdoptionRequest());
+                builder: (context) => AdoptionRequest(itemID: itemID ?? ''),);
+                           
+
 
           case AppRoutes.adoptionConfirm:
             return MaterialPageRoute(
