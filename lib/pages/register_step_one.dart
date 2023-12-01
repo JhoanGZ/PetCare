@@ -6,7 +6,10 @@ import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  const RegisterStepOne({super.key, required this.dataStorage});
+  RegisterStepOne({super.key, required this.dataStorage}) {
+    throw UnimplementedError('Revisar inicialización');
+  }
+  
   final DataRegistrationTransfer dataStorage;
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
@@ -155,17 +158,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData =
-                      DataRegistrationTransfer();
-                  storageData.email = _emailController.text;
-                  storageData.rut = _rutController.text;
-                  storageData.firstName = _firstNameController.text;
-                  storageData.lastName = _lastNameController.text;
+                  widget.dataStorage.email = _emailController.text;
+                  widget.dataStorage.rut = _rutController.text;
+                  widget.dataStorage.firstName = _firstNameController.text;
+                  widget.dataStorage.lastName = _lastNameController.text;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          RegisterStepTwo(storageData: storageData),
+                      builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),
                     ),
                   );
                 },

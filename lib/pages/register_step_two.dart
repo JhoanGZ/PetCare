@@ -6,7 +6,7 @@ import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
   final DataRegistrationTransfer? storageData;
-  const RegisterStepTwo({super.key, this.storageData});
+  const RegisterStepTwo({super.key, this.storageData, required DataRegistrationTransfer dataStorage});
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
