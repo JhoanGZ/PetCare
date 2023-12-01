@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_web_libraries_in_flutter, unused_import
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/models/storage_transfer.dart';

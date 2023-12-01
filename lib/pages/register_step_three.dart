@@ -110,11 +110,19 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  widget.storageData.password = _passwordController.text;
-                  widget.storageData.passwordCheck = _passwordCheckController.text;
-                  widget.storageData.termAcceptance = _termAcceptanceController.text;
-                
-                  //TODO: ::JG:: Trabajado en ello
+                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
+                  storageData.password = _passwordController.text; 
+                  storageData.passwordCheck = _passwordCheckController.text; 
+                  storageData.termAcceptance = _termAcceptanceController.text;
+                  // Navigator.of(context).pushNamed(AppRoutes.home);
+                  // await registrationService(
+                  //   _formRegisterStepThreeKey,
+                  //   _passwordController,
+                  //   _passwordCheckController,
+                  //   _termAcceptanceController,
+                  //   context,
+                  // );
+                  //FIXME: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
