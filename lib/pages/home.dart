@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
@@ -46,10 +47,16 @@ class HomeState extends State<Home> {
                 // Elementos en fila: icono de perfil y título
                 Row(
                   children: [
-                    Image.asset(
-                      items[index].profileIcon, // Icono de perfil
-                      width: 38,
-                      height: 38,
+                    GestureDetector(
+
+                      onTap: (){
+                        Navigator.of(context).pushNamed(AppRoutes.ngoProfile);
+                      },
+                      child: Image.asset(
+                        items[index].profileIcon, // Icono de perfil
+                        width: 38,
+                        height: 38,
+                      ),
                     ),
                     const SizedBox(
                         width: 8), // Espacio entre el icono y el texto
@@ -84,8 +91,7 @@ class HomeState extends State<Home> {
                     child: IconButton(
                       onPressed: () {
                   
-                                              Navigator.push(context,MaterialPageRoute(
-                              builder: (context) => BuyMe(photoPet: items[index].photo)));
+           Navigator.push(context,MaterialPageRoute(builder: (context) => BuyMe(photoPet: items[index].photo)));
                       },
                       icon: Image.asset(
                         'assets/images/icon_donation_home.png',
@@ -110,8 +116,7 @@ class HomeState extends State<Home> {
                         child: IconButton(
                           onPressed: () {
                         
-                            Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => AdoptionRequest(itemID: items[index].id),
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => AdoptionRequest(itemID: items[index].id),
                               ),
                             );
                             // Acción al presionar el botón

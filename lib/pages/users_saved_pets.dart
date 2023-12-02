@@ -3,13 +3,13 @@ import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart';
 
 class UserSavedPets extends StatefulWidget {
-  const UserSavedPets({Key? key}) : super(key: key);
+  const UserSavedPets({super.key});
 
   @override
-  _UserSavedPetsState createState() => _UserSavedPetsState();
+  UserSavedPetsState createState() => UserSavedPetsState();
 }
 
-class _UserSavedPetsState extends State<UserSavedPets> {
+class UserSavedPetsState extends State<UserSavedPets> {
   late TextEditingController _searchController;
   List<ItemData> filteredItems = [];
 
