@@ -6,10 +6,9 @@ import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  RegisterStepOne({super.key, required this.dataStorage}) {
-    throw UnimplementedError('Revisar inicialización');
-  }
-  
+  // ignore: prefer_const_constructors_in_immutables
+  RegisterStepOne({super.key, required this.dataStorage});
+
   final DataRegistrationTransfer dataStorage;
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
@@ -21,6 +20,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   late TextEditingController _rutController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+  
 
   @override
   void initState() {
@@ -165,7 +165,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),
+                      builder: (context) =>
+                          RegisterStepTwo(dataStorage: widget.dataStorage),
                     ),
                   );
                 },

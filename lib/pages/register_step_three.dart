@@ -77,19 +77,20 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
+                        // ignore: prefer_const_constructors
                         Padding(
                           padding: const EdgeInsets.only(left: 2),
-                          child: CheckboxListTile(
-                            title: const Text(
-                                ''), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                            value: _termAcceptanceController.text.toLowerCase() == 'true',
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _termAcceptanceController.text = value.toString();
-                              });
-                            },
-                            controlAffinity: ListTileControlAffinity.leading,
-                          ),
+                          // child: CheckboxListTile(
+                          //   title: const Text(
+                          //       ''), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                          //   value: _termAcceptanceController.text.toLowerCase() == 'true',
+                          //   onChanged: (bool? value) {
+                          //     setState(() {
+                          //       _termAcceptanceController.text = value.toString();
+                          //     });
+                          //   },
+                          //   controlAffinity: ListTileControlAffinity.leading,
+                          // ),
                         ),
                         TextButton(
                           onPressed: () {

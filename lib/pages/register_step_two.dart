@@ -6,7 +6,10 @@ import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
   final DataRegistrationTransfer? storageData;
-  const RegisterStepTwo({super.key, this.storageData, required DataRegistrationTransfer dataStorage});
+  const RegisterStepTwo(
+      {super.key,
+      this.storageData,
+      required DataRegistrationTransfer dataStorage});
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
@@ -33,7 +36,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
   }
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -62,8 +65,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           }
                           return null;
                         },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Celular').regularInput,
+                        decoration: PetCareInputStyle(labelText: ' Celular')
+                            .regularInput,
                       ),
                     ),
                     Container(
@@ -77,12 +80,12 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           return null;
                         },
                         obscureText: true,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Dirección').regularInput,
+                        decoration: PetCareInputStyle(labelText: ' Dirección')
+                            .regularInput,
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(bottom: 14),
+                      margin: const EdgeInsets.only(bottom: 15),
                       child: TextFormField(
                         controller: _dateBirthController,
                         validator: (dateBirth) {
@@ -97,36 +100,38 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                         ).regularInput,
                       ),
                     ),
-                    //FIXME: ::Not working:: Trabajado en ello
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        CheckboxListTile(
-                          title: const Text('Masculino'),
-                          value: _maleController.text == 'true',
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value != null) {
-                                _maleController.text = value.toString();
-                                _femaleController.text = (!value).toString();
-                              }
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        Expanded(
+                          child: CheckboxListTile(
+                            title: const Text('Masculino',
+                                style: TextStyle(fontSize: 13)),
+                            value: _maleController.text == 'true',
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isMale = value ?? false;
+                                isFemale = !isMale;
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
-                        CheckboxListTile(
-                          title: const Text(
-                              'Femenino'), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                          value: _femaleController.text == 'true',
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value != null) {
-                                _femaleController.text = value.toString();
-                                _maleController.text = (!value).toString();
-                              }
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        const SizedBox(width: 1),
+                        Expanded(
+                          child: CheckboxListTile(
+                            title: const Text('Femenino',
+                                style: TextStyle(fontSize: 13)),
+                            //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                            value: _femaleController.text == 'true',
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isFemale = value ?? false;
+                                isMale = !isFemale;
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
                       ],
                     ),
@@ -138,12 +143,13 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
+                  DataRegistrationTransfer storageData =
+                      DataRegistrationTransfer();
                   storageData.phone = _phoneController.text;
                   storageData.address = _addressController.text;
                   storageData.dateBirth = _dateBirthController.text;
-                  storageData.female = _femaleController.text.toLowerCase();
-                  storageData.male = _maleController.text.toLowerCase();
+                  storageData.female = isFemale.toString();
+                  storageData.male = isMale.toString();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
