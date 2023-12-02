@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class BuyMe extends StatefulWidget {
-  const BuyMe({super.key});
+  final String photoPet;
+
+  const BuyMe({super.key, required this.photoPet});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -11,8 +13,24 @@ class BuyMe extends StatefulWidget {
 
 class _BuyMeState extends State<BuyMe> {
   final _formBuyMeKey = GlobalKey<FormState>();
-
+  late String photoPet;
+  late String statement;
   late String donationAmount;
+
+  @override
+  void initState() {
+    super.initState();
+    // Revisa si la variable está vacía al iniciar la pantalla
+    if (widget.photoPet.isEmpty) {
+      statement =
+          'PetCare es financiada de aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.';
+      // Asigna un valor si la variable está vacía
+      photoPet = 'assets/images/logo_petcare.png';
+    } else {
+      photoPet = widget.photoPet;
+      statement = '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +42,14 @@ class _BuyMeState extends State<BuyMe> {
           padding: const EdgeInsets.fromLTRB(35, 67, 30, 0),
           child: Column(children: <Widget>[
             Image.asset(
-              'assets/images/logo_petcare.png',
+              photoPet,
               width: 200, // Ancho deseado
               height: 200, // Alto deseado
             ),
             Container(
               margin: const EdgeInsets.only(top: 37, bottom: 45.82),
-              child: const Text(
-                'PetCare es financiada de aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.',
+              child: Text(
+                statement,
                 textAlign: TextAlign.center,
                 style: PetCareThemes.statementTextStyle,
               ),
@@ -50,7 +68,8 @@ class _BuyMeState extends State<BuyMe> {
                         if (amount == null || amount.isEmpty) {
                           return 'campo requerido';
                         }
-                        donationAmount = amount; //luigui esta variable contiene el monto 
+                        donationAmount =
+                            amount; //luigui esta variable contiene el monto
                         //TODO: aqui sale la varibale con el
                         return null;
                       },
@@ -63,7 +82,22 @@ class _BuyMeState extends State<BuyMe> {
                         onPressed: () {
                           if (_formBuyMeKey.currentState!.validate()) {
                             // ignore: avoid_print
-                            print('todo bien');
+                            showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Donación Enviada ✅'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cerrar'),
+                          ), 
+                        ],
+                      );
+                    },
+                  );
                             //luego cambiar pushNamed por pushReplacementNamed para evitar volver
                           }
                           //Acción al presionar el botón

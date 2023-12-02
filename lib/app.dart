@@ -90,7 +90,6 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (context) => AdoptionRequest(itemID: itemID ?? ''),);
 
-
           case AppRoutes.adoptionConfirm:
             return MaterialPageRoute(
                 builder: (context) => const AdoptionConfirm());
@@ -113,7 +112,10 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const Contact());
 
           case AppRoutes.buyMe:
-            return MaterialPageRoute(builder: (context) => const BuyMe());
+
+            String? photoPet = settings.arguments as String?;
+
+            return MaterialPageRoute(builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
             return MaterialPageRoute(builder: (context) => const LogInPage());

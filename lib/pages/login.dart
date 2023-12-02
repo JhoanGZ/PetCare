@@ -117,8 +117,7 @@ class _LogInPageState extends State<LogInPage> {
 
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(AppRoutes.retrievePass);
+                            Navigator.of(context).pushNamed(AppRoutes.retrievePass);
                             //logica del text buton Logic:
                           },
                           child: const Text(

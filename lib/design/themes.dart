@@ -5,14 +5,22 @@ class PetCareThemes {
   //Esta clase nos permite dar estilo a todos los textos de la app
   PetCareThemes._();
   //Estan todos modularizados
+<<<<<<< HEAD
     static const TextStyle nameProfileTextStyle = TextStyle(
+=======
+  static const TextStyle nameProfileTextStyle = TextStyle(
+>>>>>>> 587db21956262285051e78765fa8a1e14f0452ef
     //esta atributo es usado para los enunciados
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.bold, // esto es el ancho de la linea
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandShadowColor,
   );
+<<<<<<< HEAD
     static const TextStyle descriptionPetTextStyle = TextStyle(
+=======
+  static const TextStyle descriptionPetTextStyle = TextStyle(
+>>>>>>> 587db21956262285051e78765fa8a1e14f0452ef
     //esta atributo es usado para los enunciados
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.w200, // esto es el ancho de la linea
@@ -33,7 +41,7 @@ class PetCareThemes {
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandLinkColor,
   );
-    static const TextStyle linkTextStyleBold = TextStyle(
+  static const TextStyle linkTextStyleBold = TextStyle(
     //esta atributo es usado para los enunciados
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.bold, // esto es el ancho de la linea
@@ -65,7 +73,7 @@ class PetCareThemes {
 
   static const TextStyle textStylePopUp = TextStyle(
     // este atributo se utiliza en el texto de los popups
-    // 
+    //
     fontFamily: 'Inter',
     fontSize: 24,
     fontWeight: FontWeight.w600,
@@ -87,8 +95,7 @@ class PetCareInputStyle {
 
   InputDecoration get regularInput {
     return InputDecoration(
-      
-      floatingLabelBehavior: FloatingLabelBehavior.auto,//para la animacion
+      floatingLabelBehavior: FloatingLabelBehavior.auto, //para la animacion
       filled: true,
       fillColor: PetCareColors.brandSecondaryColor,
       border: OutlineInputBorder(
@@ -104,8 +111,12 @@ class PetCareInputStyle {
                 .brandPrimaryColor), // Color del borde al estar enfocado
       ),
       labelText: labelText,
-      labelStyle: const TextStyle(fontSize: 12.0, color: PetCareColors.brandShadowColor, fontFamily: 'Inter'),
-      contentPadding: const EdgeInsets.symmetric(vertical: 10.0), // Ajusta la altura del espacio interno
+      labelStyle: const TextStyle(
+          fontSize: 12.0,
+          color: PetCareColors.brandShadowColor,
+          fontFamily: 'Inter'),
+      contentPadding: const EdgeInsets.symmetric(
+          vertical: 10.0), // Ajusta la altura del espacio interno
     );
   }
 }
@@ -124,30 +135,18 @@ class PetCareButtonStyles {
       ),
       textStyle: PetCareThemes.buttonTextStyle);
 }
-//=====================================================APPBAR USER=======================================================
-class PetCareTitleAppBarUser extends StatelessWidget {
-  const PetCareTitleAppBarUser({super.key});
 
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          'assets/images/logo_petcare_blanco.png',
-          width: 21,
-          height: 21,
-        ),
-        const SizedBox(
-          width: 317,
-        ),
-        // TODO: AQUÍ VA LA IMAGEN DE USUARIO
-        Image.asset(
-          'assets/images/pic_default_user.png',
-          width: 21,
-          height: 21,
-        ),
-      ],
-    );
-  }
+class PetCareLittleButtonStyles {
+  static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
+       //alto y ancho del boton
+      backgroundColor:
+          PetCareColors.brandPrimaryColor, // Color de fondo del botón
+      foregroundColor: Colors.white, // Color del texto del botón
+      padding: const EdgeInsets.symmetric(
+          vertical: 15, horizontal: 20), // Padding del botón
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(7), // Bordes redondeados del botón
+      ),
+      textStyle: PetCareThemes.buttonTextStyle);
 }
+//=====================================================APPBAR USER=======================================================
