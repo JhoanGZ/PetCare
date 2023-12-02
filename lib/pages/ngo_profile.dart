@@ -55,8 +55,9 @@ class NgoProfileState extends State<NgoProfile> {
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
-       ),
-      body: Column(
+      ),
+      body: 
+      Column(
         children: [
           Container(
             alignment: Alignment.centerLeft,
@@ -80,34 +81,32 @@ class NgoProfileState extends State<NgoProfile> {
                   fit: BoxFit.cover,
                 ),
               ),
-                    const Expanded(child: Text('Fundacion esperanza animal', style: PetCareThemes.nameProfileTextStyle, textAlign: TextAlign.center,)),
-
+              const Expanded(child: Text('Fundacion esperanza animal', style: PetCareThemes.nameProfileTextStyle, textAlign: TextAlign.center,)),
             ],
-            
           ),
-           Row(
-                   children:[   
-                    Container(
-                      margin: const EdgeInsets.only(left: 46, right: 100, top: 20),
-                      child: const Text('96', style: PetCareThemes.nameProfileTextStyle,)),
-                    Container(
-                      margin: const EdgeInsets.only(top:20),
-                      child: const Text('120',style: PetCareThemes.nameProfileTextStyle,)), ]   
+          Row(
+            children:[   
+            Container(
+                margin: const EdgeInsets.only(left: 46, right: 100, top: 20),
+                child: const Text('96', style: PetCareThemes.nameProfileTextStyle,)),
+            Container(
+                margin: const EdgeInsets.only(top:20),
+                child: const Text('120',style: PetCareThemes.nameProfileTextStyle,)), ]   
           ),
-                     Row(
-                   children:[   
-                    Container(
-                      margin: const EdgeInsets.only(left: 12, right: 30, bottom: 20),
-                      child: const Text('Publicaciones', style: PetCareThemes.statementTextStyle,)),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: const Text('adopciones',style: PetCareThemes.statementTextStyle,)), ]   
+          Row(
+            children:[   
+              Container(
+                  margin: const EdgeInsets.only(left: 12, right: 30, bottom: 20),
+                  child: const Text('Publicaciones', style: PetCareThemes.statementTextStyle,)),
+              Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: const Text('adopciones',style: PetCareThemes.statementTextStyle,)), ]   
           ),
 
-                    // Utilizando el widget ExpandableTextWidget
-                    Container(
-                      margin: const EdgeInsets.only(right: 100 ,left: 20, bottom: 20),
-                      child: const ExpandText(text: 'Fundación Esperanza Animal es una organización sin fines de lucro que se forma con el objetivo de mejorar la calidad de vida de las mascotas abandonadas o nacidas en la calle y a la vez disminuir la sobrepoblación a través de la educación y concientizar sobre la temática de Tenencia Responsable en nuestro país.', maxLines: 100,)),
+          // Utilizando el widget ExpandableTextWidget
+          Container(
+            margin: const EdgeInsets.only(right: 100 ,left: 20, bottom: 20),
+            child: const ExpandText(text: 'Fundación Esperanza Animal es una organización sin fines de lucro que se forma con el objetivo de mejorar la calidad de vida de las mascotas abandonadas o nacidas en la calle y a la vez disminuir la sobrepoblación a través de la educación y concientizar sobre la temática de Tenencia Responsable en nuestro país.', maxLines: 100,)),
 
           Row(
             children: [
@@ -164,9 +163,7 @@ class NgoProfileState extends State<NgoProfile> {
               },
             ),
           ),
-          
         ],
-        
       ),
     );
   }
