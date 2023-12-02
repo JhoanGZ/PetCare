@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class PetCareCheckBox extends StatefulWidget {
@@ -32,6 +33,7 @@ class PetCareCheckBoxState extends State<PetCareCheckBox> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Checkbox(
+          activeColor: PetCareColors.brandPrimaryColor,
           value: _isChecked,
           onChanged: (bool? value) {
             if (value != null) {
