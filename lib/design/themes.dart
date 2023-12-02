@@ -5,22 +5,14 @@ class PetCareThemes {
   //Esta clase nos permite dar estilo a todos los textos de la app
   PetCareThemes._();
   //Estan todos modularizados
-<<<<<<< HEAD
-    static const TextStyle nameProfileTextStyle = TextStyle(
-=======
   static const TextStyle nameProfileTextStyle = TextStyle(
->>>>>>> 587db21956262285051e78765fa8a1e14f0452ef
     //esta atributo es usado para los enunciados
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.bold, // esto es el ancho de la linea
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandShadowColor,
   );
-<<<<<<< HEAD
-    static const TextStyle descriptionPetTextStyle = TextStyle(
-=======
   static const TextStyle descriptionPetTextStyle = TextStyle(
->>>>>>> 587db21956262285051e78765fa8a1e14f0452ef
     //esta atributo es usado para los enunciados
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.w200, // esto es el ancho de la linea

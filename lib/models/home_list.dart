@@ -39,8 +39,6 @@ final List<ItemData> items = [
     description: 'Descripción de la imagen 3',
     id: '789'
   ),
-<<<<<<< HEAD
-=======
     ItemData(
     profileIcon: 'assets/images/fundacion perfil.png',
     title: 'Fundacion Esperanza',
@@ -126,5 +124,4 @@ final List<ItemData> items = [
     description: 'Descripción de la imagen 3',
     id: '789'
   ),
->>>>>>> 587db21956262285051e78765fa8a1e14f0452ef
 ];

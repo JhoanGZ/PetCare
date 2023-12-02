@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/widgets/app_bar_home.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
-import 'package:petcare_app/widgets/slide_button.dart';
 
 class PetProfile extends StatefulWidget {
   const PetProfile({super.key});
@@ -16,17 +15,17 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            ),
           ),
-        ),
-        title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
-        backgroundColor: PetCareColors.brandPrimaryColor,
-        toolbarHeight: 28,
-        centerTitle: true,
-       ),
-     body: Column(
+          title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
+          backgroundColor: PetCareColors.brandPrimaryColor,
+          toolbarHeight: 28,
+          centerTitle: true,
+      ),
+      body: Column(
 
       children: [
         
@@ -39,9 +38,7 @@ class _PetProfileState extends State<PetProfile> {
             // Hacer algo cuando el valor del checkbox cambie :Logic
           },
         )],
-     )
-          
-     
+      )
     );
   }
 }
