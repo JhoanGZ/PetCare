@@ -74,29 +74,53 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                                 .regularInput,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        // ignore: prefer_const_constructors
-                        Flexible(
-                          child: CheckboxListTile(
-                            title: const Text('Acepto', style: TextStyle( fontSize: 9)), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: <Widget>[
+                    //     Flexible(
+                    //       child: CheckboxListTile(
+                    //         title: const Text('Acepto', style: TextStyle( fontSize: 10)), 
+                    //         value: _termAcceptanceController.text.toLowerCase() == 'true',
+                    //         onChanged: (bool? value) { setState(() { _termAcceptanceController.text = value.toString();});
+                    //         },
+                    //         controlAffinity: ListTileControlAffinity.leading,
+                    //       ),
+                    //     ),
+                    //     TextButton(
+                    //       onPressed: () {
+                    //         Navigator.of(context).pushNamed(AppRoutes.terms);
+                    //       },
+                    //       child: const Text(
+                    //         'los términos y condiciones',
+                    //         style: TextStyle(fontSize: 14),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    Theme(
+                      data: PetCareAnimationColor.customAnimationColorTheme,
+                      child: Row(
+                        children: <Widget>[
+                          Checkbox(
                             value: _termAcceptanceController.text.toLowerCase() == 'true',
-                            onChanged: (bool? value) { setState(() { _termAcceptanceController.text = value.toString();});
+                            onChanged: (bool? value) {
+                              setState(() {
+                                _termAcceptanceController.text = value.toString();
+                              });
                             },
-                            controlAffinity: ListTileControlAffinity.leading,
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.terms);
-                          },
-                          child: const Text(
-                            'los términos y condiciones',
-                            style: TextStyle(fontSize: 14),
+                          const SizedBox(width: 8.0), // Ajusta este valor según tu necesidad
+                          const Text('Acepto ', style: TextStyle(fontSize: 15),
                           ),
-                        ),
-                      ],
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(AppRoutes.terms);
+                            },
+                            child: const Text('los términos y condiciones', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), // NOTE: No se puede usar Themes por overflow
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
