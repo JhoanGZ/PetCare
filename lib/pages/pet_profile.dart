@@ -40,16 +40,18 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
-          ),
-        ),
-        title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
+             title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
-       ),
+       
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            ),
+          ),
+        ),
+   
      body: SingleChildScrollView(
        child: Padding(
          padding: const EdgeInsets.fromLTRB(30,0,34,30),

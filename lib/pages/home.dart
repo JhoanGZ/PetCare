@@ -35,8 +35,8 @@ class HomeState extends State<Home> {
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
-       ),
-     body: ListView.builder(
+      ),
+         body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
           return Padding(
@@ -78,20 +78,20 @@ class HomeState extends State<Home> {
                 const SizedBox(
                     height: 8), // Espacio entre la imagen y la descripción
                 //======================================================botones
-              Row(
-              children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: PetCareColors.brandPrimaryColor,
-                  ),
-                  child: GestureDetector(
+                Row(
+                  children: [
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: PetCareColors.brandPrimaryColor,
+                    ),
+                    child: GestureDetector(
                     child: IconButton(
                       onPressed: () {
                   
-           Navigator.push(context,MaterialPageRoute(builder: (context) => BuyMe(photoPet: items[index].photo)));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => BuyMe(photoPet: items[index].photo)));
                       },
                       icon: Image.asset(
                         'assets/images/icon_donation_home.png',
@@ -128,7 +128,7 @@ class HomeState extends State<Home> {
                         ),
                       ),
                     ),
-//otro boton
+                      //otro boton
                         const SizedBox(
                         width:
                             4),
@@ -145,7 +145,6 @@ class HomeState extends State<Home> {
                         child: IconButton(
                           onPressed: () {
                             // Acción al presionar el botón
-                             
                           },
                           icon: Image.asset('assets/images/icon_share_home.png',
                               width: 30, height: 30),
@@ -177,16 +176,16 @@ class HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                                
+                Container(
+                  alignment: Alignment.centerLeft,
                 
-Container(
-  alignment: Alignment.centerLeft,
- 
-  child: Text(
-    
-    items[index].title,
-    style: PetCareThemes.nameProfileTextStyle,
-  ),
-),
+                  child: Text(
+                    
+                    items[index].title,
+                    style: PetCareThemes.nameProfileTextStyle,
+                  ),
+                ),
                 const SizedBox(width: 8),
                     // Utilizando el widget ExpandableTextWidget
                     ExpandText(text: items[index].description, maxLines: 2,),// Descripción del elemento

@@ -77,16 +77,12 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2),
+                        // ignore: prefer_const_constructors
+                        Flexible(
                           child: CheckboxListTile(
-                            title: const Text(
-                                ''), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                            title: const Text('Acepto', style: TextStyle( fontSize: 9)), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
                             value: _termAcceptanceController.text.toLowerCase() == 'true',
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _termAcceptanceController.text = value.toString();
-                              });
+                            onChanged: (bool? value) { setState(() { _termAcceptanceController.text = value.toString();});
                             },
                             controlAffinity: ListTileControlAffinity.leading,
                           ),
@@ -97,7 +93,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           },
                           child: const Text(
                             'los términos y condiciones',
-                            style: PetCareThemes.linkTextStyleBold,
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                       ],
@@ -110,19 +106,13 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
-                  storageData.password = _passwordController.text; 
-                  storageData.passwordCheck = _passwordCheckController.text; 
-                  storageData.termAcceptance = _termAcceptanceController.text;
-                  // Navigator.of(context).pushNamed(AppRoutes.home);
-                  // await registrationService(
-                  //   _formRegisterStepThreeKey,
-                  //   _passwordController,
-                  //   _passwordCheckController,
-                  //   _termAcceptanceController,
-                  //   context,
-                  // );
-                  //FIXME: ::JG:: Trabajado en ello
+                  widget.storageData.password = _passwordController.text;
+                  widget.storageData.passwordCheck =
+                      _passwordCheckController.text;
+                  widget.storageData.termAcceptance =
+                      _termAcceptanceController.text;
+
+                  //TODO: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
