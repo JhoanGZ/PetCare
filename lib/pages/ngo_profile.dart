@@ -80,8 +80,28 @@ class NgoProfileState extends State<NgoProfile> {
                   height: 64,
                   fit: BoxFit.cover,
                 ),
+
               ),
-              const Expanded(child: Text('Fundacion esperanza animal', style: PetCareThemes.nameProfileTextStyle, textAlign: TextAlign.center,)),
+
+                    const Expanded(child: Text('Fundacion esperanza animal', style: PetCareThemes.nameProfileTextStyle, textAlign: TextAlign.center,)),
+              Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: PetCareColors.brandPrimaryColor,
+                  ),
+                child: IconButton(
+                        onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.adoptionAccept);
+                        },
+                        icon: Image.asset(
+                          'assets/images/icon_notification.png',
+                          width: 30,
+                          height: 30,),
+                          ),
+              ),
             ],
           ),
           Row(
