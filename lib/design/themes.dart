@@ -142,9 +142,11 @@ class PetCareLittleButtonStyles {
       textStyle: PetCareThemes.buttonTextStyle);
 }
 //=====================================================APPBAR USER=======================================================
-//===================================================== COLOR ANIMATION CHECKBOX =======================================================
+//===================================================== COLOR ANIMATION CHECKBOX ========================================
 
 class PetCareAnimationColor{
+  static dynamic customAnimationColor = Colors.orange;
+
   static ThemeData get customAnimationColorTheme {
     return ThemeData(
       checkboxTheme: CheckboxThemeData(

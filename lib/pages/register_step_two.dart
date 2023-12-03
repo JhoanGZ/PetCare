@@ -100,89 +100,58 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                         ).regularInput,
                       ),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: <Widget>[
-                    //     Expanded(
-                    //       child: CheckboxListTile(
-                    //         title: const Text('Masculino',
-                    //             style: TextStyle( fontSize: 13)),
-                    //         value: _maleController.text == 'true',
-                    //         onChanged: (bool? value) {
-                    //           setState(() {
-                    //             isMale = value ?? false;
-                    //             isFemale = !isMale;
-                    //           });
-                    //         },
-                    //         controlAffinity: ListTileControlAffinity.leading,
-                    //       ),
-                    //     ),
-                    //     const SizedBox(width: 1),
-                    //     Expanded(
-                    //       child: CheckboxListTile(
-                    //         title: const Text('Femenino',
-                    //             style: TextStyle( fontSize: 13)),
-                    //         //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                    //         value: _femaleController.text == 'true',
-                    //         onChanged: (bool? value) {
-                    //           setState(() {
-                    //             isFemale = value ?? false;
-                    //             isMale = !isFemale;
-                    //           });
-                    //         },
-                    //         controlAffinity: ListTileControlAffinity.leading,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                isMale = !isMale;
-                                isFemale = !isMale;
-                              });
-                            },
-                            child: CheckboxListTile(
-                              title: const Text('Masculino', style: TextStyle(fontSize: 13)),
-                              value: _maleController.text == 'true',
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  isMale = value ?? false;
-                                  isFemale = !isMale;
-                                });
-                              },
-                              controlAffinity: ListTileControlAffinity.leading,
-                            ),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isMale = !isMale;
+                              isFemale = !isMale;
+                            });
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Checkbox(
+                                value: _maleController.text == 'true',
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    isMale = value ?? false;
+                                    isFemale = !isMale;
+                                  });
+                                },
+                                activeColor: PetCareAnimationColor.customAnimationColor,
+                              ),
+                              const Text('Masculino', style: TextStyle(fontSize: 13)),
+                            ],
                           ),
                         ),
-                        const SizedBox(width: 1),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                isFemale = !isFemale;
-                                isMale = !isFemale;
-                              });
-                            },
-                            child: CheckboxListTile(
-                              title: const Text('Femenino', style: TextStyle(fontSize: 13)),
-                              value: _femaleController.text == 'true',
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  isFemale = value ?? false;
-                                  isMale = !isFemale;
-                                });
-                              },
-                              controlAffinity: ListTileControlAffinity.leading,
-                            ),
+                        const SizedBox(width: 60), // Ajusta este valor según sea necesario
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isFemale = !isFemale;
+                              isMale = !isFemale;
+                            });
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Checkbox(
+                                value: _femaleController.text == 'true',
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    isFemale = value ?? false;
+                                    isMale = !isFemale;
+                                  });
+                                },
+                                activeColor: PetCareAnimationColor.customAnimationColor,
+                              ),
+                              const Text('Femenino', style: TextStyle(fontSize: 13)),
+                            ],
                           ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
