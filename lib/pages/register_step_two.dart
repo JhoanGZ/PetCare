@@ -100,37 +100,85 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                         ).regularInput,
                       ),
                     ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: <Widget>[
+                    //     Expanded(
+                    //       child: CheckboxListTile(
+                    //         title: const Text('Masculino',
+                    //             style: TextStyle( fontSize: 13)),
+                    //         value: _maleController.text == 'true',
+                    //         onChanged: (bool? value) {
+                    //           setState(() {
+                    //             isMale = value ?? false;
+                    //             isFemale = !isMale;
+                    //           });
+                    //         },
+                    //         controlAffinity: ListTileControlAffinity.leading,
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 1),
+                    //     Expanded(
+                    //       child: CheckboxListTile(
+                    //         title: const Text('Femenino',
+                    //             style: TextStyle( fontSize: 13)),
+                    //         //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                    //         value: _femaleController.text == 'true',
+                    //         onChanged: (bool? value) {
+                    //           setState(() {
+                    //             isFemale = value ?? false;
+                    //             isMale = !isFemale;
+                    //           });
+                    //         },
+                    //         controlAffinity: ListTileControlAffinity.leading,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Expanded(
-                          child: CheckboxListTile(
-                            title: const Text('Masculino',
-                                style: TextStyle(fontSize: 13)),
-                            value: _maleController.text == 'true',
-                            onChanged: (bool? value) {
+                          child: GestureDetector(
+                            onTap: () {
                               setState(() {
-                                isMale = value ?? false;
+                                isMale = !isMale;
                                 isFemale = !isMale;
                               });
                             },
-                            controlAffinity: ListTileControlAffinity.leading,
+                            child: CheckboxListTile(
+                              title: const Text('Masculino', style: TextStyle(fontSize: 13)),
+                              value: _maleController.text == 'true',
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isMale = value ?? false;
+                                  isFemale = !isMale;
+                                });
+                              },
+                              controlAffinity: ListTileControlAffinity.leading,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 1),
                         Expanded(
-                          child: CheckboxListTile(
-                            title: const Text('Femenino',
-                                style: TextStyle(fontSize: 13)),
-                            //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                            value: _femaleController.text == 'true',
-                            onChanged: (bool? value) {
+                          child: GestureDetector(
+                            onTap: () {
                               setState(() {
-                                isFemale = value ?? false;
+                                isFemale = !isFemale;
                                 isMale = !isFemale;
                               });
                             },
-                            controlAffinity: ListTileControlAffinity.leading,
+                            child: CheckboxListTile(
+                              title: const Text('Femenino', style: TextStyle(fontSize: 13)),
+                              value: _femaleController.text == 'true',
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isFemale = value ?? false;
+                                  isMale = !isFemale;
+                                });
+                              },
+                              controlAffinity: ListTileControlAffinity.leading,
+                            ),
                           ),
                         ),
                       ],

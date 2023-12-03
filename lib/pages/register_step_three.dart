@@ -78,19 +78,14 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         // ignore: prefer_const_constructors
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2),
-                          // child: CheckboxListTile(
-                          //   title: const Text(
-                          //       ''), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
-                          //   value: _termAcceptanceController.text.toLowerCase() == 'true',
-                          //   onChanged: (bool? value) {
-                          //     setState(() {
-                          //       _termAcceptanceController.text = value.toString();
-                          //     });
-                          //   },
-                          //   controlAffinity: ListTileControlAffinity.leading,
-                          // ),
+                        Flexible(
+                          child: CheckboxListTile(
+                            title: const Text('Acepto', style: TextStyle( fontSize: 9)), //TODO: ::FR&JG:: Ordenar los styles de estos checkboxes, no pude usar el widget original.
+                            value: _termAcceptanceController.text.toLowerCase() == 'true',
+                            onChanged: (bool? value) { setState(() { _termAcceptanceController.text = value.toString();});
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
@@ -98,7 +93,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           },
                           child: const Text(
                             'los términos y condiciones',
-                            style: PetCareThemes.linkTextStyleBold,
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                       ],
@@ -112,9 +107,11 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               child: ElevatedButton(
                 onPressed: () async {
                   widget.storageData.password = _passwordController.text;
-                  widget.storageData.passwordCheck = _passwordCheckController.text;
-                  widget.storageData.termAcceptance = _termAcceptanceController.text;
-                
+                  widget.storageData.passwordCheck =
+                      _passwordCheckController.text;
+                  widget.storageData.termAcceptance =
+                      _termAcceptanceController.text;
+
                   //TODO: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
