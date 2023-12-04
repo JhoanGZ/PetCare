@@ -104,11 +104,29 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (context) => const DonationConfirm());
 
-          case AppRoutes.ngoProfile:
-            return MaterialPageRoute(builder: (context) => const NgoProfile());
+       case AppRoutes.ngoProfile:
+        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final String foundationId = args['foundationId'];
+        final String userName = args['userName'];
 
-          case AppRoutes.petProfile:
-            return MaterialPageRoute(builder: (context) => const PetProfile());
+        return MaterialPageRoute(
+          builder: (context) => NgoProfile(
+            foundationId: foundationId,
+            userName: userName,
+          ),
+        );
+ 
+        case AppRoutes.petProfile:
+        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final String foundationId = args['foundationId'];
+        final String userName = args['userName'];
+
+        return MaterialPageRoute(
+          builder: (context) => PetProfile(
+            foundationId: foundationId,
+            userName: userName,
+          ),
+        );
 
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());

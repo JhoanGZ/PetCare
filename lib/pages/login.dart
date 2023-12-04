@@ -80,7 +80,7 @@ class _LogInPageState extends State<LogInPage> {
                       ),
                       Container(
                         margin:
-                        const EdgeInsets.only(top: 14.82, bottom: 30.63),
+                            const EdgeInsets.only(top: 14.82, bottom: 30.63),
                         child: TextFormField(
                           controller: _passwordController,
                           validator: (password) {
@@ -117,7 +117,8 @@ class _LogInPageState extends State<LogInPage> {
 
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.retrievePass);
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.retrievePass);
                             //logica del text buton Logic:
                           },
                           child: const Text(
@@ -284,7 +285,12 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacementNamed(AppRoutes.home);//TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.home, arguments: {
+                          'userName': 'Francisco Soto',
+                          'userToken': 'Token de usuario',
+                          'foundationId': '1',
+                        }); //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
                         //logica del text buton contactanos Logic:
                       },
                       child: const Text(

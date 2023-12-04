@@ -5,7 +5,6 @@ import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
 import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/pages/buy_me.dart';
-import 'package:petcare_app/widgets/app_bar_home.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class Home extends StatefulWidget {
@@ -28,6 +27,9 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+      bool showButtons = widget.foundationId == '0';
+
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -35,7 +37,42 @@ class HomeState extends State<Home> {
             bottom: Radius.circular(10),
           ),
         ),
-        title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
+        title:Row(
+      children: [
+        Image.asset(
+          'assets/images/logo_petcare_blanco.png',
+          width: 21,
+          height: 21,
+        ),
+
+     
+        Expanded(child: Text(widget.userName,style: PetCareThemes.buttonTextStyle,)),
+        // TODO: AQUÍ VA LA IMAGEN DE USUARIO
+        GestureDetector(
+      onTap: () {
+        if(widget.foundationId == '0'){
+              Navigator.of(context).pushNamed(AppRoutes.userProfile);
+        }else{
+                Navigator.of(context).pushNamed(
+        AppRoutes.ngoProfile,
+        arguments: {
+    'foundationId': widget.foundationId,
+    'nameUser': widget.userName, // Asegúrate de tener el valor de nameUser disponible aquí
+    },
+      );
+        }
+    // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
+
+      },
+        child: Image.asset(
+        'assets/images/pic_default_user.png',
+        width: 21,
+        height: 21,
+  ),
+)
+
+      ],
+    ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
@@ -52,9 +89,13 @@ class HomeState extends State<Home> {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(AppRoutes.ngoProfile);
-                      },
+onTap: () {
+    
+      Navigator.of(context).pushNamed(
+        AppRoutes.ngoProfile,
+        arguments: widget.foundationId,
+      );
+},
                       child: Image.asset(
                         items[index].profileIcon, // Icono de perfil
                         width: 38,
@@ -81,6 +122,7 @@ class HomeState extends State<Home> {
                 const SizedBox(
                     height: 8), // Espacio entre la imagen y la descripción
                 //======================================================botones
+              if (showButtons)
                 Row(
                   children: [
                     Container(
