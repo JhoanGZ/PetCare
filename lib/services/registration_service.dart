@@ -1,46 +1,64 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/models/storage_transfer.dart';
 
-// Define una función para manejar la lógica de autenticación
-Future<void> registrationService(
-  GlobalKey<FormState> formKey,
-  TextEditingController emailController,
-  TextEditingController rutController,
-  TextEditingController firstNameController,
-  TextEditingController lastNameController,
-  TextEditingController phoneController,
-  TextEditingController addressController,
-  TextEditingController dateBirthController,
-  TextEditingController maleController,
-  TextEditingController femaleController,
-  TextEditingController passwordController,
-  TextEditingController passwordCheckController,
-  TextEditingController termAcceptanceController,
-  BuildContext context,
+final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-) async {
+Future<void> registrationService(DataRegistrationTransfer data, BuildContext context) async 
+{
+  String email = data.email;
+  String rut = data.rut;
+  String firstName = data.firstName;
+  String lastName = data.lastName;
+  String photo = data.photo;
+  String address = data.address;
+  String dateBirth = data.dateBirth;
+  String female = data.female;
+  String male = data.male;
+  String password = data.password;
+  String passwordCheck = data.passwordCheck;
+  String termAcceptance = data.termAcceptance;
+  String gender;
+
+  print('Datos recibidos en registrationService:');
+  print('Email: ${data.email}');
+  print('Rut: ${data.rut}');
+  print('Nombre: ${data.firstName}');
+  print('Apellido: ${data.lastName}');
+  print('Foto: ${data.photo}');
+  print('Dirección: ${data.address}');
+  print('Fecha de Nacimiento: ${data.dateBirth}');
+  print('Femenino: ${data.female}');
+  print('Masculino: ${data.male}');
+  print('Contraseña: ${data.password}');
+  print('Repetir Contraseña: ${data.passwordCheck}');
+  print('Aceptación de Términos: ${data.termAcceptance}');
+
+  gender = male == 'false' ? '1' : '0';    
+
   if (formKey.currentState!.validate()) {
-    // Datos del usuario del formulario usando controladores
-    String email = emailController.text;
-    String rut = rutController.text;
-    String firstName = firstNameController.text;
-    String lastName = lastNameController.text;
-    String fullName = "$firstName $lastName"; //NOTE: Revisar ::LUIGUI::LN:: como van los datos con el nombre.
-
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/login'), // TODO: ::LN:: Falta agregar Endpoint correcto.
-        body: {
-          'email': email,
-          'rut': rut,
-          'nombre': fullName,
-        },
-      );
+      Uri.parse('http://127.0.0.1:8000/api/login'),
+      headers: {
+        'Content-Type': 'application/json', //NOTE: ::LN:: Por si lo necesitas como application/json
+      },
+      body: jsonEncode({
+        'email': email,
+        'rut': rut,
+        'nombre': '$firstName $lastName',
+        'photo': photo,
+        'address': address,
+        'dateBirth': dateBirth,
+        'gender': gender,
+        'password': password,
+        'passwordCheck': passwordCheck,
+        'termAcceptance': termAcceptance
+      }),
+    );
 
       // Verificar la respuesta de la API y manejarla según sea necesario
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -51,12 +69,9 @@ Future<void> registrationService(
         print('Respuesta de la API: $responseData');
 
         // Guarda los datos que necesitas o realiza otras acciones
-        String userName = responseData['name']
-            .toString(); // FIXME::LUIGUI::29-11-23:: Esta variable debe llegar al home.
-        String userToken = responseData['token']
-            .toString(); // FIXME::LUIGUI::29-11-23:: Este token deben ser llevado al home.
-        bool userAuth = responseData['auth'] ==
-            true; // FIXME::LUIGUI::29-11-23:: Esto no va a ninguna otra vista
+        String userName = responseData['name'].toString();
+        String userToken = responseData['token'].toString();
+        bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
@@ -72,8 +87,7 @@ Future<void> registrationService(
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content:
-                Text('Error en la autenticación. Verifica tus credenciales.'),
+            content: Text('Error en la autenticación. Verifica tus credenciales.'),
             duration: Duration(seconds: 3),
           ),
         );
@@ -85,8 +99,7 @@ Future<void> registrationService(
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
+          content: Text('Error al conectar con la API. Por favor, inténtalo de nuevo.'),
           duration: Duration(seconds: 3),
         ),
       );

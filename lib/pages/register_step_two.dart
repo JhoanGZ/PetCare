@@ -164,8 +164,19 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                   storageData.dateBirth = _dateBirthController.text;
                   storageData.female = isFemale.toString();
                   storageData.male = isMale.toString();
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: storageData),
-                    ),
+
+                  print("Datos recibidos en RegisterStepTwo:");
+                  print("Email: ${widget.storageData?.email}");
+                  print("Rut: ${widget.storageData?.rut}");
+                  print("Nombre: ${widget.storageData?.firstName}");
+                  print("Apellido: ${widget.storageData?.lastName}");
+                  print("Foto: ${widget.storageData?.photo}");
+                  print("Dirección: ${storageData.address}");
+                  print("Fecha de Nacimiento: ${storageData.dateBirth}");
+                  print("Femenino: ${storageData.female}");
+                  print("Masculino: ${storageData.male}");
+                  
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: storageData),),
                   );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
