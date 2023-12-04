@@ -6,8 +6,9 @@ import 'package:petcare_app/widgets/app_bar_home.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class PetProfile extends StatefulWidget {
-  const PetProfile({super.key});
-
+  const PetProfile({super.key, required this.foundationId, required this.userName});
+  final String foundationId;
+  final String userName;
   @override
   State<PetProfile> createState() => _PetProfileState();
 }
