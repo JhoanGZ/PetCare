@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
@@ -20,7 +22,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   late TextEditingController _rutController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
-  
+  late TextEditingController _photoController;
+  File? _image;
 
   @override
   void initState() {
@@ -29,6 +32,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
     _rutController = TextEditingController();
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
+    _photoController = TextEditingController();
   }
 
   @override
@@ -60,7 +64,16 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute( builder: (context) => const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SetPhotoScreen(
+                      onPhotoSelected: (File? photo) {
+                        _image = photo;
+                      },
+                    ),
+                  ),
+                );
               },
               child: Column(
                 children: [
@@ -70,8 +83,12 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       width: 200,
                       height: 200,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(69), // promedio width x height
-                        child: Image.asset('assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
+                        borderRadius: BorderRadius.circular(
+                            69), // promedio width x height
+                        child: _image != null
+                            ? Image.file(_image!)
+                            : Image.asset(
+                                'assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
                       ),
                     ),
                   ),
@@ -89,10 +106,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _emailController,
                         validator: (email) {
-                          if (email == null || email.isEmpty) {return 'Correo Electrónico requerido';}
+                          if (email == null || email.isEmpty) {
+                            return 'Correo Electrónico requerido';
+                          }
                           return null;
                         },
-                        decoration: PetCareInputStyle(labelText: ' Correo Electrónico').regularInput,
+                        decoration:
+                            PetCareInputStyle(labelText: ' Correo Electrónico')
+                                .regularInput,
                       ),
                     ),
                     Container(
@@ -100,7 +121,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _rutController,
                         validator: (rut) {
-                          if (rut == null || rut.isEmpty) { return 'Rut requerido';}
+                          if (rut == null || rut.isEmpty) {
+                            return 'Rut requerido';
+                          }
                           return null;
                         },
                         decoration:

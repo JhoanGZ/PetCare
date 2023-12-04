@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
@@ -27,28 +29,28 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          children: [const SizedBox(width: 250,),
+          children: [
+            const SizedBox(width: 250,),
             Container(
-              
-                          width: 30,
-                          height: 30,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: PetCareColors.brandPrimaryColor, // Color de fondo del botón
-                          ),
-                          child: IconButton(
-                            onPressed: () {
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: PetCareColors.brandPrimaryColor, // Color de fondo del botón
+              ),
+              child: IconButton(
+                onPressed: () {
 
-                              Navigator.of(context).pushNamed(AppRoutes.userSavedPets);
-                              // Acción al presionar el botón
-                            },
-                            icon: Image.asset(
-                              'assets/images/icon_save_home.png',
-                              width: 30,
-                              height: 30,
-                            ),
-                          ),
-                        ),
+                  Navigator.of(context).pushNamed(AppRoutes.userSavedPets);
+                  // Acción al presionar el botón
+                },
+                icon: Image.asset(
+                  'assets/images/icon_save_home.png',
+                  width: 30,
+                  height: 30,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -72,10 +74,15 @@ class _UserProfileState extends State<UserProfile> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SetPhotoScreen(
+                      onPhotoSelected: (File? photo) {
+                        
+                      },
+                    ),
+                  ),
+                );
               },
               child: Column(
                 children: [

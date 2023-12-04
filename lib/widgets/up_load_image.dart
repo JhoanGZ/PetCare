@@ -8,7 +8,8 @@ import 'option_photo_select.dart';
 
 // ignore: must_be_immutable
 class SetPhotoScreen extends StatefulWidget {
-  const SetPhotoScreen({super.key});
+  final Function(File?) onPhotoSelected;
+  const SetPhotoScreen({super.key, required this.onPhotoSelected});
 
   static const id = 'set_photo_screen';
 
@@ -24,10 +25,11 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       File? img = File(image.path);
-      img = await _cropImage(imageFile: img);
+      // img = await _cropImage(imageFile: img);
       setState(() {
         _image = img;
         Navigator.of(context).pop();
+        widget.onPhotoSelected(_image);
       });
     } on PlatformException catch (e) {
       // ignore: avoid_print
@@ -37,12 +39,12 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
     }
   }
 
-  Future<File?> _cropImage({required File imageFile}) async {
-    CroppedFile? croppedImage =
-        await ImageCropper().cropImage(sourcePath: imageFile.path);
-    if (croppedImage == null) return null;
-    return File(croppedImage.path);
-  }
+  // Future<File?> _cropImage({required File imageFile}) async {
+  //   CroppedFile? croppedImage =
+  //       await ImageCropper().cropImage(sourcePath: imageFile.path);
+  //   if (croppedImage == null) return null;
+  //   return File(croppedImage.path);
+  // }
 
   void _showSelectPhotoOptions(BuildContext context) {
     showModalBottomSheet(
@@ -76,7 +78,7 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       body: SafeArea(
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 30, top: 20),
+              const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,28 +89,22 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 30,
-                      ),
+                          // height: 30,
+                          ),
                       Text(
                         'Elija una foto',
                         style: PetCareThemes.textStylePopUp,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
                       Text(
-                        'Las fotos son necesarias para un perfil completo de adopción',
-                        style: PetCareThemes.textStyleSubtitle,
+                        'Su foto es importante para un perfil completo de adopción',
+                        style: PetCareThemes.statementItalicTextStyle,
                       ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
-              ),
               Padding(
-                padding: const EdgeInsets.all(28.0),
+                padding: const EdgeInsets.all(80.0),
                 child: Center(
                   child: GestureDetector(
                     behavior: HitTestBehavior.translucent,
@@ -127,7 +123,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                             child: _image == null
                                 ? const Text(
                                     'Imagen no seleccionada',
-                                    style: PetCareThemes.textStylePopUp,
+                                    style: PetCareThemes.blackRegularTextStyle,
+                                    textAlign: TextAlign.center,
                                   )
                                 : CircleAvatar(
                                     backgroundImage: FileImage(_image!),
@@ -141,13 +138,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Elija su foto',
-                    textAlign: TextAlign.center,
-                    style: PetCareThemes.blackRegularTextStyle,
-                  ),
                   const SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                   ElevatedButton(
                     onPressed: () => _showSelectPhotoOptions(context),
