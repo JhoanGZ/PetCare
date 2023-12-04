@@ -42,7 +42,12 @@ class _UserProfileState extends State<UserProfile> {
               child: IconButton(
                 onPressed: () {
 
-                  Navigator.of(context).pushNamed(AppRoutes.userSavedPets);
+                  Navigator.of(context).pushNamed(AppRoutes.userSavedPets,
+                  arguments: {
+                    'foundationId': widget.foundationId,
+                    'userName': widget.userName,
+                  }
+                  );
                   // Acción al presionar el botón
                 },
                 icon: Image.asset(

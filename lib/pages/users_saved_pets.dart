@@ -3,7 +3,9 @@ import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart';
 
 class UserSavedPets extends StatefulWidget {
-  const UserSavedPets({super.key});
+  const UserSavedPets({super.key, required this.foundationId, required this.userName});
+  final String foundationId;
+  final String userName;
 
   @override
   UserSavedPetsState createState() => UserSavedPetsState();
@@ -40,7 +42,7 @@ class UserSavedPetsState extends State<UserSavedPets> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UserSavedPets'),
+        title: Text(widget.userName),
       ),
       body: Column(
         children: [
@@ -50,8 +52,8 @@ class UserSavedPetsState extends State<UserSavedPets> {
               left: 39,
               bottom: 18,
             ),
-            child: const Text(
-              'User_Profile',
+            child: Text(
+              widget.userName,
               style: PetCareThemes.titleTextStyle,
               textAlign: TextAlign.right,
             ),
