@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/services/registration_service.dart';
 
 class RegisterStepThree extends StatefulWidget {
-  final DataRegistrationTransfer storageData;
   const RegisterStepThree({super.key, required this.storageData});
+  final DataRegistrationTransfer storageData;
 
   @override
   State<RegisterStepThree> createState() => _RegisterStepThreeState();
@@ -69,8 +70,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           return null;
                         },
                         obscureText: true,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Repetir Contraseña')
+                        decoration: PetCareInputStyle(labelText: ' Repetir Contraseña')
                                 .regularInput,
                       ),
                     ),
@@ -113,8 +113,8 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                   widget.storageData.password = _passwordController.text;
                   widget.storageData.passwordCheck = _passwordCheckController.text;
                   widget.storageData.termAcceptance = _termAcceptanceController.text;
-
-                  //TODO: ::JG:: Falta hacer lógica de envío data a services y de creación token newUser 
+                  _formRegisterStepThreeKey.currentState?.save();
+                  await registrationService(widget.storageData, context);
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('Registrarme'),

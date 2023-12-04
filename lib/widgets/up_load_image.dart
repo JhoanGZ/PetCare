@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_cropper/image_cropper.dart'; // Stanby
+// import 'package:image_cropper/image_cropper.dart'; // Standby
 import 'package:image_picker/image_picker.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'option_photo_select.dart';

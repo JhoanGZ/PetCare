@@ -8,8 +8,8 @@ import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  RegisterStepOne({super.key, required this.dataStorage});
+  
+  const RegisterStepOne({super.key, required this.dataStorage});
 
   final DataRegistrationTransfer dataStorage;
   @override
@@ -192,8 +192,12 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   widget.dataStorage.rut = _rutController.text;
                   widget.dataStorage.firstName = _firstNameController.text;
                   widget.dataStorage.lastName = _lastNameController.text;
-                  widget.dataStorage.photo;
-                  Navigator.push( context, MaterialPageRoute( builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),),
+                  widget.dataStorage.photo = _image?.path ?? 'assets/images/pic_default_user.png';
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),
+                    ),
                   );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,

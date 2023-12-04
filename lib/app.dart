@@ -45,26 +45,27 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(
-                builder: (context) => RegisterStepOne(
-                      dataStorage: DataRegistrationTransfer(),
-                    ));
+              builder: (context) => RegisterStepOne(
+                dataStorage: DataRegistrationTransfer(),
+              ),
+            );
 
           case AppRoutes.registerStepTwo:
+            final DataRegistrationTransfer? storageData =
+                settings.arguments as DataRegistrationTransfer?;
             return MaterialPageRoute(
-                builder: (context) => RegisterStepTwo(
-                      dataStorage: DataRegistrationTransfer(),
-                    ));
+              builder: (context) => RegisterStepTwo(
+                dataStorage: storageData ?? DataRegistrationTransfer(),
+              ),
+            );
 
           case AppRoutes.registerStepThree:
+            final DataRegistrationTransfer? storageData =
+                settings.arguments as DataRegistrationTransfer?;
             return MaterialPageRoute(
-              builder: (context) {
-                final DataRegistrationTransfer? storageData =
-                    settings.arguments as DataRegistrationTransfer?;
-                return storageData != null
-                    ? RegisterStepThree(storageData: storageData)
-                    : RegisterStepThree(
-                        storageData: DataRegistrationTransfer());
-              },
+              builder: (context) => RegisterStepThree(
+                storageData: storageData ?? DataRegistrationTransfer(),
+              ),
             );
 
           case AppRoutes.terms:
