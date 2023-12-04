@@ -6,9 +6,10 @@ import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class NgoProfile extends StatefulWidget {
-  const NgoProfile({super.key, required this.foundationId, required this.userName});
+  const NgoProfile({super.key, required this.foundationId, required this.userName, required this.foundationIdClick});
   final String foundationId;
   final String userName;
+  final String foundationIdClick;
   @override
   NgoProfileState createState() => NgoProfileState();
 }
@@ -29,7 +30,7 @@ class NgoProfileState extends State<NgoProfile> {
     String query = _searchController.text.toLowerCase();
     setState(() {
       filteredItems =
-          items.where((item) => item.id.toLowerCase().contains(query)).toList();
+          items.where((item) => item.idPet.toLowerCase().contains(query)).toList();
     });
   }
 
@@ -41,7 +42,7 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.foundationId != '0';
+    bool showButtons = widget.foundationId != '0' && widget.foundationId == widget.foundationIdClick;
 
     return Scaffold(
       appBar: AppBar(
@@ -208,7 +209,7 @@ class NgoProfileState extends State<NgoProfile> {
                   child: GridTile(
                     footer: GridTileBar(
                       backgroundColor: Colors.black45,
-                      title: Text(item.id),
+                      title: Text(item.idPet),
                     ),
                     child: Image.asset(
                       item.photo,

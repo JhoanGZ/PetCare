@@ -3,14 +3,16 @@ class ItemData {
   final String title;
   final String photo;
   final String description;
-  final String id;
+  final String idPet;
+  final String idfoundation;
 
   ItemData({
     required this.profileIcon,
     required this.title,
     required this.photo,
     required this.description,
-    required this.id,
+    required this.idPet,
+    required this.idfoundation,
   });
 }
 
@@ -23,21 +25,24 @@ final List<ItemData> items = [
     photo: 'assets/images/Bruno.jpg',
     description:
         'Bruno\nRaza: Mestizo\nEdad: 9 meses\nEsterilizacion: Si\nVacunas: Al dia\nPeso: 21kilos\n ',
-    id: '123'
+    idPet: '123', 
+    idfoundation: '1',
   ),
   ItemData(
     profileIcon: 'assets/images/fundacion perfil.png',
     title: 'Fundacion Manos Amigas',
     photo: 'assets/images/gatitos luigui.png',
     description: 'Descripción de la imagen 2',
-    id: '456'
+    idPet: '456',
+    idfoundation: '2',
   ),
   ItemData(
     profileIcon: 'assets/images/fundacion perfil.png',
     title: 'Fundacion Give Life',
     photo: 'assets/images/sofia.jpg',
     description: 'Descripción de la imagen 3',
-    id: '789'
+    idPet: '789',
+    idfoundation: '3',
   ),
     ItemData(
     profileIcon: 'assets/images/fundacion perfil.png',
@@ -45,83 +50,8 @@ final List<ItemData> items = [
     photo: 'assets/images/Bruno.jpg',
     description:
         'Bruno\nRaza: Mestizo\nEdad: 9 meses\nEsterilizacion: Si\nVacunas: Al dia\nPeso: 21kilos\n ',
-    id: '123'
+    idPet: '123',
+    idfoundation: '4',
   ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Manos Amigas',
-    photo: 'assets/images/gatitos luigui.png',
-    description: 'Descripción de la imagen 2',
-    id: '456'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Give Life',
-    photo: 'assets/images/sofia.jpg',
-    description: 'Descripción de la imagen 3',
-    id: '789'
-  ),  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Esperanza',
-    photo: 'assets/images/Bruno.jpg',
-    description:
-        'Bruno\nRaza: Mestizo\nEdad: 9 meses\nEsterilizacion: Si\nVacunas: Al dia\nPeso: 21kilos\n ',
-    id: '123'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Manos Amigas',
-    photo: 'assets/images/gatitos luigui.png',
-    description: 'Descripción de la imagen 2',
-    id: '456'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Give Life',
-    photo: 'assets/images/sofia.jpg',
-    description: 'Descripción de la imagen 3',
-    id: '789'
-  ),  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Esperanza',
-    photo: 'assets/images/Bruno.jpg',
-    description:
-        'Bruno\nRaza: Mestizo\nEdad: 9 meses\nEsterilizacion: Si\nVacunas: Al dia\nPeso: 21kilos\n ',
-    id: '123'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Manos Amigas',
-    photo: 'assets/images/gatitos luigui.png',
-    description: 'Descripción de la imagen 2',
-    id: '456'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Give Life',
-    photo: 'assets/images/sofia.jpg',
-    description: 'Descripción de la imagen 3',
-    id: '789'
-  ),  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Esperanza',
-    photo: 'assets/images/Bruno.jpg',
-    description:
-        'Bruno\nRaza: Mestizo\nEdad: 9 meses\nEsterilizacion: Si\nVacunas: Al dia\nPeso: 21kilos\n ',
-    id: '123'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Manos Amigas',
-    photo: 'assets/images/gatitos luigui.png',
-    description: 'Descripción de la imagen 2',
-    id: '456'
-  ),
-  ItemData(
-    profileIcon: 'assets/images/fundacion perfil.png',
-    title: 'Fundacion Give Life',
-    photo: 'assets/images/sofia.jpg',
-    description: 'Descripción de la imagen 3',
-    id: '789'
-  ),
+  
 ];

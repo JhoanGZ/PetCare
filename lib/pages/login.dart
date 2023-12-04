@@ -287,7 +287,7 @@ class _LogInPageState extends State<LogInPage> {
                       onPressed: () {
                         Navigator.of(context)
                             .pushReplacementNamed(AppRoutes.home, arguments: {
-                          'userName': 'Francisco Soto',
+                          'userName': 'Fundacion Generica',
                           'userToken': 'Token de usuario',
                           'foundationId': '1',
                         }); //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS

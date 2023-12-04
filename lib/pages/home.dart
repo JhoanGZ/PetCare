@@ -27,8 +27,7 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
-      bool showButtons = widget.foundationId == '0';
+    bool showButtons = widget.foundationId == '0';
 
     return Scaffold(
       appBar: AppBar(
@@ -37,42 +36,45 @@ class HomeState extends State<Home> {
             bottom: Radius.circular(10),
           ),
         ),
-        title:Row(
-      children: [
-        Image.asset(
-          'assets/images/logo_petcare_blanco.png',
-          width: 21,
-          height: 21,
-        ),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo_petcare_blanco.png',
+              width: 21,
+              height: 21,
+            ),
 
-     
-        Expanded(child: Text(widget.userName,style: PetCareThemes.buttonTextStyle,)),
-        // TODO: AQUÍ VA LA IMAGEN DE USUARIO
-        GestureDetector(
-      onTap: () {
-        if(widget.foundationId == '0'){
-              Navigator.of(context).pushNamed(AppRoutes.userProfile);
-        }else{
-                Navigator.of(context).pushNamed(
-        AppRoutes.ngoProfile,
-        arguments: {
-    'foundationId': widget.foundationId,
-    'nameUser': widget.userName, // Asegúrate de tener el valor de nameUser disponible aquí
-    },
-      );
-        }
-    // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
+            Expanded(
+                child: Text(
+              widget.userName,
+              style: PetCareThemes.buttonTextStyle,
+            )),
+            // TODO: AQUÍ VA LA IMAGEN DE USUARIO
+            GestureDetector(
+              onTap: () {
+                if (widget.foundationId == '0') {
+                  Navigator.of(context).pushNamed(AppRoutes.userProfile);
+                } else {
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.ngoProfile,
+                    arguments: {
+                      'foundationId': widget.foundationId,
+                      'userName': widget.userName,
+                      'foundationIdClick': widget.foundationId,
 
-      },
-        child: Image.asset(
-        'assets/images/pic_default_user.png',
-        width: 21,
-        height: 21,
-  ),
-)
-
-      ],
-    ), // Widget del título del AppBar
+                    },
+                  );
+                }
+                // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
+              },
+              child: Image.asset(
+                'assets/images/pic_default_user.png',
+                width: 21,
+                height: 21,
+              ),
+            )
+          ],
+        ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
@@ -89,13 +91,20 @@ class HomeState extends State<Home> {
                 Row(
                   children: [
                     GestureDetector(
-onTap: () {
-    
-      Navigator.of(context).pushNamed(
-        AppRoutes.ngoProfile,
-        arguments: widget.foundationId,
-      );
-},
+                      onTap: () {
+                        print(widget.userName);
+                        print(items[index].title);
+                        print(items[index].idfoundation);
+
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.ngoProfile,
+                          arguments: {
+                            'foundationId': widget.foundationId,
+                            'userName': items[index].title, // Asegúrate de tener el valor de userName disponible aquí
+                            'foundationIdClick': items[index].idfoundation,
+                          },
+                        );
+                      },
                       child: Image.asset(
                         items[index].profileIcon, // Icono de perfil
                         width: 38,
@@ -122,107 +131,109 @@ onTap: () {
                 const SizedBox(
                     height: 8), // Espacio entre la imagen y la descripción
                 //======================================================botones
-              if (showButtons)
-                Row(
-                  children: [
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: PetCareColors.brandPrimaryColor,
+                if (showButtons)
+                  Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: PetCareColors.brandPrimaryColor,
+                        ),
+                        child: GestureDetector(
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          BuyMe(photoPet: items[index].photo)));
+                            },
+                            icon: Image.asset(
+                              'assets/images/icon_donation_home.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: GestureDetector(
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
+                      //otro boton
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: PetCareColors
+                              .brandPrimaryColor, // Color de fondo del botón
+                        ),
+                        child: GestureDetector(
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        BuyMe(photoPet: items[index].photo)));
+                                  builder: (context) => AdoptionRequest(
+                                      itemID: items[index].idPet),
+                                ),
+                              );
+                              // Acción al presionar el botón
+                            },
+                            icon: Image.asset(
+                                'assets/images/icon_adoption_home.png',
+                                width: 30,
+                                height: 30),
+                          ),
+                        ),
+                      ),
+//otro boton
+                      const SizedBox(width: 4),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: PetCareColors
+                              .brandPrimaryColor, // Color de fondo del botón
+                        ),
+                        child: GestureDetector(
+                          child: IconButton(
+                            onPressed: () {
+                              // Acción al presionar el botón
+                            },
+                            icon: Image.asset(
+                                'assets/images/icon_share_home.png',
+                                width: 30,
+                                height: 30),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 256,
+                      ),
+
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: PetCareColors
+                              .brandPrimaryColor, // Color de fondo del botón
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            // Acción al presionar el botón
                           },
                           icon: Image.asset(
-                            'assets/images/icon_donation_home.png',
+                            'assets/images/icon_save_home.png',
                             width: 30,
                             height: 30,
                           ),
                         ),
                       ),
-                    ),
-                    //otro boton
-                    const SizedBox(width: 4),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: PetCareColors
-                            .brandPrimaryColor, // Color de fondo del botón
-                      ),
-                      child: GestureDetector(
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AdoptionRequest(itemID: items[index].id),
-                              ),
-                            );
-                            // Acción al presionar el botón
-                          },
-                          icon: Image.asset(
-                              'assets/images/icon_adoption_home.png',
-                              width: 30,
-                              height: 30),
-                        ),
-                      ),
-                    ),
-//otro boton
-                    const SizedBox(width: 4),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: PetCareColors
-                            .brandPrimaryColor, // Color de fondo del botón
-                      ),
-                      child: GestureDetector(
-                        child: IconButton(
-                          onPressed: () {
-                            // Acción al presionar el botón
-                          },
-                          icon: Image.asset('assets/images/icon_share_home.png',
-                              width: 30, height: 30),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 256,
-                    ),
-
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: PetCareColors
-                            .brandPrimaryColor, // Color de fondo del botón
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          // Acción al presionar el botón
-                        },
-                        icon: Image.asset(
-                          'assets/images/icon_save_home.png',
-                          width: 30,
-                          height: 30,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
 
                 Container(
                   alignment: Alignment.centerLeft,

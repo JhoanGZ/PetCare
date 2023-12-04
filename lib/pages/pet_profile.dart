@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/widgets/app_bar_home.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class PetProfile extends StatefulWidget {
@@ -41,17 +40,25 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-             title: const PetCareTitleAppBarUser(), // Widget del título del AppBar
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          ),
+        ),
+        title: Row(
+          children: [
+            Expanded(child: Text(widget.userName, style: PetCareThemes.buttonTextStyle,)),
+            Image.asset(
+              'assets/images/logo_petcare_blanco.png',
+              width: 21,
+              height: 21,
+            ),
+          ],
+        ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
-       
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
-            ),
-          ),
-        ),
+      ),
    
      body: SingleChildScrollView(
        child: Padding(
