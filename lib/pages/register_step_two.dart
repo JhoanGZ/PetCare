@@ -102,7 +102,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                     ),
                     Row(
                       children: <Widget>[
-                        const SizedBox(width: 20),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -112,21 +111,24 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           },
                           child: Row(
                             children: <Widget>[
+                              const SizedBox(width: 15),
                               Checkbox(
-                                value: _maleController.text == 'true',
+                                value: isMale,
                                 onChanged: (bool? value) {
                                   setState(() {
                                     isMale = value ?? false;
                                     isFemale = !isMale;
                                   });
                                 },
-                                activeColor: PetCareAnimationColor.customAnimationColor,
+                                activeColor:
+                                    PetCareAnimationColor.customAnimationColor,
                               ),
-                              const Text('Masculino', style: TextStyle(fontSize: 13)),
+                              const Text('Masculino',
+                                  style: TextStyle(fontSize: 15)),
                             ],
                           ),
                         ),
-                        const SizedBox(width: 60), // Ajusta este valor según sea necesario
+                        const SizedBox(width: 40),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -137,16 +139,18 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           child: Row(
                             children: <Widget>[
                               Checkbox(
-                                value: _femaleController.text == 'true',
+                                value: isFemale,
                                 onChanged: (bool? value) {
                                   setState(() {
                                     isFemale = value ?? false;
                                     isMale = !isFemale;
                                   });
                                 },
-                                activeColor: PetCareAnimationColor.customAnimationColor,
+                                activeColor:
+                                    PetCareAnimationColor.customAnimationColor,
                               ),
-                              const Text('Femenino', style: TextStyle(fontSize: 13)),
+                              const Text('Femenino',
+                                  style: TextStyle(fontSize: 15)),
                             ],
                           ),
                         ),
