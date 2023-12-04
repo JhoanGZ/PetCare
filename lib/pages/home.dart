@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
@@ -50,10 +51,15 @@ class HomeState extends State<Home> {
                 // Elementos en fila: icono de perfil y título
                 Row(
                   children: [
-                    Image.asset(
-                      items[index].profileIcon, // Icono de perfil
-                      width: 38,
-                      height: 38,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRoutes.ngoProfile);
+                      },
+                      child: Image.asset(
+                        items[index].profileIcon, // Icono de perfil
+                        width: 38,
+                        height: 38,
+                      ),
                     ),
                     const SizedBox(
                         width: 8), // Espacio entre el icono y el texto

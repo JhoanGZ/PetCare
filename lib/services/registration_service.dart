@@ -29,12 +29,12 @@ Future<void> registrationService(
     String rut = rutController.text;
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
-    String fullName = "$firstName $lastName"; //NOTE: Revisar ::LUIGUI:: como van los datos con el nombre.
+    String fullName = "$firstName $lastName"; //NOTE: Revisar ::LUIGUI::LN:: como van los datos con el nombre.
 
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/login'), // TODO: Falta agregar Endpoint correcto.
+        Uri.parse('http://127.0.0.1:8000/api/login'), // TODO: ::LN:: Falta agregar Endpoint correcto.
         body: {
           'email': email,
           'rut': rut,

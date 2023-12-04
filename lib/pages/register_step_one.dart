@@ -5,10 +5,11 @@ import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
-
 class RegisterStepOne extends StatefulWidget {
-  const RegisterStepOne({super.key});
+  // ignore: prefer_const_constructors_in_immutables
+  RegisterStepOne({super.key, required this.dataStorage});
 
+  final DataRegistrationTransfer dataStorage;
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
 }
@@ -19,6 +20,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   late TextEditingController _rutController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+  
 
   @override
   void initState() {
@@ -58,11 +60,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
+                Navigator.push(context, MaterialPageRoute( builder: (context) => const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
               },
               child: Column(
                 children: [
@@ -72,10 +70,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       width: 200,
                       height: 200,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            69), // promedio width x height
-                        child: Image.asset(
-                            'assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
+                        borderRadius: BorderRadius.circular(69), // promedio width x height
+                        child: Image.asset('assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
                       ),
                     ),
                   ),
@@ -93,14 +89,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _emailController,
                         validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Correo Electrónico requerido';
-                          }
+                          if (email == null || email.isEmpty) {return 'Correo Electrónico requerido';}
                           return null;
                         },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Correo Electrónico')
-                                .regularInput,
+                        decoration: PetCareInputStyle(labelText: ' Correo Electrónico').regularInput,
                       ),
                     ),
                     Container(
@@ -108,12 +100,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _rutController,
                         validator: (rut) {
-                          if (rut == null || rut.isEmpty) {
-                            return 'Rut requerido';
-                          }
+                          if (rut == null || rut.isEmpty) { return 'Rut requerido';}
                           return null;
                         },
-                        obscureText: true,
                         decoration:
                             PetCareInputStyle(labelText: ' Rut').regularInput,
                       ),
@@ -128,7 +117,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           }
                           return null;
                         },
-                        obscureText: true,
                         decoration: PetCareInputStyle(labelText: ' Nombre')
                             .regularInput,
                       ),
@@ -143,7 +131,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           }
                           return null;
                         },
-                        obscureText: true,
                         decoration: PetCareInputStyle(labelText: ' Apellido')
                             .regularInput,
                       ),
@@ -156,27 +143,17 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
-                  storageData.email = _emailController.text;
-                  storageData.rut = _rutController.text;
-                  storageData.firstName = _firstNameController.text;
-                  storageData.lastname = _lastNameController.text;
+                  widget.dataStorage.email = _emailController.text;
+                  widget.dataStorage.rut = _rutController.text;
+                  widget.dataStorage.firstName = _firstNameController.text;
+                  widget.dataStorage.lastName = _lastNameController.text;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          RegisterStepTwo(storageData: storageData),
+                          RegisterStepTwo(dataStorage: widget.dataStorage),
                     ),
                   );
-                  // await registrationService(
-                  //   _formRegisterStepOneKey,
-                  //   _emailController,
-                  //   _rutController,
-                  //   _firstNameController,
-                  //   _lastNameController,
-                  //   context,
-                  // );
-                  //FIXME: ::JG:: Trabajado en ello
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
