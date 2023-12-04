@@ -22,7 +22,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   late TextEditingController _rutController;
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
-  late TextEditingController _photoController;
   File? _image;
 
   @override
@@ -32,7 +31,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
     _rutController = TextEditingController();
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
-    _photoController = TextEditingController();
   }
 
   @override
@@ -62,39 +60,63 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 ),
               ],
             ),
+            const SizedBox(height: 15,),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                File? selectedImage = await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SetPhotoScreen(
                       onPhotoSelected: (File? photo) {
-                        _image = photo;
+                        setState(() {
+                          _image = photo;
+                        });
                       },
                     ),
                   ),
                 );
+                if (selectedImage != null) {
+                  widget.dataStorage.photo =
+                      selectedImage as String; //verificar sino .toString();
+                }
               },
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 1, right: 5),
                     child: SizedBox(
-                      width: 200,
-                      height: 200,
+                      width: 180,
+                      height: 180,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            69), // promedio width x height
-                        child: _image != null
-                            ? Image.file(_image!)
-                            : Image.asset(
-                                'assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
+                        borderRadius: BorderRadius.circular(90),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: Colors.grey.shade200,
+                              child: _image != null
+                                  ? Image.file(_image!, fit: BoxFit.cover)
+                                  : Image.asset(
+                                      'assets/images/pic_default_user.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                            if (_image != null)
+                              CircleAvatar(
+                                backgroundImage: FileImage(_image!),
+                                radius: 90.0,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
+            const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.fromLTRB(33, 0, 34, 0),
               child: Form(
@@ -170,12 +192,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   widget.dataStorage.rut = _rutController.text;
                   widget.dataStorage.firstName = _firstNameController.text;
                   widget.dataStorage.lastName = _lastNameController.text;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          RegisterStepTwo(dataStorage: widget.dataStorage),
-                    ),
+                  widget.dataStorage.photo;
+                  Navigator.push( context, MaterialPageRoute( builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),),
                   );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,

@@ -26,7 +26,6 @@ class SelectPhoto extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Icon(
               icon,

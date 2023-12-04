@@ -70,9 +70,6 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
 
-          // case AppRoutes.upLoad:
-          //   return MaterialPageRoute( builder: (context) => _image = _image ?? '');
-
           case AppRoutes.userProfile:
             return MaterialPageRoute(builder: (context) => const UserProfile());
 
