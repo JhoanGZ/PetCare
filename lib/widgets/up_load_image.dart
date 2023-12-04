@@ -76,7 +76,7 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       body: SafeArea(
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 30, top: 20),
+              const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,28 +87,22 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 30,
+                        // height: 30,
                       ),
                       Text(
                         'Elija una foto',
                         style: PetCareThemes.textStylePopUp,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
                       Text(
-                        'Las fotos son necesarias para un perfil completo de adopción',
-                        style: PetCareThemes.textStyleSubtitle,
+                        'Su foto es importante para un perfil completo de adopción',
+                        style: PetCareThemes.statementItalicTextStyle,
                       ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 8,
-              ),
               Padding(
-                padding: const EdgeInsets.all(28.0),
+                padding: const EdgeInsets.all(80.0),
                 child: Center(
                   child: GestureDetector(
                     behavior: HitTestBehavior.translucent,
@@ -124,10 +118,9 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                             color: Colors.grey.shade200,
                           ),
                           child: Center(
-                            child: _image == null
-                                ? const Text(
-                                    'Imagen no seleccionada',
-                                    style: PetCareThemes.textStylePopUp,
+                            child: _image == null ? const Text( 'Imagen no seleccionada',
+                                    style: PetCareThemes.blackRegularTextStyle, 
+                                    textAlign: TextAlign.center,
                                   )
                                 : CircleAvatar(
                                     backgroundImage: FileImage(_image!),
@@ -141,13 +134,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Elija su foto',
-                    textAlign: TextAlign.center,
-                    style: PetCareThemes.blackRegularTextStyle,
-                  ),
                   const SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                   ElevatedButton(
                     onPressed: () => _showSelectPhotoOptions(context),
