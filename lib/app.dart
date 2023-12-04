@@ -33,16 +33,15 @@ class PetCareApp extends StatelessWidget {
             // Asegúrate de que `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
-            
-
 
             return MaterialPageRoute(
               builder: (context) => Home(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userName: arguments?['userName'] ?? 'Invitado',
-                userToken: arguments?['userToken'] ?? 'null', 
-                // NOTE: Debemos revisar esto para cambiarlo por 
-                //[x]: 'userName': 'nombreUsuario', 
+                userToken: arguments?['userToken'] ?? 'null',
+                foundationId: arguments?['foundationId'] ?? 'null',
+                // NOTE: Debemos revisar esto para cambiarlo por
+                //[x]: 'userName': 'nombreUsuario',
                 //[x]: 'userToken': 'tokenUsuario',
               ),
             );
@@ -53,20 +52,26 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.registerStepTwo:
             return MaterialPageRoute(
-                builder: 
-                  (context){
-                    final DataRegistrationTransfer? storageData = settings.arguments as DataRegistrationTransfer?;
-                    return storageData != null ? RegisterStepTwo(storageData: storageData) : const RegisterStepTwo();
-                  },
-                );
+              builder: (context) {
+                final DataRegistrationTransfer? storageData =
+                    settings.arguments as DataRegistrationTransfer?;
+                return storageData != null
+                    ? RegisterStepTwo(storageData: storageData)
+                    : const RegisterStepTwo();
+              },
+            );
 
           case AppRoutes.registerStepThree:
             return MaterialPageRoute(
-                  builder: (context){
-                    final DataRegistrationTransfer? storageData = settings.arguments as DataRegistrationTransfer?;
-                    return storageData != null ? RegisterStepThree(storageData: storageData) : RegisterStepThree(storageData: DataRegistrationTransfer());
-                  },
-                );
+              builder: (context) {
+                final DataRegistrationTransfer? storageData =
+                    settings.arguments as DataRegistrationTransfer?;
+                return storageData != null
+                    ? RegisterStepThree(storageData: storageData)
+                    : RegisterStepThree(
+                        storageData: DataRegistrationTransfer());
+              },
+            );
 
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
@@ -87,13 +92,11 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => const RetrievePassChange());
 
           case AppRoutes.adoptionRequest:
-  
-              String? itemID = settings.arguments as String?;
+            String? itemID = settings.arguments as String?;
 
             return MaterialPageRoute(
-                builder: (context) => AdoptionRequest(itemID: itemID ?? ''),);
-                           
-
+              builder: (context) => AdoptionRequest(itemID: itemID ?? ''),
+            );
 
           case AppRoutes.adoptionConfirm:
             return MaterialPageRoute(
@@ -117,10 +120,10 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const Contact());
 
           case AppRoutes.buyMe:
-
             String? photoPet = settings.arguments as String?;
 
-            return MaterialPageRoute(builder: (context) => BuyMe(photoPet: photoPet ?? ''));
+            return MaterialPageRoute(
+                builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
             return MaterialPageRoute(builder: (context) => const LogInPage());

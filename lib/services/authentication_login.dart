@@ -40,6 +40,7 @@ Future<void> authenticationLogin(
             .toString(); // TODO::LUIGUI::29-11-23:: Este token deben ser llevado al home.
         bool userAuth = responseData['auth'] ==
             true; // TODO::LUIGUI::29-11-23:: Esto no va a ninguna otra vista
+        String foundationId = responseData['foundation_id'].toString();
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
@@ -47,7 +48,11 @@ Future<void> authenticationLogin(
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(
             AppRoutes.home,
-            arguments: {'userName': userName, 'userToken': userToken},
+            arguments: {
+              'userName': userName,
+              'userToken': userToken,
+              'foundationId': foundationId
+            },
           );
         }
       } else {

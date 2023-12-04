@@ -7,12 +7,16 @@ import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/app_bar_home.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
-
 class Home extends StatefulWidget {
   final String userName;
   final String userToken;
+  final String foundationId;
 
-  const Home({super.key, required this.userName, required this.userToken});
+  const Home(
+      {super.key,
+      required this.userName,
+      required this.userToken,
+      required this.foundationId});
 
   @override
   HomeState createState() => HomeState();
@@ -34,8 +38,8 @@ class HomeState extends State<Home> {
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
-       ),
-     body: ListView.builder(
+      ),
+      body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
           return Padding(
@@ -71,33 +75,34 @@ class HomeState extends State<Home> {
                 const SizedBox(
                     height: 8), // Espacio entre la imagen y la descripción
                 //======================================================botones
-              Row(
-              children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: PetCareColors.brandPrimaryColor,
-                  ),
-                  child: GestureDetector(
-                    child: IconButton(
-                      onPressed: () {
-                  
-                                              Navigator.push(context,MaterialPageRoute(
-                              builder: (context) => BuyMe(photoPet: items[index].photo)));
-                      },
-                      icon: Image.asset(
-                        'assets/images/icon_donation_home.png',
-                        width: 30,
-                        height: 30,),
+                Row(
+                  children: [
+                    Container(
+                      width: 30,
+                      height: 30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: PetCareColors.brandPrimaryColor,
+                      ),
+                      child: GestureDetector(
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        BuyMe(photoPet: items[index].photo)));
+                          },
+                          icon: Image.asset(
+                            'assets/images/icon_donation_home.png',
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
-                  ),
+                      ),
                     ),
                     //otro boton
-                     const SizedBox(
-                        width:
-                            4),
+                    const SizedBox(width: 4),
                     Container(
                       width: 30,
                       height: 30,
@@ -109,9 +114,11 @@ class HomeState extends State<Home> {
                       child: GestureDetector(
                         child: IconButton(
                           onPressed: () {
-                        
-                            Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => AdoptionRequest(itemID: items[index].id),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdoptionRequest(itemID: items[index].id),
                               ),
                             );
                             // Acción al presionar el botón
@@ -124,9 +131,7 @@ class HomeState extends State<Home> {
                       ),
                     ),
 //otro boton
-                        const SizedBox(
-                        width:
-                            4),
+                    const SizedBox(width: 4),
                     Container(
                       width: 30,
                       height: 30,
@@ -135,12 +140,10 @@ class HomeState extends State<Home> {
                         color: PetCareColors
                             .brandPrimaryColor, // Color de fondo del botón
                       ),
-                      child: 
-                      GestureDetector(
+                      child: GestureDetector(
                         child: IconButton(
                           onPressed: () {
                             // Acción al presionar el botón
-                             
                           },
                           icon: Image.asset('assets/images/icon_share_home.png',
                               width: 30, height: 30),
@@ -172,19 +175,20 @@ class HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                
-Container(
-  alignment: Alignment.centerLeft,
- 
-  child: Text(
-    
-    items[index].title,
-    style: PetCareThemes.nameProfileTextStyle,
-  ),
-),
+
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    items[index].title,
+                    style: PetCareThemes.nameProfileTextStyle,
+                  ),
+                ),
                 const SizedBox(width: 8),
-                    // Utilizando el widget ExpandableTextWidget
-                    ExpandText(text: items[index].description, maxLines: 2,),// Descripción del elemento
+                // Utilizando el widget ExpandableTextWidget
+                ExpandText(
+                  text: items[index].description,
+                  maxLines: 2,
+                ), // Descripción del elemento
               ],
             ),
           );
