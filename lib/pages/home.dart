@@ -53,7 +53,12 @@ class HomeState extends State<Home> {
             GestureDetector(
               onTap: () {
                 if (widget.foundationId == '0') {
-                  Navigator.of(context).pushNamed(AppRoutes.userProfile);
+                  Navigator.of(context).pushNamed(AppRoutes.userProfile,
+                  arguments: {
+                    'userName': widget.userName,
+                    'foundationId' : widget.foundationId,
+                  }
+                  );
                 } else {
                   Navigator.of(context).pushNamed(
                     AppRoutes.ngoProfile,
