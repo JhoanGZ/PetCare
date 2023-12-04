@@ -8,7 +8,8 @@ import 'option_photo_select.dart';
 
 // ignore: must_be_immutable
 class SetPhotoScreen extends StatefulWidget {
-  const SetPhotoScreen({super.key});
+  final Function(File?) onPhotoSelected;
+  const SetPhotoScreen({super.key, required this.onPhotoSelected});
 
   static const id = 'set_photo_screen';
 
@@ -24,10 +25,11 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       File? img = File(image.path);
-      img = await _cropImage(imageFile: img);
+      // img = await _cropImage(imageFile: img);
       setState(() {
         _image = img;
         Navigator.of(context).pop();
+        widget.onPhotoSelected(_image);
       });
     } on PlatformException catch (e) {
       // ignore: avoid_print
@@ -37,12 +39,12 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
     }
   }
 
-  Future<File?> _cropImage({required File imageFile}) async {
-    CroppedFile? croppedImage =
-        await ImageCropper().cropImage(sourcePath: imageFile.path);
-    if (croppedImage == null) return null;
-    return File(croppedImage.path);
-  }
+  // Future<File?> _cropImage({required File imageFile}) async {
+  //   CroppedFile? croppedImage =
+  //       await ImageCropper().cropImage(sourcePath: imageFile.path);
+  //   if (croppedImage == null) return null;
+  //   return File(croppedImage.path);
+  // }
 
   void _showSelectPhotoOptions(BuildContext context) {
     showModalBottomSheet(
@@ -87,8 +89,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        // height: 30,
-                      ),
+                          // height: 30,
+                          ),
                       Text(
                         'Elija una foto',
                         style: PetCareThemes.textStylePopUp,
@@ -118,8 +120,10 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                             color: Colors.grey.shade200,
                           ),
                           child: Center(
-                            child: _image == null ? const Text( 'Imagen no seleccionada',
-                                    style: PetCareThemes.blackRegularTextStyle, 
+                            child: _image == null
+                                ? const Text(
+                                    'Imagen no seleccionada',
+                                    style: PetCareThemes.blackRegularTextStyle,
                                     textAlign: TextAlign.center,
                                   )
                                 : CircleAvatar(
