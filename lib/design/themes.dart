@@ -82,7 +82,7 @@ class PetCareThemes {
 // =====================================================iNPUTS===========================================================
 class PetCareInputStyle {
   final String labelText;
-
+  
   PetCareInputStyle({required this.labelText});
 
   InputDecoration get regularInput {
@@ -108,7 +108,7 @@ class PetCareInputStyle {
           color: PetCareColors.brandShadowColor,
           fontFamily: 'Inter'),
       contentPadding: const EdgeInsets.symmetric(
-          vertical: 10.0), // Ajusta la altura del espacio interno
+          vertical: 10.0, horizontal: 16), // Ajusta la altura del espacio interno, tanto horizontal y vertical.
     );
   }
 }

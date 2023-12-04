@@ -60,11 +60,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
+                Navigator.push(context, MaterialPageRoute( builder: (context) => const SetPhotoScreen())); //NOTE: habilitación de usuario para nueva foto - Metodo
               },
               child: Column(
                 children: [
@@ -74,10 +70,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       width: 200,
                       height: 200,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            69), // promedio width x height
-                        child: Image.asset(
-                            'assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
+                        borderRadius: BorderRadius.circular(69), // promedio width x height
+                        child: Image.asset('assets/images/pic_default_user.png'), //NOTE: Foto inicial (sin foto)
                       ),
                     ),
                   ),
@@ -95,14 +89,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _emailController,
                         validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Correo Electrónico requerido';
-                          }
+                          if (email == null || email.isEmpty) {return 'Correo Electrónico requerido';}
                           return null;
                         },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Correo Electrónico')
-                                .regularInput,
+                        decoration: PetCareInputStyle(labelText: ' Correo Electrónico').regularInput,
                       ),
                     ),
                     Container(
@@ -110,12 +100,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       child: TextFormField(
                         controller: _rutController,
                         validator: (rut) {
-                          if (rut == null || rut.isEmpty) {
-                            return 'Rut requerido';
-                          }
+                          if (rut == null || rut.isEmpty) { return 'Rut requerido';}
                           return null;
                         },
-                        obscureText: true,
                         decoration:
                             PetCareInputStyle(labelText: ' Rut').regularInput,
                       ),
@@ -130,7 +117,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           }
                           return null;
                         },
-                        obscureText: true,
                         decoration: PetCareInputStyle(labelText: ' Nombre')
                             .regularInput,
                       ),
@@ -145,7 +131,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           }
                           return null;
                         },
-                        obscureText: true,
                         decoration: PetCareInputStyle(labelText: ' Apellido')
                             .regularInput,
                       ),
