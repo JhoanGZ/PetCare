@@ -26,9 +26,10 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       if (image == null) return;
       File? img = File(image.path);
       // img = await _cropImage(imageFile: img);
+      widget.onPhotoSelected(img);
       setState(() {
         _image = img;
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(img);
         widget.onPhotoSelected(_image);
       });
     } on PlatformException catch (e) {
@@ -113,8 +114,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
                     },
                     child: Center(
                       child: Container(
-                          height: 200.0,
-                          width: 200.0,
+                          height: 200,
+                          width: 200,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade200,

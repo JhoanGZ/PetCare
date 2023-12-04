@@ -5,6 +5,7 @@ class DataRegistrationTransfer {
   String rut = '';
   String firstName = '';
   String lastName = '';
+  String photo = '';
   String phone = '';
   String address = '';
   String dateBirth = '';
@@ -22,6 +23,7 @@ class DataRegistrationTransfer {
     rut = '';
     firstName = '';
     lastName = '';
+    photo = '';
     phone = '';
     address = '';
     dateBirth = '';
@@ -38,6 +40,7 @@ class DataRegistrationTransfer {
         _isNonEmpty(rut) &&
         _isNonEmpty(firstName) &&
         _isNonEmpty(lastName) &&
+        _isNonEmpty(photo) &&
         _isNonEmpty(phone) &&
         _isNonEmpty(address) &&
         _isNonEmpty(dateBirth) &&
@@ -55,6 +58,7 @@ class DataRegistrationTransfer {
       'rut': rut,
       'firstName': firstName,
       'lastName': lastName,
+      'photo': photo,
       'phone': phone,
       'address': address,
       'dateBirth': dateBirth,

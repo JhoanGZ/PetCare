@@ -6,10 +6,7 @@ import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
   final DataRegistrationTransfer? storageData;
-  const RegisterStepTwo(
-      {super.key,
-      this.storageData,
-      required DataRegistrationTransfer dataStorage});
+  const RegisterStepTwo({super.key, this.storageData, required DataRegistrationTransfer dataStorage});
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
@@ -161,18 +158,13 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               margin: const EdgeInsets.only(top: 60, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData =
-                      DataRegistrationTransfer();
+                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
                   storageData.phone = _phoneController.text;
                   storageData.address = _addressController.text;
                   storageData.dateBirth = _dateBirthController.text;
                   storageData.female = isFemale.toString();
                   storageData.male = isMale.toString();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          RegisterStepThree(storageData: storageData),
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: storageData),
                     ),
                   );
                 },
