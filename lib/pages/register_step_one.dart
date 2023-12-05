@@ -8,10 +8,9 @@ import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  
-  const RegisterStepOne({super.key, required this.dataStorage});
+  const RegisterStepOne({super.key, required this.storageData});
 
-  final DataRegistrationTransfer dataStorage;
+  final DataRegistrationTransfer storageData;
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
 }
@@ -76,8 +75,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   ),
                 );
                 if (selectedImage != null) {
-                  widget.dataStorage.photo =
-                      selectedImage as String; //verificar sino .toString();
+                  widget.storageData.photo = selectedImage as String; //verificar sino .toString();
                 }
               },
               child: Column(
@@ -85,10 +83,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   Padding(
                     padding: const EdgeInsets.only(left: 1, right: 5),
                     child: SizedBox(
-                      width: 180,
-                      height: 180,
+                      width: 170,
+                      height: 170,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(90),
+                        borderRadius: BorderRadius.circular(90), //WARNING: Siempre h+w/2. Sino OverFlow
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
@@ -188,15 +186,15 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  widget.dataStorage.email = _emailController.text;
-                  widget.dataStorage.rut = _rutController.text;
-                  widget.dataStorage.firstName = _firstNameController.text;
-                  widget.dataStorage.lastName = _lastNameController.text;
-                  widget.dataStorage.photo = _image?.path ?? 'assets/images/pic_default_user.png';
+                  widget.storageData.email = _emailController.text;
+                  widget.storageData.rut = _rutController.text;
+                  widget.storageData.firstName = _firstNameController.text;
+                  widget.storageData.lastName = _lastNameController.text;
+                  widget.storageData.photo = _image?.path ?? 'assets/images/pic_default_user.png';
                     Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegisterStepTwo(dataStorage: widget.dataStorage),
+                      builder: (context) => RegisterStepTwo(storageData: widget.storageData),
                     ),
                   );
                 },

@@ -5,10 +5,12 @@ import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
-  final DataRegistrationTransfer? storageData;
-  const RegisterStepTwo({super.key, this.storageData, required DataRegistrationTransfer dataStorage});
+  final DataRegistrationTransfer storageData;
+
+  const RegisterStepTwo({super.key, required this.storageData});
 
   @override
+  
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
 }
 
@@ -158,25 +160,13 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               margin: const EdgeInsets.only(top: 60, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  DataRegistrationTransfer storageData = DataRegistrationTransfer();
-                  storageData.phone = _phoneController.text;
-                  storageData.address = _addressController.text;
-                  storageData.dateBirth = _dateBirthController.text;
-                  storageData.female = isFemale.toString();
-                  storageData.male = isMale.toString();
-
-                  print("Datos recibidos en RegisterStepTwo:");
-                  print("Email: ${widget.storageData?.email}");
-                  print("Rut: ${widget.storageData?.rut}");
-                  print("Nombre: ${widget.storageData?.firstName}");
-                  print("Apellido: ${widget.storageData?.lastName}");
-                  print("Foto: ${widget.storageData?.photo}");
-                  print("Dirección: ${storageData.address}");
-                  print("Fecha de Nacimiento: ${storageData.dateBirth}");
-                  print("Femenino: ${storageData.female}");
-                  print("Masculino: ${storageData.male}");
-                  
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: storageData),),
+                  widget.storageData.address = _addressController.text;
+                  widget.storageData.phone = _phoneController.text;
+                  widget.storageData.dateBirth = _dateBirthController.text;
+                  widget.storageData.female = isFemale.toString();
+                  widget.storageData.male = isMale.toString();
+                                  
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: widget.storageData),),
                   );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
