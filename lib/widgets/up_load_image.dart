@@ -80,78 +80,76 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
         child: Padding(
           padding:
               const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
-          child: Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            // height: 30,
-                            ),
-                        Text(
-                          'Elija una foto',
-                          style: PetCareThemes.textStylePopUp,
-                        ),
-                        Text(
-                          'Su foto es importante para un perfil completo de adopción',
-                          style: PetCareThemes.statementItalicTextStyle,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(80.0),
-                  child: Center(
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () {
-                        _showSelectPhotoOptions(context);
-                      },
-                      child: Center(
-                        child: Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey.shade200,
-                            ),
-                            child: Center(
-                              child: _image == null
-                                  ? const Text(
-                                      'Imagen no seleccionada',
-                                      style: PetCareThemes.blackRegularTextStyle,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  : CircleAvatar(
-                                      backgroundImage: FileImage(_image!),
-                                      radius: 200.0,
-                                    ),
-                            )),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                          // height: 30,
+                          ),
+                      Text(
+                        'Elija una foto',
+                        style: PetCareThemes.textStylePopUp,
                       ),
+                      Text(
+                        'Su foto es importante para un perfil completo de adopción',
+                        style: PetCareThemes.statementItalicTextStyle,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(80.0),
+                child: Center(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      _showSelectPhotoOptions(context);
+                    },
+                    child: Center(
+                      child: Container(
+                          height: 200,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.shade200,
+                          ),
+                          child: Center(
+                            child: _image == null
+                                ? const Text(
+                                    'Imagen no seleccionada',
+                                    style: PetCareThemes.blackRegularTextStyle,
+                                    textAlign: TextAlign.center,
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage: FileImage(_image!),
+                                    radius: 200.0,
+                                  ),
+                          )),
                     ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => _showSelectPhotoOptions(context),
-                      style: PetCareButtonStyles.elevatedButtonStyle,
-                      child: const Text('Agregar una foto'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _showSelectPhotoOptions(context),
+                    style: PetCareButtonStyles.elevatedButtonStyle,
+                    child: const Text('Agregar una foto'),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
