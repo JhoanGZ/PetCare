@@ -289,7 +289,7 @@ class _LogInPageState extends State<LogInPage> {
                             .pushReplacementNamed(AppRoutes.home, arguments: {
                           'userName': 'Fundacion Generica',
                           'userToken': 'Token de usuario',
-                          'foundationId': '1',
+                          'foundationId': '0',
                         }); //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
                         //logica del text buton contactanos Logic:
                       },

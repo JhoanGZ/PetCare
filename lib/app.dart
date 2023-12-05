@@ -71,12 +71,33 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
 
+
           case AppRoutes.userProfile:
-            return MaterialPageRoute(builder: (context) => const UserProfile());
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
+            final String foundationId = args['foundationId'];
+            final String userName = args['userName'];
+            return MaterialPageRoute(
+              builder: (context) => UserProfile(
+                foundationId: foundationId,
+                userName: userName,
+              ),
+            );
 
           case AppRoutes.userSavedPets:
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
+            final String foundationId = args['foundationId'];
+            final String userName = args['userName'];
+
+
             return MaterialPageRoute(
-                builder: (context) => const UserSavedPets());
+              builder: (context) => UserSavedPets(
+                foundationId: foundationId,
+                userName: userName,
+
+              ),
+            );
 
           case AppRoutes.retrievePass:
             return MaterialPageRoute(

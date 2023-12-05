@@ -8,8 +8,9 @@ import 'package:petcare_app/widgets/up_load_image.dart';
 
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({super.key});
-
+  const UserProfile({super.key, required this.foundationId, required this.userName});
+  final String foundationId;
+  final String userName;
   @override
   State<UserProfile> createState() => _UserProfileState();
 }
@@ -41,7 +42,12 @@ class _UserProfileState extends State<UserProfile> {
               child: IconButton(
                 onPressed: () {
 
-                  Navigator.of(context).pushNamed(AppRoutes.userSavedPets);
+                  Navigator.of(context).pushNamed(AppRoutes.userSavedPets,
+                  arguments: {
+                    'foundationId': widget.foundationId,
+                    'userName': widget.userName,
+                  }
+                  );
                   // Acción al presionar el botón
                 },
                 icon: Image.asset(
@@ -63,8 +69,8 @@ class _UserProfileState extends State<UserProfile> {
                   margin: const EdgeInsets.only(
                     left: 39,
                   ),
-                  child: const Text(
-                    'User_Profile',
+                  child: Text(
+                    widget.userName,
                     style: PetCareThemes.titleTextStyle,
                     textAlign: TextAlign.right,
                   ),
