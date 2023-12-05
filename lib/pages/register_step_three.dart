@@ -33,7 +33,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
         leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () =>
-                Navigator.of(context).pushNamed(AppRoutes.registerStepTwo)),
+                Navigator.of(context).pushReplacementNamed(AppRoutes.registerStepTwo)),
       ),
       //TODO: Adjuntar gatito en el borde inferior
       body: SingleChildScrollView(
@@ -109,6 +109,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
             Container(
               margin: const EdgeInsets.only(top: 120, bottom: 26),
               child: ElevatedButton(
+                key: const Key('button_register_step_three'),
                 onPressed: () async {
                   widget.storageData.password = _passwordController.text;
                   widget.storageData.passwordCheck = _passwordCheckController.text;

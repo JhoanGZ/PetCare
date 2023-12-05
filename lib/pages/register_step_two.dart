@@ -5,12 +5,10 @@ import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/register_step_three.dart';
 
 class RegisterStepTwo extends StatefulWidget {
+  const RegisterStepTwo({super.key, required this.storageData});
   final DataRegistrationTransfer storageData;
 
-  const RegisterStepTwo({super.key, required this.storageData});
-
-  @override
-  
+  @override  
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
 }
 
@@ -37,7 +35,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () =>
-              Navigator.of(context).pushNamed(AppRoutes.registerStepOne),
+              Navigator.of(context).pushReplacementNamed(AppRoutes.registerStepOne),
         ),
       ),
       //TODO: Montar imagen Ruta => Image.asset('assets/images/dog_corner_register',),
@@ -159,13 +157,25 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
             Container(
               margin: const EdgeInsets.only(top: 60, bottom: 26),
               child: ElevatedButton(
+                key: const Key('button_register_step_two'),
                 onPressed: () async {
                   widget.storageData.address = _addressController.text;
                   widget.storageData.phone = _phoneController.text;
                   widget.storageData.dateBirth = _dateBirthController.text;
                   widget.storageData.female = isFemale.toString();
                   widget.storageData.male = isMale.toString();
-                                  
+
+                  // print("Datos recibidos en RegisterStepTwo:");
+                  // print("Email: ${widget.storageData?.email}");
+                  // print("Rut: ${widget.storageData?.rut}");
+                  // print("Nombre: ${widget.storageData?.firstName}");
+                  // print("Apellido: ${widget.storageData?.lastName}");
+                  // print("Foto: ${widget.storageData?.photo}");
+                  // print("Dirección: ${storageData.address}");
+                  // print("Fecha de Nacimiento: ${storageData.dateBirth}");
+                  // print("Femenino: ${storageData.female}");
+                  // print("Masculino: ${storageData.male}");
+                  
                   Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: widget.storageData),),
                   );
                 },
