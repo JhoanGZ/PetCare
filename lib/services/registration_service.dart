@@ -36,30 +36,47 @@ Future<void> registrationService(
   print('Masculino: ${data.male}');
   print('Contraseña: ${data.password}');
   print('Repetir Contraseña: ${data.passwordCheck}');
-  print('Aceptación de Términos: ${data.termAcceptance}');
+  print('Aceptación de Términos🥵🍆💧: ${data.termAcceptance}');
 
   gender = male == 'false' ? '1' : '0';
 
-  if (formKey.currentState!.validate()) {
+  if (true) {
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/register'), // COMMENT: URL correcta
+        Uri.parse('http://127.0.0.1:8000/api/register'),
+        headers: {
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
         body: {
           'rut': rut,
           'email': email,
           'nombre': firstName,
           'apellido': lastName,
           'password': password,
-          'password_confirmation': passwordCheck,
+          // 'password_confirmation': passwordCheck,
           'fnac': dateBirth,
           'direccion': address,
           'sexo': gender,
           'celular': phone,
           'imagen': photo,
-          'aceptaTerminosDeUso': termAcceptance == true
-              ? '1'
-              : '0', //FIXME::LUIGUI:: DEBO CHEQUEAR ESTO
+          'codigoVerificacion': 'null',
+          // ignore: unrelated_type_equality_checks
+          'aceptaTerminosDeUso': termAcceptance == true ? '1' : '0',
+
+          // 'rut': '261740002', // TODO::LUIGUI:: ESTOS COMENTARIOS SON UN EJEMPLO DE LLENADO QUE SE ENVÍA SIN PROBLEMAS..
+          // 'email': 'luivin@gmail.com',
+          // 'nombre': 'Luigui',
+          // 'apellido': 'Vinci',
+          // 'password': '123456',
+          // 'fnac': '1997-01-01',
+          // 'direccion': 'Paradisi',
+          // 'sexo': '0',
+          // 'celular': '1234567',
+          // 'imagen': 'null',
+          // 'codigoVerificacion': 'null',
+          // 'aceptaTerminosDeUso': '1',
         },
       );
 
@@ -72,22 +89,21 @@ Future<void> registrationService(
         print('Respuesta de la API: $responseData');
 
         // Guarda los datos que necesitas o realiza otras acciones
-        String userName = responseData['name'].toString();
-        String userToken = responseData['token'].toString();
+        String userName = responseData['name']
+            .toString(); // Ajusta la clave según la respuesta real
+        String userToken = responseData['token']
+            .toString(); // Ajusta la clave según la respuesta real
         bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
-          print('LOGIN EXITOSO!');
-          // ignore: use_build_context_synchronously
+          print('LOGIN EXITOSO🍆🥵!');
           Navigator.of(context)
               .pushNamed(AppRoutes.home, arguments: {userName, userToken});
         }
       } else {
         // La autenticación falló, puedes mostrar un mensaje de error al usuario
         print('Error en la autenticación: ${response.body}');
-        // Puedes mostrar un mensaje de error al usuario
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content:
@@ -99,8 +115,6 @@ Future<void> registrationService(
     } catch (e) {
       // Manejar errores de conexión o de la API
       print('Error al conectar con la API: $e');
-      // Puedes mostrar un mensaje de error al usuario
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
