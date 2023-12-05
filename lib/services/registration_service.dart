@@ -44,7 +44,7 @@ Future<void> registrationService(
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/register'), // URL correcta
+        Uri.parse('http://127.0.0.1:8000/api/register'), // COMMENT: URL correcta
         body: {
           'rut': rut,
           'email': email,
@@ -59,7 +59,7 @@ Future<void> registrationService(
           'imagen': photo,
           'aceptaTerminosDeUso': termAcceptance == true
               ? '1'
-              : '0', //FIXME::LUIGUI:: dEBO CHEQUEAR ESTO
+              : '0', //FIXME::LUIGUI:: DEBO CHEQUEAR ESTO
         },
       );
 
