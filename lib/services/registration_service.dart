@@ -15,7 +15,7 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
   String photo = data.photo;
   String address = data.address;
   String dateBirth = data.dateBirth;
-  // String female = data.female;
+  // String female = data.female; // En lógica final quedo sin uso.
   String male = data.male;
   String password = data.password;
   String passwordCheck = data.passwordCheck;

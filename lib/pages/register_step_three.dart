@@ -65,7 +65,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                         controller: _passwordCheckController,
                         validator: (address) {
                           if (address == null || address.isEmpty) {
-                            return 'Repetición de Contraseña requerida';
+                            return 'Repetición de Contraseña requerida'; // TODO: Lógica passwordCheck
                           }
                           return null;
                         },
