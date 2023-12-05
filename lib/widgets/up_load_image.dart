@@ -79,7 +79,7 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       body: SafeArea(
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
+          const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

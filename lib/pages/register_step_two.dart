@@ -157,7 +157,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
             Container(
               margin: const EdgeInsets.only(top: 60, bottom: 26),
               child: ElevatedButton(
-                key: const Key('button_register_step_two'),
+                // key: const Key('button_register_step_two'),
                 onPressed: () async {
                   widget.storageData.address = _addressController.text;
                   widget.storageData.phone = _phoneController.text;
@@ -165,17 +165,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                   widget.storageData.female = isFemale.toString();
                   widget.storageData.male = isMale.toString();
 
-                  // print("Datos recibidos en RegisterStepTwo:");
-                  // print("Email: ${widget.storageData?.email}");
-                  // print("Rut: ${widget.storageData?.rut}");
-                  // print("Nombre: ${widget.storageData?.firstName}");
-                  // print("Apellido: ${widget.storageData?.lastName}");
-                  // print("Foto: ${widget.storageData?.photo}");
-                  // print("Dirección: ${storageData.address}");
-                  // print("Fecha de Nacimiento: ${storageData.dateBirth}");
-                  // print("Femenino: ${storageData.female}");
-                  // print("Masculino: ${storageData.male}");
-                  
                   Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: widget.storageData),),
                   );
                 },
