@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/services/authentication_login.dart';
+import 'package:petcare_app/services/authentication_service.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class LogInPage extends StatefulWidget {

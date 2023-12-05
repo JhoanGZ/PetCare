@@ -5,6 +5,7 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/storage_transfer.dart';
 import 'package:petcare_app/pages/register_step_two.dart';
+import 'package:petcare_app/utils/validators_register.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class RegisterStepOne extends StatefulWidget {
@@ -59,7 +60,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 ),
               ],
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             GestureDetector(
               onTap: () async {
                 File? selectedImage = await Navigator.push(
@@ -75,7 +78,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   ),
                 );
                 if (selectedImage != null) {
-                  widget.storageData.photo = selectedImage as String; //verificar sino .toString();
+                  widget.storageData.photo =
+                      selectedImage as String; //verificar sino .toString();
                 }
               },
               child: Column(
@@ -86,7 +90,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       width: 170,
                       height: 170,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(90), //WARNING: Siempre h+w/2. Sino OverFlow
+                        borderRadius: BorderRadius.circular(
+                            90), //WARNING: Siempre h+w/2. Sino OverFlow
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
@@ -114,7 +119,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 ],
               ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(33, 0, 34, 0),
               child: Form(
@@ -129,6 +136,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           if (email == null || email.isEmpty) {
                             return 'Correo Electrónico requerido';
                           }
+                          if (!ValidatorMailRegister.isValidEmail(email)) {
+                            return 'Ingrese su correo correctamente';
+                          }
                           return null;
                         },
                         decoration:
@@ -142,12 +152,16 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                         controller: _rutController,
                         validator: (rut) {
                           if (rut == null || rut.isEmpty) {
-                            return 'Rut requerido';
+                            return 'RUT requerido';
+                          }
+                          if (!ValidatorsRegister.isValidRut(rut)) {
+                            return 'Ingrese un RUT válido, con puntos y guión medio';
                           }
                           return null;
                         },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Rut').regularInput,
+                        decoration: PetCareInputStyle(
+                                labelText: ' Rut, con puntos y guión medio')
+                            .regularInput,
                       ),
                     ),
                     Container(
@@ -186,23 +200,30 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  widget.storageData.email = _emailController.text;
-                  widget.storageData.rut = _rutController.text;
-                  widget.storageData.firstName = _firstNameController.text;
-                  widget.storageData.lastName = _lastNameController.text;
-                  widget.storageData.photo = _image?.path ?? 'assets/images/pic_default_user.png';
+                  print('RUT: ${_rutController.text}');
+                  print(
+                      'Resultado de la expresión regular: ${!ValidatorsRegister.isValidRut(_rutController.text)}');
+                  if (_formRegisterStepOneKey.currentState!.validate()) {
+                    widget.storageData.email = _emailController.text;
+                    widget.storageData.rut = _rutController.text;
+                    widget.storageData.firstName = _firstNameController.text;
+                    widget.storageData.lastName = _lastNameController.text;
+                    widget.storageData.photo =
+                        _image?.path ?? 'assets/images/pic_default_user.png';
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RegisterStepTwo(storageData: widget.storageData),
-                    ),
-                  );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            RegisterStepTwo(storageData: widget.storageData),
+                      ),
+                    );
+                  }
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
               ),
             ),
-          ], // mark
+          ],
         ),
       ),
     );

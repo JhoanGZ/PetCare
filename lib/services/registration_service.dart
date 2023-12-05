@@ -16,7 +16,7 @@ Future<void> registrationService(
   String phone = data.phone;
   String address = data.address;
   String dateBirth = data.dateBirth;
-  // String female = data.female;
+  // String female = data.female; // En lógica final quedo sin uso.
   String male = data.male;
   String password = data.password;
   String passwordCheck = data.passwordCheck;
