@@ -171,7 +171,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                   //   );
                   // }  else {
                   //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar( content: Text('Seleccione al menos una opción de género.'),),
+                  //     const SnackBar( content: Text('Seleccione una opción de género. 🐶 ', textAlign: TextAlign.center,),),
                   //   );
                   // }
                     widget.storageData.address = _addressController.text;

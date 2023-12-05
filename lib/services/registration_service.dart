@@ -19,7 +19,7 @@ Future<void> registrationService(
   // String female = data.female; // En lógica final quedo sin uso.
   String male = data.male;
   String password = data.password;
-  String passwordCheck = data.passwordCheck;
+  // String passwordCheck = data.passwordCheck; // Gestión de PswCheck en FE
   String termAcceptance = data.termAcceptance;
   String gender;
 
@@ -118,7 +118,7 @@ Future<void> registrationService(
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
+              'Error al conectar con la API. Por favor, inténtalo de nuevo.', textAlign: TextAlign.center,),
           duration: Duration(seconds: 3),
         ),
       );
