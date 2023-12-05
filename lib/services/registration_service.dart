@@ -6,13 +6,14 @@ import 'package:petcare_app/models/storage_transfer.dart';
 
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-Future<void> registrationService(DataRegistrationTransfer data, BuildContext context) async 
-{
+Future<void> registrationService(
+    DataRegistrationTransfer data, BuildContext context) async {
   String email = data.email;
   String rut = data.rut;
   String firstName = data.firstName;
   String lastName = data.lastName;
   String photo = data.photo;
+  String phone = data.phone;
   String address = data.address;
   String dateBirth = data.dateBirth;
   // String female = data.female;
@@ -28,6 +29,7 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
   print('Nombre: ${data.firstName}');
   print('Apellido: ${data.lastName}');
   print('Foto: ${data.photo}');
+  print('phone: ${data.phone}');
   print('Dirección: ${data.address}');
   print('Fecha de Nacimiento: ${data.dateBirth}');
   print('Femenino: ${data.female}');
@@ -36,29 +38,30 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
   print('Repetir Contraseña: ${data.passwordCheck}');
   print('Aceptación de Términos: ${data.termAcceptance}');
 
-  gender = male == 'false' ? '1' : '0';    
+  gender = male == 'false' ? '1' : '0';
 
   if (formKey.currentState!.validate()) {
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/api/login'),
-      headers: {
-        'Content-Type': 'application/json', //NOTE: ::LN:: Por si lo necesitas como application/json
-      },
-      body: jsonEncode({
-        'email': email,
-        'rut': rut,
-        'nombre': '$firstName $lastName',
-        'photo': photo,
-        'address': address,
-        'dateBirth': dateBirth,
-        'gender': gender,
-        'password': password,
-        'passwordCheck': passwordCheck,
-        'termAcceptance': termAcceptance
-      }),
-    );
+        Uri.parse('http://127.0.0.1:8000/api/register'), // URL correcta
+        body: {
+          'rut': rut,
+          'email': email,
+          'nombre': firstName,
+          'apellido': lastName,
+          'password': password,
+          'password_confirmation': passwordCheck,
+          'fnac': dateBirth,
+          'direccion': address,
+          'sexo': gender,
+          'celular': phone,
+          'imagen': photo,
+          'aceptaTerminosDeUso': termAcceptance == true
+              ? '1'
+              : '0', //FIXME::LUIGUI:: dEBO CHEQUEAR ESTO
+        },
+      );
 
       // Verificar la respuesta de la API y manejarla según sea necesario
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -87,7 +90,8 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Error en la autenticación. Verifica tus credenciales.'),
+            content:
+                Text('Error en la autenticación. Verifica tus credenciales.'),
             duration: Duration(seconds: 3),
           ),
         );
@@ -99,7 +103,8 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Error al conectar con la API. Por favor, inténtalo de nuevo.'),
+          content: Text(
+              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
           duration: Duration(seconds: 3),
         ),
       );
