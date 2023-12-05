@@ -65,7 +65,7 @@ Future<void> registrationService(
           // ignore: unrelated_type_equality_checks
           'aceptaTerminosDeUso': termAcceptance == true ? '1' : '0',
 
-          // 'rut': '261740002', // TODO::LUIGUI:: ESTOS COMENTARIOS SON UN EJEMPLO DE LLENADO QUE SE ENVÍA SIN PROBLEMAS.
+          // 'rut': '261740002', // TODO::LUIGUI:: ESTOS COMENTARIOS SON UN EJEMPLO DE LLENADO QUE SE ENVÍA SIN PROBLEMAS..
           // 'email': 'luivin@gmail.com',
           // 'nombre': 'Luigui',
           // 'apellido': 'Vinci',
