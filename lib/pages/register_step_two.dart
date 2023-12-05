@@ -159,14 +159,29 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               child: ElevatedButton(
                 // key: const Key('button_register_step_two'),
                 onPressed: () async {
-                  widget.storageData.address = _addressController.text;
-                  widget.storageData.phone = _phoneController.text;
-                  widget.storageData.dateBirth = _dateBirthController.text;
-                  widget.storageData.female = isFemale.toString();
-                  widget.storageData.male = isMale.toString();
+                  // COMMENT: Se comenta código de validación por implementación
+                  // if(_formRegisterStepTwoKey.currentState!.validate() && isMale || isFemale){
+                  //   widget.storageData.address = _addressController.text;
+                  //   widget.storageData.phone = _phoneController.text;
+                  //   widget.storageData.dateBirth = _dateBirthController.text;
+                  //   widget.storageData.female = isFemale.toString();
+                  //   widget.storageData.male = isMale.toString();
 
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => RegisterStepThree(storageData: widget.storageData),),
-                  );
+                  //   Navigator.push( context, MaterialPageRoute(builder: (context) =>  RegisterStepThree(storageData: widget.storageData),),
+                  //   );
+                  // }  else {
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar( content: Text('Seleccione al menos una opción de género.'),),
+                  //   );
+                  // }
+                    widget.storageData.address = _addressController.text;
+                    widget.storageData.phone = _phoneController.text;
+                    widget.storageData.dateBirth = _dateBirthController.text;
+                    widget.storageData.female = isFemale.toString();
+                    widget.storageData.male = isMale.toString();
+
+                    Navigator.push( context, MaterialPageRoute(builder: (context) =>  RegisterStepThree(storageData: widget.storageData),),
+                    );
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

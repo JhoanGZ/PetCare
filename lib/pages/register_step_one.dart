@@ -137,7 +137,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             return 'Correo Electrónico requerido';
                           }
                           if (!ValidatorMailRegister.isValidEmail(email)) {
-                            return 'Ingrese su correo correctamente';
+                            return 'Ingrese un correo valido';
                           }
                           return null;
                         },
@@ -200,10 +200,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  print('RUT: ${_rutController.text}');
-                  print(
-                      'Resultado de la expresión regular: ${!ValidatorsRegister.isValidRut(_rutController.text)}');
-                  if (_formRegisterStepOneKey.currentState!.validate()) {
+                  // if (_formRegisterStepOneKey.currentState!.validate()) {
                     widget.storageData.email = _emailController.text;
                     widget.storageData.rut = _rutController.text;
                     widget.storageData.firstName = _firstNameController.text;
@@ -217,7 +214,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  }
+                  //}
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),
