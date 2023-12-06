@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/models/register_data_transfer.dart';
 import 'package:petcare_app/pages/register_step_two.dart';
 import 'package:petcare_app/utils/validators_register.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';

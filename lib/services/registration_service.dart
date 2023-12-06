@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
-import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/models/register_data_transfer.dart';
 
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 Future<void> registrationService(
-    DataRegistrationTransfer data, BuildContext context) async {
+  DataRegistrationTransfer data, BuildContext context) async {
   String email = data.email;
   String rut = data.rut;
   String firstName = data.firstName;

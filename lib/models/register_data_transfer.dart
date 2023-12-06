@@ -33,7 +33,6 @@ class DataRegistrationTransfer {
     passwordCheck = '';
     termAcceptance = '';
   }
-
   // Método para verificar si todos los campos obligatorios están completos
   bool isComplete() {
     return _isNonEmpty(email) &&
@@ -50,8 +49,7 @@ class DataRegistrationTransfer {
         _isNonEmpty(passwordCheck) &&
         _isNonEmpty(termAcceptance);
   }
-
-  // Método para convertir la instancia en un mapa de datos
+// Método para convertir la instancia en un mapa de datos
   Map<String, dynamic> toMap() {
     return {
       'email': email,
@@ -69,7 +67,6 @@ class DataRegistrationTransfer {
       'termAcceptance': termAcceptance,
     };
   }
-
   // Función auxiliar para verificar si una cadena no está vacía
   bool _isNonEmpty(String value) {
     return value.isNotEmpty;
