@@ -26,7 +26,7 @@ class PetCareApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, //COMMENT: DESACTIVADO DEBUG BANNER
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:

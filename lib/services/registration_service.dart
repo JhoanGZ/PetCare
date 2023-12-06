@@ -36,7 +36,7 @@ Future<void> registrationService(
   print('Masculino: ${data.male}');
   print('Contraseña: ${data.password}');
   print('Repetir Contraseña: ${data.passwordCheck}');
-  print('Aceptación de Términos🥵🍆💧: ${data.termAcceptance}');
+  print('Aceptación de Términos🥵🍆💧: ${data.termAcceptance}'); //NOTE: BORRAR
 
   gender = male == 'false' ? '1' : '0';
 
@@ -64,19 +64,6 @@ Future<void> registrationService(
           'codigoVerificacion': 'null',
           // ignore: unrelated_type_equality_checks
           'aceptaTerminosDeUso': termAcceptance == true ? '1' : '0',
-
-          // 'rut': '261740002', // TODO::LUIGUI:: ESTOS COMENTARIOS SON UN EJEMPLO DE LLENADO QUE SE ENVÍA SIN PROBLEMAS..
-          // 'email': 'luivin@gmail.com',
-          // 'nombre': 'Luigui',
-          // 'apellido': 'Vinci',
-          // 'password': '123456',
-          // 'fnac': '1997-01-01',
-          // 'direccion': 'Paradisi',
-          // 'sexo': '0',
-          // 'celular': '1234567',
-          // 'imagen': 'null',
-          // 'codigoVerificacion': 'null',
-          // 'aceptaTerminosDeUso': '1',
         },
       );
 
@@ -96,18 +83,16 @@ Future<void> registrationService(
         bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
-        if (userAuth) {
-          print('LOGIN EXITOSO🍆🥵!');
-          Navigator.of(context)
-              .pushNamed(AppRoutes.home, arguments: {userName, userToken});
+        if (userAuth) {print('LOGIN EXITOSO');
+          Navigator.of(context).pushNamed(AppRoutes.home, arguments: {userName, userToken});
         }
       } else {
-        // La autenticación falló, puedes mostrar un mensaje de error al usuario
+        // El registro falló
         print('Error en la autenticación: ${response.body}');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content:
-                Text('Error en la autenticación. Verifica tus credenciales.'),
+                Text('Error en el registro. Verificar conexión.'),
             duration: Duration(seconds: 3),
           ),
         );

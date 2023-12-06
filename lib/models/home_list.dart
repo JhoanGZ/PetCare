@@ -16,7 +16,7 @@ class ItemData {
   });
 }
 
-//TODO: LUIGUI FUCKER AQUI SE ALIMENTA EL LISTVIEW DEL HOME PARA HACER EL SCROLL INFINITE
+//TODO: 
 // Lista de elementos
 final List<ItemData> items = [
   ItemData(
