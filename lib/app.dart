@@ -37,9 +37,7 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (context) => Home(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
-                userName: arguments?['userName'] ?? 'Invitado',
-                userToken: arguments?['userToken'] ?? 'null',
-                foundationId: arguments?['foundationId'] ?? 'null',
+                userData: arguments?['userData'] ?? 'Invitado',
               ),
             );
 
@@ -71,7 +69,6 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
 
-
           case AppRoutes.userProfile:
             final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
@@ -88,12 +85,10 @@ class PetCareApp extends StatelessWidget {
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
-
             return MaterialPageRoute(
               builder: (context) => UserSavedPets(
                 foundationId: foundationId,
                 userName: userName,
-
               ),
             );
 

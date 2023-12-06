@@ -8,15 +8,13 @@ import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class Home extends StatefulWidget {
-  final String userName;
-  final String userToken;
-  final String foundationId;
+  final String userData;
+  String foundationId;
 
-  const Home(
-      {super.key,
-      required this.userName,
-      required this.userToken,
-      required this.foundationId});
+  const Home({
+    super.key,
+    required this.userData,
+  });
 
   @override
   HomeState createState() => HomeState();
@@ -46,19 +44,18 @@ class HomeState extends State<Home> {
 
             Expanded(
                 child: Text(
-              widget.userName,
+              widget.userData,
               style: PetCareThemes.buttonTextStyle,
             )),
             // TODO: AQUÍ VA LA IMAGEN DE USUARIO
             GestureDetector(
               onTap: () {
                 if (widget.foundationId == '0') {
-                  Navigator.of(context).pushNamed(AppRoutes.userProfile,
-                  arguments: {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.userProfile, arguments: {
                     'userName': widget.userName,
-                    'foundationId' : widget.foundationId,
-                  }
-                  );
+                    'foundationId': widget.foundationId,
+                  });
                 } else {
                   Navigator.of(context).pushNamed(
                     AppRoutes.ngoProfile,
@@ -66,7 +63,6 @@ class HomeState extends State<Home> {
                       'foundationId': widget.foundationId,
                       'userName': widget.userName,
                       'foundationIdClick': widget.foundationId,
-
                     },
                   );
                 }
@@ -105,7 +101,8 @@ class HomeState extends State<Home> {
                           AppRoutes.ngoProfile,
                           arguments: {
                             'foundationId': widget.foundationId,
-                            'userName': items[index].title, // Asegúrate de tener el valor de userName disponible aquí
+                            'userName': items[index]
+                                .title, // Asegúrate de tener el valor de userName disponible aquí
                             'foundationIdClick': items[index].idfoundation,
                           },
                         );
