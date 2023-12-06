@@ -34,13 +34,8 @@ Future<void> authenticationLogin(
         print('Respuesta de la API: $responseData');
 
         // Guarda los datos que necesitas o realiza otras acciones
-        String userName = responseData['name']
-            .toString(); // TODO::LUIGUI::29-11-23:: Esta variable debe llegar al home.
-        String userToken = responseData['token']
-            .toString(); // TODO::LUIGUI::29-11-23:: Este token deben ser llevado al home.
-        bool userAuth = responseData['auth'] ==
-            true; // TODO::LUIGUI::29-11-23:: Esto no va a ninguna otra vista
-        String foundationId = responseData['foundation_id'].toString();
+        String userData = responseData['user'];
+        bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
@@ -48,11 +43,7 @@ Future<void> authenticationLogin(
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(
             AppRoutes.home,
-            arguments: {
-              'userName': userName,
-              'userToken': userToken,
-              'foundationId': foundationId
-            },
+            arguments: {userData},
           );
         }
       } else {
