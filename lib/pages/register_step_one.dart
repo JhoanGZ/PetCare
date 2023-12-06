@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
@@ -79,7 +78,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 );
                 if (selectedImage != null) {
                   widget.storageData.photo =
-                      selectedImage as String; //verificar sino .toString();
+                      selectedImage as String; //NOTE: verificar sino .toString(), pero funcional;
                 }
               },
               child: Column(
@@ -200,7 +199,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  // if (_formRegisterStepOneKey.currentState!.validate()) {
+                  if (_formRegisterStepOneKey.currentState!.validate()) {
                     widget.storageData.email = _emailController.text;
                     widget.storageData.rut = _rutController.text;
                     widget.storageData.firstName = _firstNameController.text;
@@ -214,7 +213,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  //} // [x]: NO OLVIDAR DESCOMENTAR para que funcione
+                  } 
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

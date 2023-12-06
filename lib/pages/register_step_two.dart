@@ -27,6 +27,15 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
     _phoneController = TextEditingController();
     _addressController = TextEditingController();
     _dateBirthController = TextEditingController();
+    DateFormatter.handleDateController(
+      _dateBirthController,
+      context,
+      (selectedDate) {
+        setState(() {
+          widget.storageData.dateBirth = DateFormatter.formatDate(selectedDate);
+        });
+      },
+    );
   }
   
 
@@ -60,6 +69,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           }
                           return null;
                         },
+                        keyboardType: TextInputType.number,
                         decoration: PetCareInputStyle(labelText: ' Celular')
                             .regularInput,
                       ),
@@ -92,8 +102,12 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                       //     labelText: ' Fecha de Nacimiento',
                       //   ).regularInput,
                       // ),
-                        child: TextFormField(
-                          controller: _dateBirthController,
+                      child: TextFormField(
+                        controller: _dateBirthController,
+                        readOnly: true,
+                        decoration: PetCareInputStyle(
+                          labelText: 'Fecha de Nacimiento',
+                        ).regularInput,
                         onTap: () async {
                           DateTime? pickedDate = await DateFormatter.selectDate(context);
                           if (pickedDate != null) {
@@ -102,10 +116,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                             });
                           }
                         },
-                        readOnly: true,
-                        decoration: PetCareInputStyle(
-                          labelText: 'Fecha de Nacimiento',
-                        ).regularInput,
                       ),
                     ),
                     Padding(
@@ -177,33 +187,20 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                 // key: const Key('button_register_step_two'),
                 onPressed: () async {
                   // COMMENT: Se comenta código de validación por implementación
-                  // if(_formRegisterStepTwoKey.currentState!.validate() && isMale || isFemale){
-                  //   widget.storageData.address = _addressController.text;
-                  //   widget.storageData.phone = _phoneController.text;
-                  //   widget.storageData.dateBirth = _dateBirthController.text;
-                  //   widget.storageData.female = isFemale.toString();
-                  //   widget.storageData.male = isMale.toString();
+                  if(_formRegisterStepTwoKey.currentState!.validate() && isMale || isFemale){
+                    widget.storageData.address = _addressController.text;
+                    widget.storageData.phone = _phoneController.text;
+                    widget.storageData.dateBirth = _dateBirthController.text;
+                    widget.storageData.female = isFemale.toString();
+                    widget.storageData.male = isMale.toString();
 
-                  //   Navigator.push( context, MaterialPageRoute(builder: (context) =>  RegisterStepThree(storageData: widget.storageData),),
-                  //   );
-                  // }  else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar( content: Text('Seleccione una opción de género. 🐶 ', textAlign: TextAlign.center,),),
-                  //   );
-                  // }
-                  widget.storageData.address = _addressController.text;
-                  widget.storageData.phone = _phoneController.text;
-                  widget.storageData.dateBirth = _dateBirthController.text;
-                  widget.storageData.female = isFemale.toString();
-                  widget.storageData.male = isMale.toString();
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          RegisterStepThree(storageData: widget.storageData),
-                    ),
-                  );
+                    Navigator.push( context, MaterialPageRoute(builder: (context) =>  RegisterStepThree(storageData: widget.storageData),),
+                    );
+                  }  else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar( content: Text('Seleccione una opción de género 🐶! ', textAlign: TextAlign.center,),),
+                    );
+                  }
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

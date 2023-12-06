@@ -114,7 +114,6 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               child: ElevatedButton(
                 key: const Key('button_register_step_three'),
                 onPressed: () async {
-                  
                   if(_formRegisterStepThreeKey.currentState!.validate()){
                     widget.storageData.password = _passwordController.text;
                     widget.storageData.passwordCheck = _passwordCheckController.text;
