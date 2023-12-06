@@ -154,7 +154,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           if (rut == null || rut.isEmpty) {
                             return 'RUT requerido';
                           }
-                          if (!ValidatorsRegister.isValidRut(rut)) {
+                          if (!ValidatorsRutRegister.isValidRut(rut)) {
                             return 'Ingrese un RUT válido, con puntos y guión medio';
                           }
                           return null;
@@ -214,7 +214,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  //}
+                  //} // [x]: NO OLVIDAR DESCOMENTAR para que funcione
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

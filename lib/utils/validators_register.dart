@@ -1,5 +1,7 @@
 // validators_register.dart
-class ValidatorsRegister {
+
+
+class ValidatorsRutRegister {
 
   //Validador Rut
   static bool isValidRut(String rut) {
@@ -25,3 +27,4 @@ class ValidatorMailRegister{
   }
 
 }
+
