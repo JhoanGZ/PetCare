@@ -67,6 +67,9 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           if (address == null || address.isEmpty) {
                             return 'Repetición de Contraseña requerida'; // TODO: Lógica passwordCheck
                           }
+                          if(_passwordController.text != _passwordCheckController.text){
+                            return 'Ambas contraseñas deben ser iguales';
+                          }
                           return null;
                         },
                         obscureText: true,
@@ -111,11 +114,17 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               child: ElevatedButton(
                 key: const Key('button_register_step_three'),
                 onPressed: () async {
-                  widget.storageData.password = _passwordController.text;
-                  widget.storageData.passwordCheck = _passwordCheckController.text;
-                  widget.storageData.termAcceptance = _termAcceptanceController.text;
-                  _formRegisterStepThreeKey.currentState?.save();
-                  await registrationService(widget.storageData, context);
+                  if(_formRegisterStepThreeKey.currentState!.validate()){
+                    widget.storageData.password = _passwordController.text;
+                    widget.storageData.passwordCheck = _passwordCheckController.text;
+                    widget.storageData.termAcceptance = _termAcceptanceController.text;
+                    _formRegisterStepThreeKey.currentState?.save();
+                    await registrationService(widget.storageData, context);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar( content: Text('Para registrarse debe aceptar los términos y condiciones', textAlign: TextAlign.center,),),
+                    );
+                  }
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('Registrarme'),

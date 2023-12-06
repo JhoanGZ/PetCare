@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
@@ -79,7 +78,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 );
                 if (selectedImage != null) {
                   widget.storageData.photo =
-                      selectedImage as String; //verificar sino .toString();
+                      selectedImage as String; //NOTE: verificar sino .toString(), pero funcional;
                 }
               },
               child: Column(
@@ -137,7 +136,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             return 'Correo Electrónico requerido';
                           }
                           if (!ValidatorMailRegister.isValidEmail(email)) {
-                            return 'Ingrese su correo correctamente';
+                            return 'Ingrese un correo valido';
                           }
                           return null;
                         },
@@ -154,7 +153,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           if (rut == null || rut.isEmpty) {
                             return 'RUT requerido';
                           }
-                          if (!ValidatorsRegister.isValidRut(rut)) {
+                          if (!ValidatorsRutRegister.isValidRut(rut)) {
                             return 'Ingrese un RUT válido, con puntos y guión medio';
                           }
                           return null;
@@ -200,9 +199,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-                  print('RUT: ${_rutController.text}');
-                  print(
-                      'Resultado de la expresión regular: ${!ValidatorsRegister.isValidRut(_rutController.text)}');
                   if (_formRegisterStepOneKey.currentState!.validate()) {
                     widget.storageData.email = _emailController.text;
                     widget.storageData.rut = _rutController.text;
@@ -217,7 +213,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  }
+                  } 
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

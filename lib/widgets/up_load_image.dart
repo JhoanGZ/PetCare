@@ -40,6 +40,7 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
     }
   }
 
+  //BUG: Problemas con el android manifest, tocaría revisar a fondo en la libreria.
   // Future<File?> _cropImage({required File imageFile}) async {
   //   CroppedFile? croppedImage =
   //       await ImageCropper().cropImage(sourcePath: imageFile.path);
@@ -79,7 +80,7 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
       body: SafeArea(
         child: Padding(
           padding:
-          const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 20),
+          const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
