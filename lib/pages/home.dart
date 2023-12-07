@@ -8,7 +8,7 @@ import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class Home extends StatefulWidget {
-  //TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE
+  //TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE.
   Map<String, dynamic> userData = {
     "user": {
       "id": 2,
