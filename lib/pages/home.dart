@@ -8,10 +8,32 @@ import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class Home extends StatefulWidget {
-  final String userData;
-  String foundationId;
+  //TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE
+  Map<String, dynamic> userData = {
+    "user": {
+      "id": 2,
+      "rut": "261740002",
+      "email": "luivin@gmail.com",
+      "nombre": "Luigui",
+      "apellido": "Vinci",
+      "fnac": "1997-01-01",
+      "direccion": "Paradisi",
+      "sexo": 0,
+      "celular": "1234567",
+      "imagen": "",
+      "codigoVerificacion": "",
+      "aceptaTerminosDeUso": "1",
+      "usuarioActivo": 1,
+      "email_verified_at": null,
+      "created_at": "2023-12-05T19:16:26.000000Z",
+      "updated_at": "2023-12-06T19:21:28.000000Z",
+      "foundation": null
+    },
+    "foundation_id": "0",
+    "auth": true
+  };
 
-  const Home({
+  Home({
     super.key,
     required this.userData,
   });
@@ -25,7 +47,8 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.foundationId == '0';
+    bool showButtons = widget.userData['foundation_id'] ==
+        '0'; //TODO::LUIGUI::EJEMPLO DE CONSUMO DE DATOS:: AQUI ESTOY ACCEDIENDO A 'foundation_id'
 
     return Scaffold(
       appBar: AppBar(
@@ -44,25 +67,25 @@ class HomeState extends State<Home> {
 
             Expanded(
                 child: Text(
-              widget.userData,
+              widget.userData as String,
               style: PetCareThemes.buttonTextStyle,
             )),
             // TODO: AQUÍ VA LA IMAGEN DE USUARIO
             GestureDetector(
               onTap: () {
-                if (widget.foundationId == '0') {
+                if (widget.userData['foundation_id'] == '0') {
                   Navigator.of(context)
                       .pushNamed(AppRoutes.userProfile, arguments: {
-                    'userName': widget.userName,
-                    'foundationId': widget.foundationId,
+                    'userName': widget.userData['user']['name'],
+                    'foundationId': widget.userData['foundation_id'],
                   });
                 } else {
                   Navigator.of(context).pushNamed(
                     AppRoutes.ngoProfile,
                     arguments: {
-                      'foundationId': widget.foundationId,
-                      'userName': widget.userName,
-                      'foundationIdClick': widget.foundationId,
+                      'foundationId': widget.userData['foundation_id'],
+                      'userName': widget.userData['user']['name'],
+                      'foundationIdClick': widget.userData['foundation_id'],
                     },
                   );
                 }
@@ -93,14 +116,14 @@ class HomeState extends State<Home> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print(widget.userName);
+                        print(widget.userData['user']['name']);
                         print(items[index].title);
                         print(items[index].idfoundation);
 
                         Navigator.of(context).pushNamed(
                           AppRoutes.ngoProfile,
                           arguments: {
-                            'foundationId': widget.foundationId,
+                            'foundationId': widget.userData['foundation_id'],
                             'userName': items[index]
                                 .title, // Asegúrate de tener el valor de userName disponible aquí
                             'foundationIdClick': items[index].idfoundation,
