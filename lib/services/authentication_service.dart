@@ -53,7 +53,7 @@ Future<void> authenticationLogin(
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content:
+            content:/*  */
                 Text('Error en la autenticación. Verifica tus credenciales.'),
             duration: Duration(seconds: 3),
           ),

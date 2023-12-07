@@ -95,35 +95,30 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
                       decoration: PetCareInputStyle(labelText: '').regularInput,
                     ),
                   ),
-                                Container(
-                  margin: const EdgeInsets.only(top: 20, bottom: 20, left: 14),
-                  child: ElevatedButton(
-                    onPressed: () {
-
-                    },
-                    style: PetCareLittleButtonStyles.elevatedButtonStyle,
-                    child: const Text('Adjuntar'),
+                  Container(
+                    margin:
+                        const EdgeInsets.only(top: 20, bottom: 20, left: 14),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: PetCareLittleButtonStyles.elevatedButtonStyle,
+                      child: const Text('Adjuntar'),
+                    ),
                   ),
-                ),
                 ],
-
-                
               ),
               const SizedBox(
                 height: 50,
               ),
-                              Container(
-                  margin: const EdgeInsets.only(top: 20, bottom: 26),
-                  child: ElevatedButton(
-                    onPressed: () {
-
-                     Navigator.of(context).pushNamed(AppRoutes.adoptionConfirm);
-
-                    },
-                    style: PetCareButtonStyles.elevatedButtonStyle,
-                    child: const Text('Enviar'),
-                  ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, bottom: 26),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.adoptionConfirm);
+                  },
+                  style: PetCareButtonStyles.elevatedButtonStyle,
+                  child: const Text('Enviar'),
                 ),
+              ),
             ],
           ),
         ));

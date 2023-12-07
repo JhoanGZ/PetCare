@@ -28,7 +28,8 @@ class _BuyMeState extends State<BuyMe> {
       photoPet = 'assets/images/logo_petcare.png';
     } else {
       photoPet = widget.photoPet;
-      statement = '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
+      statement =
+          '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
     }
   }
 
@@ -83,21 +84,21 @@ class _BuyMeState extends State<BuyMe> {
                           if (_formBuyMeKey.currentState!.validate()) {
                             // ignore: avoid_print
                             showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Donación Enviada ✅'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cerrar'),
-                          ), 
-                        ],
-                      );
-                    },
-                  );
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Donación Enviada ✅'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cerrar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                             //luego cambiar pushNamed por pushReplacementNamed para evitar volver
                           }
                           //Acción al presionar el botón

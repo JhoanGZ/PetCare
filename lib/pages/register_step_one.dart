@@ -77,8 +77,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   ),
                 );
                 if (selectedImage != null) {
-                  widget.storageData.photo =
-                      selectedImage as String; //NOTE: verificar sino .toString(), pero funcional;
+                  widget.storageData.photo = selectedImage
+                      as String; //NOTE: verificar sino .toString(), pero funcional;
                 }
               },
               child: Column(
@@ -213,7 +213,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  } 
+                  }
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

@@ -69,7 +69,7 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
 
-            case AppRoutes.userProfile:
+          case AppRoutes.userProfile:
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
@@ -121,35 +121,23 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (context) => const DonationConfirm());
 
-
           case AppRoutes.ngoProfile:
-  // Asegurarse `settings.arguments` es un Map<String, dynamic>
-              Map<String, dynamic>? arguments =
-              settings.arguments as Map<String, dynamic>?;
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+                settings.arguments as Map<String, dynamic>?;
 
-              final String foundationIdClick = arguments?['foundationIdClick'] ?? '';
+            final String foundationIdClick =
+                arguments?['foundationIdClick'] ?? '';
 
-           return MaterialPageRoute(
+            return MaterialPageRoute(
               builder: (context) => NgoProfile(
-      // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
-             userData: arguments?['userData'] ?? 'Invitado',
-              foundationIdClick: foundationIdClick,
-    ),
-  );
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userData: arguments?['userData'] ?? 'Invitado',
+                foundationIdClick: foundationIdClick,
+              ),
+            );
 
-          // case AppRoutes.petProfile:
-          //   final Map<String, dynamic> args =
-          //       settings.arguments as Map<String, dynamic>;
-          //   final String foundationId = args['foundationId'];
-          //   final String userName = args['userName'];
-
-          //   return MaterialPageRoute(
-          //     builder: (context) => PetProfile(
-          //       foundationId: foundationId,
-          //       userName: userName,
-          //     ),
-          //   );
-            case AppRoutes.petProfile:
+          case AppRoutes.petProfile:
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
@@ -171,8 +159,7 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-          return MaterialPageRoute(builder: (context) => LogInPage());
-        
+            return MaterialPageRoute(builder: (context) => LogInPage());
         }
       },
     );

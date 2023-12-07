@@ -53,16 +53,18 @@ class HomeState extends State<Home> {
             GestureDetector(
               onTap: () {
                 if (widget.userData['foundation_id'] == '0') {
-
-                Navigator.of(context).pushNamed(AppRoutes.userProfile, 
-                             arguments: {'userData': widget.userData,
-                             }, );
-
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.userProfile,
+                    arguments: {'userData': widget.userData},
+                  );
                 } else {
-
-                Navigator.of(context).pushNamed(AppRoutes.ngoProfile, 
-                             arguments: {'userData': widget.userData,
-                             'foundationIdClick': widget.userData['foundation_id']}, );
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.ngoProfile,
+                    arguments: {
+                      'userData': widget.userData,
+                      'foundationIdClick': widget.userData['foundation_id']
+                    },
+                  );
                 }
                 // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
               },
@@ -91,10 +93,13 @@ class HomeState extends State<Home> {
                   children: [
                     GestureDetector(
                       onTap: () {
-               Navigator.of(context).pushNamed(AppRoutes.ngoProfile, 
-                             arguments: {'userData': widget.userData,
-                             'foundationIdClick': items[index].idfoundation}, );
-
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.ngoProfile,
+                          arguments: {
+                            'userData': widget.userData,
+                            'foundationIdClick': items[index].idfoundation
+                          },
+                        );
                       },
                       child: Image.asset(
                         items[index].profileIcon, // Icono de perfil
@@ -179,7 +184,7 @@ class HomeState extends State<Home> {
                           ),
                         ),
                       ),
-//otro boton
+                      //otro boton
                       const SizedBox(width: 4),
                       Container(
                         width: 30,

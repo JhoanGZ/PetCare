@@ -309,10 +309,10 @@ class _LogInPageState extends State<LogInPage> {
 
                     TextButton(
                       onPressed: () {
-
-                        Navigator.of(context)
-                            .pushReplacementNamed(AppRoutes.home, 
-                             arguments: {'userData': widget.userData}, );
+                        Navigator.of(context).pushReplacementNamed(
+                          AppRoutes.home,
+                          arguments: {'userData': widget.userData},
+                        );
                         //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
                         //logica del text buton contactanos Logic:
                       },

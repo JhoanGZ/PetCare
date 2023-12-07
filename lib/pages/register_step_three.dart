@@ -32,8 +32,8 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
       appBar: AppBar(
         leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () =>
-                Navigator.of(context).pushReplacementNamed(AppRoutes.registerStepTwo)),
+            onPressed: () => Navigator.of(context)
+                .pushReplacementNamed(AppRoutes.registerStepTwo)),
       ),
       //TODO: Adjuntar gatito en el borde inferior
       body: SingleChildScrollView(
@@ -67,13 +67,15 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           if (address == null || address.isEmpty) {
                             return 'Repetición de Contraseña requerida'; // TODO: Lógica passwordCheck
                           }
-                          if(_passwordController.text != _passwordCheckController.text){
+                          if (_passwordController.text !=
+                              _passwordCheckController.text) {
                             return 'Ambas contraseñas deben ser iguales';
                           }
                           return null;
                         },
                         obscureText: true,
-                        decoration: PetCareInputStyle(labelText: ' Repetir Contraseña')
+                        decoration:
+                            PetCareInputStyle(labelText: ' Repetir Contraseña')
                                 .regularInput,
                       ),
                     ),
@@ -84,21 +86,34 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                         child: Row(
                           children: <Widget>[
                             Checkbox(
-                              value: _termAcceptanceController.text.toLowerCase() == 'true',
+                              value: _termAcceptanceController.text
+                                      .toLowerCase() ==
+                                  'true',
                               onChanged: (bool? value) {
                                 setState(() {
-                                  _termAcceptanceController.text = value.toString();
+                                  _termAcceptanceController.text =
+                                      value.toString();
                                 });
                               },
                             ),
-                            const SizedBox(width: 8.0), // Ajusta este valor según tu necesidad
-                            const Text('Acepto ', style: TextStyle(fontSize: 15),
+                            const SizedBox(
+                                width:
+                                    8.0), // Ajusta este valor según tu necesidad
+                            const Text(
+                              'Acepto ',
+                              style: TextStyle(fontSize: 15),
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed(AppRoutes.terms);
+                                Navigator.of(context)
+                                    .pushNamed(AppRoutes.terms);
                               },
-                              child: const Text('los términos y condiciones', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), // NOTE: No se puede usar Themes por overflow
+                              child: const Text(
+                                'los términos y condiciones',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight
+                                        .bold), // NOTE: No se puede usar Themes por overflow
                               ),
                             ),
                           ],
@@ -114,15 +129,22 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               child: ElevatedButton(
                 key: const Key('button_register_step_three'),
                 onPressed: () async {
-                  if(_formRegisterStepThreeKey.currentState!.validate()){
+                  if (_formRegisterStepThreeKey.currentState!.validate()) {
                     widget.storageData.password = _passwordController.text;
-                    widget.storageData.passwordCheck = _passwordCheckController.text;
-                    widget.storageData.termAcceptance = _termAcceptanceController.text;
+                    widget.storageData.passwordCheck =
+                        _passwordCheckController.text;
+                    widget.storageData.termAcceptance =
+                        _termAcceptanceController.text;
                     _formRegisterStepThreeKey.currentState?.save();
                     await registrationService(widget.storageData, context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar( content: Text('Para registrarse debe aceptar los términos y condiciones', textAlign: TextAlign.center,),),
+                      const SnackBar(
+                        content: Text(
+                          'Para registrarse debe aceptar los términos y condiciones',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     );
                   }
                 },
