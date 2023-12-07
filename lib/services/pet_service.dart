@@ -27,7 +27,7 @@ Future<void> petRegistration(
     try {
       // Realizar el envío a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/login'), //BUG: Asignar Endpoint
+        Uri.parse('http://127.0.0.1:8000/api/login'), //TODO: ::LN:: Asignar Endpoint
         body: {
           'name' : name, 
           'vaccine' : vaccine,  
@@ -39,21 +39,16 @@ Future<void> petRegistration(
         },
       );
 
-      // Verificar la respuesta de la API y manejarla según sea necesario
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        // La autenticación fue exitosa
         var responseData = jsonDecode(response.body);
 
-        // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
         print('Respuesta de la API: $responseData');
 
-        // Guarda los datos que necesitas o realiza otras acciones
         String userData = responseData['user'];
         bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
         if (userAuth) {
-          print('LOGIN EXITOSO!');
           // ignore: use_build_context_synchronously
           Navigator.of(context).pushNamed(
             AppRoutes.home,
@@ -61,10 +56,7 @@ Future<void> petRegistration(
           );
         }
       } else {
-        // La autenticación falló, puedes mostrar un mensaje de error al usuario
         print('Error en la autenticación: ${response.body}');
-        // Puedes mostrar un mensaje de error al usuario
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content:
@@ -74,9 +66,7 @@ Future<void> petRegistration(
         );
       }
     } catch (e) {
-      // Manejar errores de conexión o de la API
       print('Error al conectar con la API: $e');
-      // Puedes mostrar un mensaje de error al usuario
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

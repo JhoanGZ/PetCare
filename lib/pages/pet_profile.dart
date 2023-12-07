@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/services/pet_service.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 class PetProfile extends StatefulWidget {
@@ -228,26 +229,21 @@ class _PetProfileState extends State<PetProfile> {
           ),
             const SizedBox(height: 15,),
             ElevatedButton(
-                onPressed: () {
-                  if (_formPetProfileStateKey.currentState!
-                      .validate()) {
-                      Navigator.of(context).pushNamed(AppRoutes.ngoProfile);
-                    
-                    // Si la validación es exitosa, el campo de texto está lleno
-                    // Realizar acciones correspondientes aquí
-                    // Por ejemplo, puedes acceder al valor del campo de texto:
+              onPressed: () async {
+                  if (_formPetProfileStateKey.currentState!.validate()) {
+                    await petRegistration(
+                      _formPetProfileStateKey,
+                      _nameController,
+                      _vaccineController,
+                      _raceController,
+                      _weightController,
+                      _genderController,
+                      _ageController,
+                      _descriptionController,
+                      context,
+                    );
                   }
-                }
-                //async {
-                //   await authenticationRetrivePass(
-                //     // TODO::LUIGUI::29-11-23:: Dentro de esta función está la navegación
-                //     _formRetrievePassChangeKey,
-                //     _passwordController,
-                //     _repeatPasswordController,
-                //     context,
-                //   )
-                //},
-                ,
+                },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('Publicar'),
               ),                 

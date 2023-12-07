@@ -7,23 +7,24 @@ import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
+
 class Home extends StatefulWidget {
   //TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE.
   Map<String, dynamic> userData = {
     "user": {
-      "id": 2,
+      "id": '2',
       "rut": "261740002",
       "email": "luivin@gmail.com",
       "nombre": "Luigui",
       "apellido": "Vinci",
       "fnac": "1997-01-01",
       "direccion": "Paradisi",
-      "sexo": 0,
+      "sexo": '0',
       "celular": "1234567",
       "imagen": "",
       "codigoVerificacion": "",
       "aceptaTerminosDeUso": "1",
-      "usuarioActivo": 1,
+      "usuarioActivo": '1',
       "email_verified_at": null,
       "created_at": "2023-12-05T19:16:26.000000Z",
       "updated_at": "2023-12-06T19:21:28.000000Z",
@@ -33,10 +34,7 @@ class Home extends StatefulWidget {
     "auth": true
   };
 
-  Home({
-    super.key,
-    required this.userData,
-  });
+  Home({super.key, required this.userData,});
 
   @override
   HomeState createState() => HomeState();
@@ -67,7 +65,7 @@ class HomeState extends State<Home> {
 
             Expanded(
                 child: Text(
-              widget.userData as String,
+              widget.userData['user']['nombre'],
               style: PetCareThemes.buttonTextStyle,
             )),
             // TODO: AQUÍ VA LA IMAGEN DE USUARIO
@@ -114,9 +112,9 @@ class HomeState extends State<Home> {
                 // Elementos en fila: icono de perfil y título
                 Row(
                   children: [
-                    GestureDetector(
+                  GestureDetector(
                       onTap: () {
-                        print(widget.userData['user']['name']);
+                        print(widget.userData['user']['nombre']);
                         print(items[index].title);
                         print(items[index].idfoundation);
 
@@ -124,8 +122,7 @@ class HomeState extends State<Home> {
                           AppRoutes.ngoProfile,
                           arguments: {
                             'foundationId': widget.userData['foundation_id'],
-                            'userName': items[index]
-                                .title, // Asegúrate de tener el valor de userName disponible aquí
+                            'userName': items[index].title,
                             'foundationIdClick': items[index].idfoundation,
                           },
                         );
@@ -137,11 +134,12 @@ class HomeState extends State<Home> {
                       ),
                     ),
                     const SizedBox(
-                        width: 8), // Espacio entre el icono y el texto
+                      width: 8,
+                    ), // Espacio entre el icono y el texto
                     Text(
                       items[index].title,
                       style: PetCareThemes.nameProfileTextStyle,
-                    ), // Título del elemento
+                    ), // Título del elemento // Título del elemento
                   ],
                 ),
                 const SizedBox(
