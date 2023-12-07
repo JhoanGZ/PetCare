@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_web_libraries_in_flutter, unused_import
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
-import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/models/register_data_transfer.dart';
 import 'package:petcare_app/pages/adoption_accept.dart';
 import 'package:petcare_app/pages/adoption_confirm.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
@@ -26,11 +26,11 @@ class PetCareApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, //COMMENT: DESACTIVADO DEBUG BANNER
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            // Asegúrate de que `settings.arguments` es un Map<String, dynamic>
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
 
@@ -70,8 +70,7 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const Terms());
 
           case AppRoutes.userProfile:
-            final Map<String, dynamic> args =
-                settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
             return MaterialPageRoute(
@@ -82,8 +81,7 @@ class PetCareApp extends StatelessWidget {
             );
 
           case AppRoutes.userSavedPets:
-            final Map<String, dynamic> args =
-                settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -123,7 +121,7 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.ngoProfile:
             final Map<String, dynamic> args =
-                settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
             final String foundationIdClick = args['foundationIdClick'];
@@ -138,7 +136,7 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.petProfile:
             final Map<String, dynamic> args =
-                settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 

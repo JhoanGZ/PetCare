@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/storage_transfer.dart';
+import 'package:petcare_app/models/register_data_transfer.dart';
 import 'package:petcare_app/pages/register_step_three.dart';
 import 'package:petcare_app/widgets/date_formatter.dart';
 

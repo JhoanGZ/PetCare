@@ -41,7 +41,6 @@ class _UserProfileState extends State<UserProfile> {
               ),
               child: IconButton(
                 onPressed: () {
-
                   Navigator.of(context).pushNamed(AppRoutes.userSavedPets,
                   arguments: {
                     'foundationId': widget.foundationId,
@@ -84,7 +83,6 @@ class _UserProfileState extends State<UserProfile> {
                   MaterialPageRoute(
                     builder: (context) => SetPhotoScreen(
                       onPhotoSelected: (File? photo) {
-                        
                       },
                     ),
                   ),
@@ -117,7 +115,6 @@ class _UserProfileState extends State<UserProfile> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 14),
                       child: TextFormField(
-                  
                         validator: (name) {
                           if (name == null || name.isEmpty) {
                             return 'Campo requerido';
@@ -132,7 +129,6 @@ class _UserProfileState extends State<UserProfile> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 14),
                       child: TextFormField(
-               
                         validator: (apellido) {
                           if (apellido == null || apellido.isEmpty) {
                             return 'Campo requerido';
