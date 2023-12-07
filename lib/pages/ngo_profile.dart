@@ -6,10 +6,10 @@ import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class NgoProfile extends StatefulWidget {
-  const NgoProfile({super.key, required this.foundationId, required this.userName, required this.foundationIdClick});
-  final String foundationId;
-  final String userName;
+  final dynamic userData;
   final String foundationIdClick;
+  const NgoProfile({super.key, required this.userData, required this.foundationIdClick});
+
   @override
   NgoProfileState createState() => NgoProfileState();
 }
@@ -29,8 +29,9 @@ class NgoProfileState extends State<NgoProfile> {
   void onSearchChanged() {
     String query = _searchController.text.toLowerCase();
     setState(() {
-      filteredItems =
-          items.where((item) => item.idPet.toLowerCase().contains(query)).toList();
+      filteredItems = items
+          .where((item) => item.idPet.toLowerCase().contains(query))
+          .toList();
     });
   }
 
@@ -42,7 +43,7 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.foundationId != '0' && widget.foundationId == widget.foundationIdClick;
+    bool showButtons = widget.userData['foundation_id'] != '0' && widget.userData['foundation_id'] == widget.foundationIdClick;
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +54,11 @@ class NgoProfileState extends State<NgoProfile> {
         ),
         title: Row(
           children: [
-            Expanded(child: Text(widget.userName, style: PetCareThemes.buttonTextStyle,)),
+            Expanded(
+                child: Text(
+              widget.userData['user']['nombre'],
+              style: PetCareThemes.buttonTextStyle,
+            )),
             Image.asset(
               'assets/images/logo_petcare_blanco.png',
               width: 21,
@@ -82,7 +87,7 @@ class NgoProfileState extends State<NgoProfile> {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
-                  'assets/images/fundacion perfil.png',
+                  widget.userData['user']['imagen'],
                   width: 64,
                   height: 64,
                   fit: BoxFit.cover,
@@ -90,7 +95,7 @@ class NgoProfileState extends State<NgoProfile> {
               ),
               Expanded(
                   child: Text(
-                widget.userName,
+                widget.userData['user']['nombre'],
                 style: PetCareThemes.nameProfileTextStyle,
                 textAlign: TextAlign.center,
               )),
@@ -161,14 +166,16 @@ class NgoProfileState extends State<NgoProfile> {
                   margin: const EdgeInsets.only(top: 20, bottom: 20, left: 14),
                   child: ElevatedButton(
                     onPressed: () {
-                      //Navigator.of(context).pushNamed(AppRoutes.petProfile);
-                       Navigator.of(context).pushNamed(
-        AppRoutes.petProfile,
-        arguments: {
-          'foundationId': widget.foundationId,
-          'userName': widget.userName, // Asegúrate de tener el valor de userName disponible aquí
-          },
-        );
+
+                          // Navigator.of(context).pushNamed(
+                          // AppRoutes.petProfile,
+                          // arguments: {
+                          //   'foundationId': widget.userData,
+                          // },
+                        // );
+                                       Navigator.of(context).pushNamed(AppRoutes.petProfile, 
+                             arguments: {'userData': widget.userData,
+                             }, );
                     },
                     style: PetCareLittleButtonStyles.elevatedButtonStyle,
                     child: const Text('Agregar nuevo'),

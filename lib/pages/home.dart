@@ -7,34 +7,15 @@ import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
-
+// ignore: must_be_immutable
 class Home extends StatefulWidget {
-  //TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE.
-  Map<String, dynamic> userData = {
-    "user": {
-      "id": '2',
-      "rut": "261740002",
-      "email": "luivin@gmail.com",
-      "nombre": "Luigui",
-      "apellido": "Vinci",
-      "fnac": "1997-01-01",
-      "direccion": "Paradisi",
-      "sexo": '0',
-      "celular": "1234567",
-      "imagen": "",
-      "codigoVerificacion": "",
-      "aceptaTerminosDeUso": "1",
-      "usuarioActivo": '1',
-      "email_verified_at": null,
-      "created_at": "2023-12-05T19:16:26.000000Z",
-      "updated_at": "2023-12-06T19:21:28.000000Z",
-      "foundation": null
-    },
-    "foundation_id": "0",
-    "auth": true
-  };
+  final dynamic userData;
+  // Cambia el tipo de datos según tus necesidades//TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE.
 
-  Home({super.key, required this.userData,});
+  const Home({
+    super.key,
+    required this.userData,
+  });
 
   @override
   HomeState createState() => HomeState();
@@ -72,25 +53,21 @@ class HomeState extends State<Home> {
             GestureDetector(
               onTap: () {
                 if (widget.userData['foundation_id'] == '0') {
-                  Navigator.of(context)
-                      .pushNamed(AppRoutes.userProfile, arguments: {
-                    'userName': widget.userData['user']['name'],
-                    'foundationId': widget.userData['foundation_id'],
-                  });
+
+                Navigator.of(context).pushNamed(AppRoutes.userProfile, 
+                             arguments: {'userData': widget.userData,
+                             }, );
+
                 } else {
-                  Navigator.of(context).pushNamed(
-                    AppRoutes.ngoProfile,
-                    arguments: {
-                      'foundationId': widget.userData['foundation_id'],
-                      'userName': widget.userData['user']['name'],
-                      'foundationIdClick': widget.userData['foundation_id'],
-                    },
-                  );
+
+                Navigator.of(context).pushNamed(AppRoutes.ngoProfile, 
+                             arguments: {'userData': widget.userData,
+                             'foundationIdClick': widget.userData['foundation_id']}, );
                 }
                 // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
               },
               child: Image.asset(
-                'assets/images/pic_default_user.png',
+                widget.userData['user']['imagen'],
                 width: 21,
                 height: 21,
               ),
@@ -112,20 +89,12 @@ class HomeState extends State<Home> {
                 // Elementos en fila: icono de perfil y título
                 Row(
                   children: [
-                  GestureDetector(
+                    GestureDetector(
                       onTap: () {
-                        print(widget.userData['user']['nombre']);
-                        print(items[index].title);
-                        print(items[index].idfoundation);
+               Navigator.of(context).pushNamed(AppRoutes.ngoProfile, 
+                             arguments: {'userData': widget.userData,
+                             'foundationIdClick': items[index].idfoundation}, );
 
-                        Navigator.of(context).pushNamed(
-                          AppRoutes.ngoProfile,
-                          arguments: {
-                            'foundationId': widget.userData['foundation_id'],
-                            'userName': items[index].title,
-                            'foundationIdClick': items[index].idfoundation,
-                          },
-                        );
                       },
                       child: Image.asset(
                         items[index].profileIcon, // Icono de perfil
