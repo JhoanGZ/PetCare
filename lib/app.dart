@@ -70,7 +70,8 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const Terms());
 
           case AppRoutes.userProfile:
-            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
             return MaterialPageRoute(
@@ -81,7 +82,8 @@ class PetCareApp extends StatelessWidget {
             );
 
           case AppRoutes.userSavedPets:
-            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -121,7 +123,7 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.ngoProfile:
             final Map<String, dynamic> args =
-            settings.arguments as Map<String, dynamic>;
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
             final String foundationIdClick = args['foundationIdClick'];
@@ -136,7 +138,7 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.petProfile:
             final Map<String, dynamic> args =
-            settings.arguments as Map<String, dynamic>;
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -157,7 +159,8 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-            return MaterialPageRoute(builder: (context) => const LogInPage());
+          return MaterialPageRoute(builder: (context) => const LogInPage());
+        
         }
       },
     );
