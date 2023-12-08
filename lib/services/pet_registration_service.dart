@@ -3,7 +3,7 @@ import 'dart:convert';
 
 Map<String, dynamic> _petData = {
   // EJEMPLO DE CÓMO SE VEN LOS DATOS QUE SE ENVÍAN
-// ESTA ES LA ESTRUCTURA Y DATOS QUE DEBEN SER ENVIADOS A LA API.
+// ESTA ES LA ESTRUCTURA Y DATOS QUE DEBEN SER ENVIADOS A LA API..
   'vacunas': 'Vacuna contra la rabia',
   'nombre': 'Firulais',
   'raza': 'Labrador Retriever',
