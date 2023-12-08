@@ -71,7 +71,7 @@ class _BuyMeState extends State<BuyMe> {
                           return 'campo requerido';
                         }
                         donationAmount =
-                            amount; //luigui esta variable contiene el monto
+                            amount; //TODO:luigui esta variable contiene el monto
                         //TODO: aqui sale la varibale con el
                         return null;
                       },
