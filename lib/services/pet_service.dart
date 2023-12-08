@@ -7,17 +7,16 @@ import 'package:petcare_app/config/app_routes.dart';
 
 // Define una función para manejar la lógica de autenticación
 Future<void> petRegistration(
-  GlobalKey<FormState> formKey,
-  File petPhoto,
-  TextEditingController nameController,
-  TextEditingController vaccineController,
-  TextEditingController raceController,
-  TextEditingController weightController,
-  TextEditingController genderController,
-  TextEditingController ageController,
-  TextEditingController descriptionController,
-  BuildContext context
-) async {
+    GlobalKey<FormState> formKey,
+    File petPhoto,
+    TextEditingController nameController,
+    TextEditingController vaccineController,
+    TextEditingController raceController,
+    TextEditingController weightController,
+    TextEditingController genderController,
+    TextEditingController ageController,
+    TextEditingController descriptionController,
+    BuildContext context) async {
   // Verificar que los campos del formulario estén completos
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
@@ -42,7 +41,7 @@ Future<void> petRegistration(
       // Realizar el envío a la API
       final response = await http.post(
         Uri.parse(
-            'http://127.0.0.1:8000/api/login'), //TODO: ::LN:: Asignar Endpoint
+            'http://127.0.0.1:8000/api/pets/index'), //TODO: ::LN:: Asignar Endpoint
         body: {
           'name': name,
           'vaccine': vaccine,
@@ -75,8 +74,10 @@ Future<void> petRegistration(
           print('Error en el registro: ${response.body}');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content:
-                  Text('Error con la conexión.', textAlign: TextAlign.center,),
+              content: Text(
+                'Error con la conexión.',
+                textAlign: TextAlign.center,
+              ),
               duration: Duration(seconds: 3),
             ),
           );
