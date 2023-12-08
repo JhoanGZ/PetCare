@@ -4,8 +4,9 @@ import 'package:petcare_app/design/themes.dart';
 
 class AdoptionRequest extends StatefulWidget {
   final String itemID;
+  final dynamic userData;
 
-  const AdoptionRequest({super.key, required this.itemID});
+  const AdoptionRequest({super.key, required this.itemID, this.userData});
 
   @override
   State<AdoptionRequest> createState() => _AdoptionRequestState();

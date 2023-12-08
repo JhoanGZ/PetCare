@@ -131,6 +131,7 @@ class HomeState extends State<Home> {
                 if (showButtons)
                   Row(
                     children: [
+                      const SizedBox(width: 4,),
                       Container(
                         width: 30,
                         height: 30,
@@ -141,11 +142,14 @@ class HomeState extends State<Home> {
                         child: GestureDetector(
                           child: IconButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          BuyMe(photoPet: items[index].photo)));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             BuyMe(photoPet: items[index].photo)));
+                                                          Navigator.of(context).pushNamed(AppRoutes.buyMe, 
+                             arguments: {'userData': widget.userData,
+                             'photoPet': items[index].photo}, );
                             },
                             icon: Image.asset(
                               'assets/images/icon_donation_home.png',
@@ -210,41 +214,53 @@ class HomeState extends State<Home> {
                         width: 256,
                       ),
 
-                      Container(
-                        width: 30,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PetCareColors
-                              .brandPrimaryColor, // Color de fondo del botón
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            // Acción al presionar el botón
-                          },
-                          icon: Image.asset(
-                            'assets/images/icon_save_home.png',
-                            width: 30,
-                            height: 30,
+                      Expanded(
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: PetCareColors
+                                .brandPrimaryColor, // Color de fondo del botón
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              // Acción al presionar el botón
+                            },
+                            icon: Image.asset(
+                              'assets/images/icon_save_home.png',
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
 
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    items[index].title,
-                    style: PetCareThemes.nameProfileTextStyle,
-                  ),
+                Row(
+                  children: [
+                    const SizedBox(width: 4,),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        items[index].title,
+                        style: PetCareThemes.nameProfileTextStyle,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                // Utilizando el widget ExpandableTextWidget
-                ExpandText(
+                Row(
+                  children: [
+                    const SizedBox(width: 8),
+                                    ExpandText(
                   text: items[index].description,
-                  maxLines: 2,
-                ), // Descripción del elemento
+                  maxLines: 15,
+                ), // D
+                  ],
+                ),
+                // Utilizando el widget ExpandableTextWidget
+
               ],
             ),
           );

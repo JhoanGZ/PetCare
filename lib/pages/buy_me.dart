@@ -4,8 +4,8 @@ import 'package:petcare_app/design/themes.dart';
 
 class BuyMe extends StatefulWidget {
   final String photoPet;
-
-  const BuyMe({super.key, required this.photoPet});
+  final dynamic userData;
+  const BuyMe({super.key, required this.photoPet, this.userData});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -55,6 +55,7 @@ class _BuyMeState extends State<BuyMe> {
                 style: PetCareThemes.statementTextStyle,
               ),
             ),
+            
             Form(
                 key: _formBuyMeKey,
                 child: Column(

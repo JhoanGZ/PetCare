@@ -151,12 +151,27 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());
-
+            
           case AppRoutes.buyMe:
-            String? photoPet = settings.arguments as String?;
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+                settings.arguments as Map<String, dynamic>?;
+
+            final String photoPet =
+                arguments?['photoPet'] ?? '';
 
             return MaterialPageRoute(
-                builder: (context) => BuyMe(photoPet: photoPet ?? ''));
+              builder: (context) => BuyMe(
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userData: arguments?['userData'] ?? 'Invitado',
+                photoPet: photoPet,
+              ),
+            );
+          // case AppRoutes.buyMe:
+          //   String? photoPet = settings.arguments as String?;
+
+          //   return MaterialPageRoute(
+          //       builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
             return MaterialPageRoute(builder: (context) => LogInPage());
