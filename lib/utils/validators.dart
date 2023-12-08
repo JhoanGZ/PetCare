@@ -27,4 +27,9 @@ class ValidatorMailRegister{
   }
 
 }
-
+class ValidatorPassword {
+  static bool isValidPassword(String password) {
+    const minimumLengthPassword = 3;
+    return password.length >= minimumLengthPassword;
+  }
+}

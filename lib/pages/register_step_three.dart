@@ -3,6 +3,7 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/register_data_transfer.dart';
 import 'package:petcare_app/services/registration_service.dart';
+import 'package:petcare_app/utils/validators.dart';
 
 class RegisterStepThree extends StatefulWidget {
   const RegisterStepThree({super.key, required this.storageData});
@@ -53,6 +54,9 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                           if (password == null || password.isEmpty) {
                             return 'Contraseña requerida';
                           }
+                          if (!ValidatorPassword.isValidPassword(password)) {
+                            return 'La contraseña debe tener al menos 3 caracteres';
+                          }
                           return null;
                         },
                         decoration: PetCareInputStyle(labelText: ' Contraseña')
@@ -63,12 +67,14 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                       margin: const EdgeInsets.only(bottom: 14),
                       child: TextFormField(
                         controller: _passwordCheckController,
-                        validator: (address) {
-                          if (address == null || address.isEmpty) {
+                        validator: (passwordCheck) {
+                          if (passwordCheck == null || passwordCheck.isEmpty) {
                             return 'Repetición de Contraseña requerida'; // TODO: Lógica passwordCheck
                           }
-                          if (_passwordController.text !=
-                              _passwordCheckController.text) {
+                          if (!ValidatorPassword.isValidPassword(passwordCheck)) {
+                            return 'La contraseña debe tener al menos 3 caracteres';
+                          }
+                          if (_passwordController.text != _passwordCheckController.text) {
                             return 'Ambas contraseñas deben ser iguales';
                           }
                           return null;
@@ -131,10 +137,8 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                 onPressed: () async {
                   if (_formRegisterStepThreeKey.currentState!.validate()) {
                     widget.storageData.password = _passwordController.text;
-                    widget.storageData.passwordCheck =
-                        _passwordCheckController.text;
-                    widget.storageData.termAcceptance =
-                        _termAcceptanceController.text;
+                    widget.storageData.passwordCheck = _passwordCheckController.text;
+                    widget.storageData.termAcceptance = _termAcceptanceController.text;
                     _formRegisterStepThreeKey.currentState?.save();
                     await registrationService(widget.storageData, context);
                   } else {
