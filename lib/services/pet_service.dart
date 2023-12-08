@@ -54,32 +54,34 @@ Future<void> petRegistration(
         },
       );
 
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        var responseData = jsonDecode(response.body);
+      // Por scaffold no se puede crear una instancia que no se va a usar siempre, mejora el rendimiento.  Se usa microtask
+      Future.microtask(() {
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          var responseData = jsonDecode(response.body);
 
-        print('Respuesta de la API: $responseData');
+          print('Respuesta de la API: $responseData');
 
-        String userData = responseData['user'];
-        bool userAuth = responseData['auth'] == true;
+          String userData = responseData['user'];
+          bool userAuth = responseData['auth'] == true;
 
-        // Navega a la pantalla de inicio y pasa los datos necesarios
-        if (userAuth) {
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(
-            AppRoutes.home,
-            arguments: {userData},
+          // Navega a la pantalla de inicio y pasa los datos necesarios
+          if (userAuth) {
+            Navigator.of(context).pushNamed(
+              AppRoutes.home,
+              arguments: {userData},
+            );
+          }
+        } else {
+          print('Error en el registro: ${response.body}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content:
+                  Text('Error con la conexión.', textAlign: TextAlign.center,),
+              duration: Duration(seconds: 3),
+            ),
           );
         }
-      } else {
-        print('Error en la autenticación: ${response.body}');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content:
-                Text('Error en la autenticación. Verifica tus credenciales.'),
-            duration: Duration(seconds: 3),
-          ),
-        );
-      }
+      });
     } catch (e) {
       print('Error al conectar con la API: $e');
       // ignore: use_build_context_synchronously

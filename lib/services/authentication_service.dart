@@ -24,9 +24,9 @@ Future<void> authenticationLogin(
           'password': password,
         },
       );
-
-      // Verificar la respuesta de la API y manejarla según sea necesario
-      if (response.statusCode >= 200 && response.statusCode < 300) {
+      // Por scaffold no se debe crear una instancia que no se va a usar siempre, mejora el rendimiento. Se usa microtask
+      Future.microtask(() {
+        if (response.statusCode >= 200 && response.statusCode < 300) {
         // La autenticación fue exitosa
         var responseData = jsonDecode(response.body);
 
@@ -53,12 +53,13 @@ Future<void> authenticationLogin(
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content:/*  */
+            content: /*  */
                 Text('Error en la autenticación. Verifica tus credenciales.'),
             duration: Duration(seconds: 3),
           ),
         );
       }
+      });
     } catch (e) {
       // Manejar errores de conexión o de la API
       print('Error al conectar con la API: $e');
