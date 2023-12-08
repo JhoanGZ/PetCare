@@ -36,7 +36,7 @@ Future<void> registrationService(
   print('Masculino: ${data.male}');
   print('Contraseña: ${data.password}');
   print('Repetir Contraseña: ${data.passwordCheck}');
-  print('Aceptación de Términos🥵🍆💧: ${data.termAcceptance}'); //NOTE: BORRAR
+  print('Aceptación de Términos: ${data.termAcceptance}'); //NOTE: BORRAR
 
   gender = male == 'false' ? '1' : '0';
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/utils/validators.dart';
 
 class RetrievePass extends StatefulWidget {
   const RetrievePass({super.key});
@@ -65,6 +66,9 @@ class RetrievePassState extends State<RetrievePass> {
                     validator: (email) {
                       if (email == null || email.isEmpty) {
                         return 'Campo requerido';
+                      }
+                      if (!ValidatorMailRegister.isValidEmail(email)) {
+                        return 'Ingrese un correo valido';
                       }
                       mail = email;
                       return null;

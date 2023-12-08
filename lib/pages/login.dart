@@ -27,7 +27,7 @@ class LogInPage extends StatefulWidget {
       "updated_at": "2023-12-06T19:21:28.000000Z",
       "foundation": null
     },
-    "foundation_id": "1",
+    "foundation_id": "0",
     "auth": true
   };
   LogInPage({super.key});

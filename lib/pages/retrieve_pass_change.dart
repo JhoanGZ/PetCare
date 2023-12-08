@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/utils/validators.dart';
 
 class RetrievePassChange extends StatefulWidget {
   const RetrievePassChange({super.key});
@@ -71,6 +72,9 @@ class _RetrievePassChangeState extends State<RetrievePassChange> {
                                 firstPassword.isEmpty) {
                               return 'Campo requerido';
                             }
+                            if (!ValidatorPassword.isValidPassword(firstPassword)) {
+                              return 'La contraseña debe tener al menos 6 carácteres';
+                            }
                             password = firstPassword;
                             return null;
                           },
@@ -92,6 +96,9 @@ class _RetrievePassChangeState extends State<RetrievePassChange> {
                             passwordRepeat = passwordTwo;
                             if (password != passwordRepeat) {
                               return 'La contraseña no coincide';
+                            }
+                            if (!ValidatorPassword.isValidPassword(passwordTwo)) {
+                              return 'La contraseña debe tener al menos 6 carácteres';
                             }
                             return null;
                           },

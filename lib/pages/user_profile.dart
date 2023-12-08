@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
+import 'package:petcare_app/utils/validators.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
-
 class UserProfile extends StatefulWidget {
-    final dynamic userData;
-  const UserProfile({super.key, this.userData,});
+  final dynamic userData;
+  const UserProfile({
+    super.key,
+    this.userData,
+  });
 
   @override
   State<UserProfile> createState() => _UserProfileState();
@@ -18,11 +21,9 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   final _formUserProfileKey = GlobalKey<FormState>();
 
-
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -31,13 +32,16 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         title: Row(
           children: [
-            const SizedBox(width: 250,),
+            const SizedBox(
+              width: 250,
+            ),
             Container(
               width: 30,
               height: 30,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: PetCareColors.brandPrimaryColor, // Color de fondo del botón
+                color:
+                    PetCareColors.brandPrimaryColor, // Color de fondo del botón
               ),
               child: IconButton(
                 onPressed: () {
@@ -47,9 +51,10 @@ class _UserProfileState extends State<UserProfile> {
                   //   'userName': widget.userName,
                   // }
                   // );
-                  Navigator.of(context)
-                            .pushReplacementNamed(AppRoutes.userSavedPets, 
-                             arguments: {'userData': widget.userData}, );
+                  Navigator.of(context).pushReplacementNamed(
+                    AppRoutes.userSavedPets,
+                    arguments: {'userData': widget.userData},
+                  );
                   // Acción al presionar el botón
                 },
                 icon: Image.asset(
@@ -85,8 +90,7 @@ class _UserProfileState extends State<UserProfile> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SetPhotoScreen(
-                      onPhotoSelected: (File? photo) {
-                      },
+                      onPhotoSelected: (File? photo) {},
                     ),
                   ),
                 );
@@ -124,9 +128,8 @@ class _UserProfileState extends State<UserProfile> {
                           }
                           return null;
                         },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Nombre')
-                                .regularInput,
+                        decoration: PetCareInputStyle(labelText: ' Nombre')
+                            .regularInput,
                       ),
                     ),
                     Container(
@@ -139,42 +142,42 @@ class _UserProfileState extends State<UserProfile> {
                           return null;
                         },
                         obscureText: true,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Apellido').regularInput,
-                      ),
-
-                      
-                    ),
-                    Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 26),
-              child: ElevatedButton(
-                onPressed: () async {
-              Navigator.of(context).pushNamed(AppRoutes.retrievePassChange);
-
-                },
-                style: PetCareButtonStyles.elevatedButtonStyle,
-                child: const Text('Cambiar contraseña'),
-              ),
-            ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 14),
-                      child: TextFormField(
-         
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Campo requerido';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                        decoration: PetCareInputStyle(labelText: ' Correo electrónico')
+                        decoration: PetCareInputStyle(labelText: ' Apellido')
                             .regularInput,
                       ),
                     ),
                     Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 26),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.retrievePassChange);
+                        },
+                        style: PetCareButtonStyles.elevatedButtonStyle,
+                        child: const Text('Cambiar contraseña'),
+                      ),
+                    ),
+                    Container(
                       margin: const EdgeInsets.only(bottom: 14),
                       child: TextFormField(
-                 
+                        validator: (email) {
+                          if (email == null || email.isEmpty) {
+                            return 'Campo requerido';
+                          }
+                          if (!ValidatorMailRegister.isValidEmail(email)) {
+                            return 'Ingrese un correo valido';
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        decoration:
+                            PetCareInputStyle(labelText: ' Correo electrónico')
+                                .regularInput,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      child: TextFormField(
                         validator: (phone) {
                           if (phone == null || phone.isEmpty) {
                             return 'Campo requerido';
@@ -194,27 +197,25 @@ class _UserProfileState extends State<UserProfile> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-
-                  if(_formUserProfileKey.currentState!.validate()){
-showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Guardado ✅'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cerrar'),
-                          ), 
-                        ],
-                      );
-                    },
-                  );
-
+                  if (_formUserProfileKey.currentState!.validate()) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Guardado ✅'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cerrar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
-                 
+
                   // await registrationService(
                   //   _formUserProfileKey,
                   //   _nameController,
@@ -235,4 +236,3 @@ showDialog(
     );
   }
 }
-
