@@ -26,7 +26,7 @@ class PetCareThemes {
     fontSize: 15, //tamaño de la fuente
     color: PetCareColors.brandShadowColor,
   );
-    static const TextStyle statementItalicTextStyle = TextStyle(
+  static const TextStyle statementItalicTextStyle = TextStyle(
     //esta atributo es usado para los enunciados en itálico
     fontFamily: 'Inter', //esto se utiliza para recoger los fonts importados
     fontWeight: FontWeight.w500, // esto es el ancho de la linea
@@ -62,7 +62,7 @@ class PetCareThemes {
     fontSize: 24,
     color: PetCareColors.brandShadowColor,
   );
-    static const TextStyle whiteRegularTextStyle = TextStyle(
+  static const TextStyle whiteRegularTextStyle = TextStyle(
     //esta atributo es usado para los textos en blanco
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400, // FontWeight para inter-regular
@@ -94,7 +94,7 @@ class PetCareThemes {
 // =====================================================iNPUTS===========================================================
 class PetCareInputStyle {
   final String labelText;
-  
+
   PetCareInputStyle({required this.labelText});
 
   InputDecoration get regularInput {
@@ -120,7 +120,9 @@ class PetCareInputStyle {
           color: PetCareColors.brandShadowColor,
           fontFamily: 'Inter'),
       contentPadding: const EdgeInsets.symmetric(
-          vertical: 10.0, horizontal: 16), // Ajusta la altura del espacio interno, tanto horizontal y vertical.
+          vertical: 10.0,
+          horizontal:
+              16), // Ajusta la altura del espacio interno, tanto horizontal y vertical.
     );
   }
 }
@@ -142,7 +144,7 @@ class PetCareButtonStyles {
 
 class PetCareLittleButtonStyles {
   static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
-       //alto y ancho del boton
+      //alto y ancho del boton
       backgroundColor:
           PetCareColors.brandPrimaryColor, // Color de fondo del botón
       foregroundColor: Colors.white, // Color del texto del botón
@@ -156,7 +158,7 @@ class PetCareLittleButtonStyles {
 //=====================================================APPBAR USER=======================================================
 //===================================================== COLOR ANIMATION CHECKBOX ========================================
 
-class PetCareAnimationColor{
+class PetCareAnimationColor {
   static dynamic customAnimationColor = Colors.orange;
 
   static ThemeData get customAnimationColorTheme {
@@ -168,7 +170,7 @@ class PetCareAnimationColor{
               return null;
             }
             if (states.contains(MaterialState.selected)) {
-              return Colors.orange;
+              return PetCareColors.brandPrimaryColor;
             }
             return null;
           },
@@ -181,7 +183,7 @@ class PetCareAnimationColor{
               return null;
             }
             if (states.contains(MaterialState.selected)) {
-              return Colors.orange;
+              return PetCareColors.brandPrimaryColor;
             }
             return null;
           },
@@ -194,7 +196,7 @@ class PetCareAnimationColor{
               return null;
             }
             if (states.contains(MaterialState.selected)) {
-              return Colors.orange;
+              return PetCareColors.brandPrimaryColor;
             }
             return null;
           },
@@ -202,10 +204,10 @@ class PetCareAnimationColor{
         trackColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return null;  
+              return null;
             }
             if (states.contains(MaterialState.selected)) {
-              return Colors.orange;
+              return PetCareColors.brandPrimaryColor;
             }
             return null;
           },

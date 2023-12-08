@@ -6,6 +6,7 @@ import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/pet_service.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
+import 'package:petcare_app/widgets/droplists.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
 
 class PetProfile extends StatefulWidget {
@@ -25,7 +26,9 @@ class _PetProfileState extends State<PetProfile> {
   late TextEditingController _vaccineController;
   late TextEditingController _raceController;
   late TextEditingController _weightController;
+  late TextEditingController _chipController;
   late TextEditingController _genderController;
+  late TextEditingController _sterilizationController;
   late TextEditingController _ageController;
   late TextEditingController _descriptionController;
   late String userName;
@@ -38,7 +41,9 @@ class _PetProfileState extends State<PetProfile> {
     _nameController = TextEditingController();
     _vaccineController = TextEditingController();
     _raceController = TextEditingController();
+    _chipController = TextEditingController();
     _weightController = TextEditingController();
+    _sterilizationController = TextEditingController();
     _genderController = TextEditingController();
     _ageController = TextEditingController();
     _descriptionController = TextEditingController();
@@ -155,11 +160,10 @@ class _PetProfileState extends State<PetProfile> {
                       margin: const EdgeInsets.only(bottom: 0),
                       child: TextFormField(
                         controller: _nameController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
+                        validator: (name) {
+                          if (name == null || name.isEmpty) {
                             return 'Campo requerido';
                           }
-                          userName = email;
                           return null;
                         },
                         decoration: PetCareInputStyle(labelText: ' Nombre')
@@ -173,11 +177,10 @@ class _PetProfileState extends State<PetProfile> {
                       margin: const EdgeInsets.only(bottom: 0),
                       child: TextFormField(
                         controller: _vaccineController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
+                        validator: (vaccinne) {
+                          if (vaccinne == null || vaccinne.isEmpty) {
                             return 'Campo requerido';
                           }
-                          userName = email;
                           return null;
                         },
                         decoration: PetCareInputStyle(labelText: ' Vacunas')
@@ -191,11 +194,10 @@ class _PetProfileState extends State<PetProfile> {
                       margin: const EdgeInsets.only(bottom: 0),
                       child: TextFormField(
                         controller: _raceController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
+                        validator: (race) {
+                          if (race == null || race.isEmpty) {
                             return 'Campo requerido';
                           }
-                          userName = email;
                           return null;
                         },
                         decoration:
@@ -209,57 +211,73 @@ class _PetProfileState extends State<PetProfile> {
                       margin: const EdgeInsets.only(bottom: 0),
                       child: TextFormField(
                         controller: _weightController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
+                        validator: (weight) {
+                          if (weight == null || weight.isEmpty) {
                             return 'Campo requerido';
                           }
-                          userName = email;
                           return null;
                         },
+                        keyboardType: TextInputType.number,
                         decoration:
-                            PetCareInputStyle(labelText: ' Peso').regularInput,
+                            PetCareInputStyle(labelText: ' Peso, entregar en (Kgs)').regularInput,
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    PetCareCheckBox(
-                      initialValue:
-                          true, // Establecer el valor inicial si es necesario
-                      labelText: 'Chip', // Texto que se adjunta al checkbox
-                      onChanged: (value) {
-                        // Hacer algo cuando el valor del checkbox cambie :Logic
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 0),
-                      child: TextFormField(
-                        controller: _genderController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Campo requerido';
-                          }
-                          userName = email;
-                          return null;
-                        },
-                        decoration:
-                            PetCareInputStyle(labelText: ' Sexo').regularInput,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Theme(
+                        data: PetCareAnimationColor.customAnimationColorTheme,
+                        child: Row(
+                          children: <Widget>[
+                            Checkbox(
+                              value:
+                                  _chipController.text.toLowerCase() == 'true',
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _chipController.text = value.toString();
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                                width:
+                                    8.0), // Ajusta este valor según tu necesidad
+                            const Text('Chip', style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    const SizedBox(height: 20),
+                    DropListWidget(
+                      controller: _genderController,
+                      labelText: ' Sexo',
                     ),
-                    PetCareCheckBox(
-                      initialValue:
-                          true, // Establecer el valor inicial si es necesario
-                      labelText:
-                          'Esterilizacion', // Texto que se adjunta al checkbox
-                      onChanged: (value) {
-                        // Hacer algo cuando el valor del checkbox cambie :Logic
-                      },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Theme(
+                        data: PetCareAnimationColor.customAnimationColorTheme,
+                        child: Row(
+                          children: <Widget>[
+                            Checkbox(
+                              value:
+                                  _sterilizationController.text.toLowerCase() ==
+                                      'true',
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _sterilizationController.text =
+                                      value.toString();
+                                });
+                                if (value == false) {
+                                  _sterilizationController.text = 'false';
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                                width:
+                                    8.0), // Ajusta este valor según tu necesidad
+                            const Text('Esterilización',
+                                style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 15,
@@ -268,15 +286,15 @@ class _PetProfileState extends State<PetProfile> {
                       margin: const EdgeInsets.only(bottom: 0),
                       child: TextFormField(
                         controller: _ageController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
+                        validator: (age) {
+                          if (age == null || age.isEmpty) {
                             return 'Campo requerido';
                           }
-                          userName = email;
                           return null;
                         },
+                        keyboardType: TextInputType.number,
                         decoration:
-                            PetCareInputStyle(labelText: ' Edad').regularInput,
+                            PetCareInputStyle(labelText: ' Edad, menor a un año, dejar en 0').regularInput,
                       ),
                     ),
                     const SizedBox(
@@ -287,14 +305,13 @@ class _PetProfileState extends State<PetProfile> {
                       child: TextFormField(
                         maxLines: 5, // Número de líneas para el área de texto
                         controller: _descriptionController,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return 'Campo requerido';
+                        validator: (description) {
+                          if (description == null || description.isEmpty) {
+                            return 'Se debe ingresar una breve descripción';
                           }
-                          userName = email;
                           return null;
                         },
-                        decoration: PetCareInputStyle(labelText: ' Decripcion')
+                        decoration: PetCareInputStyle(labelText: ' Descripción')
                             .regularInput,
                       ),
                     ),
@@ -312,19 +329,23 @@ class _PetProfileState extends State<PetProfile> {
                         _nameController,
                         _vaccineController,
                         _raceController,
+                        _chipController,
                         _weightController,
+                        _sterilizationController,
                         _genderController,
                         _ageController,
                         _descriptionController,
                         context,
                       );
+
+                      Future.microtask(() {
+                        Navigator.of(context)
+                            .popAndPushNamed(AppRoutes.ngoProfile, arguments: {
+                          'userData': widget.userData,
+                          'foundationIdClick': widget.userData['foundation_id']
+                        });
+                      });
                     }
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context)
-                        .popAndPushNamed(AppRoutes.ngoProfile, arguments: {
-                      'userData': widget.userData,
-                      'foundationIdClick': widget.userData['foundation_id']
-                    });
                   },
                   style: PetCareButtonStyles.elevatedButtonStyle,
                   child: const Text('Publicar'),

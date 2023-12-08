@@ -4,7 +4,6 @@ import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
 import 'package:petcare_app/pages/adoption_request.dart';
-import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 // ignore: must_be_immutable
