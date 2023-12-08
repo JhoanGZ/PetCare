@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/authentication_service.dart';
-import 'package:petcare_app/utils/validators_register.dart';
+import 'package:petcare_app/utils/validators.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 
 // ignore: must_be_immutable

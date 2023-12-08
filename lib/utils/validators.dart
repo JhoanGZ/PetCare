@@ -1,6 +1,5 @@
 // validators_register.dart
 
-
 class ValidatorsRutRegister {
 
   //Validador Rut
@@ -27,7 +26,9 @@ class ValidatorMailRegister{
   }
 
 }
+  //Validador Contraseña length
 class ValidatorPassword {
+
   static bool isValidPassword(String password) {
     const minimumLengthPassword = 3;
     return password.length >= minimumLengthPassword;
