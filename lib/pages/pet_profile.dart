@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/pet_service.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
+import 'package:petcare_app/widgets/up_load_image.dart';
 
 class PetProfile extends StatefulWidget {
   final dynamic userData;
-  const PetProfile(
-      {super.key, required this.userData, });
+  const PetProfile({
+    super.key,
+    required this.userData,
+  });
 
   @override
   State<PetProfile> createState() => _PetProfileState();
@@ -24,6 +29,8 @@ class _PetProfileState extends State<PetProfile> {
   late TextEditingController _ageController;
   late TextEditingController _descriptionController;
   late String userName;
+  File? _image;
+  late File petPhoto;
 
   @override
   void initState() {
@@ -35,6 +42,7 @@ class _PetProfileState extends State<PetProfile> {
     _genderController = TextEditingController();
     _ageController = TextEditingController();
     _descriptionController = TextEditingController();
+    petPhoto = File('assets/images/avatar_pet_default.png');
   }
 
   @override
@@ -78,10 +86,64 @@ class _PetProfileState extends State<PetProfile> {
                     // Hacer algo cuando el valor del checkbox cambie :Logic
                   },
                 ),
-                Image.asset(
-                  'assets/images/Bruno.jpg',
-                  width: double.infinity, // Ancho completo
-                  height: 300, // Alto deseado
+                GestureDetector(
+                  onTap: () async {
+                    // ignore: unused_local_variable
+                    File? selectedImage = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SetPhotoScreen(
+                          onPhotoSelected: (File? photo) {
+                            setState(() {
+                              _image = photo;
+                              // if (_image != null) {
+                              //   petPhoto = _image!;
+                              // }
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                    if (selectedImage != null) {
+                      petPhoto = selectedImage;
+                    }
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 1, right: 5),
+                        child: SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                70), //WARNING: Siempre h+w/4.5. Sino OverFlow
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 150,
+                                  height: 150,
+                                  color: Colors.grey.shade200,
+                                  child: _image != null
+                                      ? Image.file(_image!, fit: BoxFit.cover)
+                                      : Image.asset(
+                                          'assets/images/avatar_pet_default.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
+                                // if (_image != null)
+                                //   CircleAvatar(
+                                //     backgroundImage: FileImage(_image!),
+                                //     radius: 90.0,
+                                //   ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Form(
                   key: _formPetProfileStateKey,
@@ -246,6 +308,7 @@ class _PetProfileState extends State<PetProfile> {
                     if (_formPetProfileStateKey.currentState!.validate()) {
                       await petRegistration(
                         _formPetProfileStateKey,
+                        petPhoto,
                         _nameController,
                         _vaccineController,
                         _raceController,
@@ -256,6 +319,12 @@ class _PetProfileState extends State<PetProfile> {
                         context,
                       );
                     }
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context)
+                        .popAndPushNamed(AppRoutes.ngoProfile, arguments: {
+                      'userData': widget.userData,
+                      'foundationIdClick': widget.userData['foundation_id']
+                    });
                   },
                   style: PetCareButtonStyles.elevatedButtonStyle,
                   child: const Text('Publicar'),

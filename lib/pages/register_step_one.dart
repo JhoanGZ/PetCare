@@ -77,8 +77,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   ),
                 );
                 if (selectedImage != null) {
-                  widget.storageData.photo =
-                      selectedImage as String; //NOTE: verificar sino .toString(), pero funcional;
+                  widget.storageData.photo = selectedImage
+                      as String; //NOTE: verificar sino .toString(), pero funcional;
                 }
               },
               child: Column(
@@ -105,11 +105,12 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                                       fit: BoxFit.cover,
                                     ),
                             ),
-                            if (_image != null)
-                              CircleAvatar(
-                                backgroundImage: FileImage(_image!),
-                                radius: 90.0,
-                              ),
+                            //NOTE: Testear sin el, dar deadline
+                            // if (_image != null)
+                            //   CircleAvatar(
+                            //     backgroundImage: FileImage(_image!),
+                            //     radius: 90.0,
+                            //   ),
                           ],
                         ),
                       ),
@@ -213,7 +214,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             RegisterStepTwo(storageData: widget.storageData),
                       ),
                     );
-                  } 
+                  }
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('->'),

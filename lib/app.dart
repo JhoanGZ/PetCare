@@ -123,19 +123,19 @@ class PetCareApp extends StatelessWidget {
 
 
           case AppRoutes.ngoProfile:
-  // Asegurarse `settings.arguments` es un Map<String, dynamic>
-              Map<String, dynamic>? arguments =
-              settings.arguments as Map<String, dynamic>?;
+          // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+            settings.arguments as Map<String, dynamic>?;
 
-              final String foundationIdClick = arguments?['foundationIdClick'] ?? '';
+            final String foundationIdClick = arguments?['foundationIdClick'] ?? '';
 
-           return MaterialPageRoute(
+            return MaterialPageRoute(
               builder: (context) => NgoProfile(
-      // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
-             userData: arguments?['userData'] ?? 'Invitado',
-              foundationIdClick: foundationIdClick,
-    ),
-  );
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userData: arguments?['userData'] ?? 'Invitado',
+                foundationIdClick: foundationIdClick,
+              ),
+            );
 
           // case AppRoutes.petProfile:
           //   final Map<String, dynamic> args =

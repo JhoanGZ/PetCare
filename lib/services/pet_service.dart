@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,6 +8,7 @@ import 'package:petcare_app/config/app_routes.dart';
 // Define una función para manejar la lógica de autenticación
 Future<void> petRegistration(
   GlobalKey<FormState> formKey,
+  File petPhoto,
   TextEditingController nameController,
   TextEditingController vaccineController,
   TextEditingController raceController,
@@ -13,8 +16,19 @@ Future<void> petRegistration(
   TextEditingController genderController,
   TextEditingController ageController,
   TextEditingController descriptionController,
-  BuildContext context,
+  BuildContext context
 ) async {
+  // Verificar que los campos del formulario estén completos
+  print('Datos recibidos en petRegistration:');
+  print('Pet Photo: ${petPhoto.path}');
+  print('Name: ${nameController.text}');
+  print('Vaccine: ${vaccineController.text}');
+  print('Race: ${raceController.text}');
+  print('Weight: ${weightController.text}');
+  print('Gender: ${genderController.text}');
+  print('Age: ${ageController.text}');
+  print('Description: ${descriptionController.text}');
+
   if (formKey.currentState!.validate()) {
     // Datos del usuario del formulario usando controladores
     String name = nameController.text; 
