@@ -7,16 +7,17 @@ import 'package:petcare_app/config/app_routes.dart';
 
 // Define una función para manejar la lógica de autenticación
 Future<void> petRegistration(
-    GlobalKey<FormState> formKey,
-    File petPhoto,
-    TextEditingController nameController,
-    TextEditingController vaccineController,
-    TextEditingController raceController,
-    TextEditingController weightController,
-    TextEditingController genderController,
-    TextEditingController ageController,
-    TextEditingController descriptionController,
-    BuildContext context) async {
+  GlobalKey<FormState> formKey,
+  File petPhoto,
+  TextEditingController nameController,
+  TextEditingController vaccineController,
+  TextEditingController raceController,
+  TextEditingController weightController,
+  TextEditingController genderController,
+  TextEditingController ageController,
+  TextEditingController descriptionController,
+  BuildContext context
+) async {
   // Verificar que los campos del formulario estén completos
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
