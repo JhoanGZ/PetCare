@@ -115,8 +115,8 @@ class _LogInPageState extends State<LogInPage> {
                             if (password == null || password.isEmpty) {
                               return 'Contraseña requerida';
                             }
-                            if (password.length < 6) {
-                              return 'Contraseña invalida';
+                            if (!ValidatorPassword.isValidPassword(password)) {
+                              return 'La contraseña debe tener al menos 6 caracteres';
                             }
                             return null;
                           },

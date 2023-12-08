@@ -55,7 +55,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                             return 'Contraseña requerida';
                           }
                           if (!ValidatorPassword.isValidPassword(password)) {
-                            return 'La contraseña debe tener al menos 3 caracteres';
+                            return 'La contraseña debe tener al menos 6 caracteres';
                           }
                           return null;
                         },
