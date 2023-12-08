@@ -69,7 +69,7 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.terms:
             return MaterialPageRoute(builder: (context) => const Terms());
 
-            case AppRoutes.userProfile:
+          case AppRoutes.userProfile:
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
@@ -121,7 +121,6 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (context) => const DonationConfirm());
 
-
           case AppRoutes.ngoProfile:
           // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
@@ -137,19 +136,7 @@ class PetCareApp extends StatelessWidget {
               ),
             );
 
-          // case AppRoutes.petProfile:
-          //   final Map<String, dynamic> args =
-          //       settings.arguments as Map<String, dynamic>;
-          //   final String foundationId = args['foundationId'];
-          //   final String userName = args['userName'];
-
-          //   return MaterialPageRoute(
-          //     builder: (context) => PetProfile(
-          //       foundationId: foundationId,
-          //       userName: userName,
-          //     ),
-          //   );
-            case AppRoutes.petProfile:
+          case AppRoutes.petProfile:
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
@@ -163,16 +150,30 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());
-
+            
           case AppRoutes.buyMe:
-            String? photoPet = settings.arguments as String?;
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+                settings.arguments as Map<String, dynamic>?;
+
+            final String photoPet =
+                arguments?['photoPet'] ?? '';
 
             return MaterialPageRoute(
-                builder: (context) => BuyMe(photoPet: photoPet ?? ''));
+              builder: (context) => BuyMe(
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userData: arguments?['userData'] ?? 'Invitado',
+                photoPet: photoPet,
+              ),
+            );
+          // case AppRoutes.buyMe:
+          //   String? photoPet = settings.arguments as String?;
+
+          //   return MaterialPageRoute(
+          //       builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-          return MaterialPageRoute(builder: (context) => LogInPage());
-        
+            return MaterialPageRoute(builder: (context) => LogInPage());
         }
       },
     );

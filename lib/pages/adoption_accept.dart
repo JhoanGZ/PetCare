@@ -51,50 +51,48 @@ class _AdoptionAcceptState extends State<AdoptionAccept> {
               ),
             ),
             Center(
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 50,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 50,
+                  ),
+                  Image.asset(
+                    'assets/images/icon_pdf.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      print('todo bien');
+                      //TODO: aqui se debe descargar pdf
+                      //logica del text buton Logic:
+                    },
+                    child: const Text(
+                      'Formulario_de_adopción.pdf',
+                      style: PetCareThemes.linkTextStyle,
                     ),
-                    Image.asset(
-                      'assets/images/icon_pdf.png',
-                      width: 30,
-                      height: 30,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        print('todo bien');
-                        //TODO: aqui se debe descargar pdf
-                        //logica del text buton Logic:
-                      },
-                      child: const Text(
-                        'Formulario_de_adopción.pdf',
-                        style: PetCareThemes.linkTextStyle,
-                      ),
-                    ),
-                    
-                  ],
-                ),
-                
+                  ),
+                ],
               ),
-const SizedBox(height: 200,),
-                Image.asset(
-                  'assets/images/perro_adorno.png',
-                  width: 200,
-                  height: 100,
-                ),
-                const SizedBox(height: 20,),
-              const MyButtonsRow(),
+            ),
+            const SizedBox(
+              height: 200,
+            ),
+            Image.asset(
+              'assets/images/perro_adorno.png',
+              width: 200,
+              height: 100,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const MyButtonsRow(),
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
 
 class MyButtonsRow extends StatelessWidget {
   const MyButtonsRow({super.key});
@@ -105,7 +103,6 @@ class MyButtonsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(
-          
           onPressed: () {
             _showConfirmationDialog(context, 'Rechazar');
           },
@@ -113,9 +110,9 @@ class MyButtonsRow extends StatelessWidget {
             foregroundColor: Colors.white,
             // ignore: deprecated_member_use
             primary: Colors.red,
-            shape:  RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10), // Radio de los bordes
-    ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10), // Radio de los bordes
+            ),
           ),
           child: const Text('Rechazar'),
         ),
@@ -127,18 +124,15 @@ class MyButtonsRow extends StatelessWidget {
             foregroundColor: Colors.white,
             // ignore: deprecated_member_use
             primary: Colors.green,
-            shape:  RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-               ),
+            ),
           ),
           child: const Text('Aceptar'),
         ),
       ],
     );
   }
-
-
-
 
   void _showConfirmationDialog(BuildContext context, String action) {
     showDialog(

@@ -3,7 +3,8 @@ import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart';
 
 class UserSavedPets extends StatefulWidget {
-  const UserSavedPets({super.key, required this.foundationId, required this.userName});
+  const UserSavedPets(
+      {super.key, required this.foundationId, required this.userName});
   final String foundationId;
   final String userName;
 
@@ -84,8 +85,8 @@ class UserSavedPetsState extends State<UserSavedPets> {
                 child: TextFormField(
                   controller: _searchController,
                   textAlign: TextAlign.right,
-                  
-                  decoration: PetCareInputStyle(labelText: ' Buscar').regularInput,
+                  decoration:
+                      PetCareInputStyle(labelText: ' Buscar').regularInput,
                 ),
               ),
             ],

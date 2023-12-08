@@ -4,8 +4,8 @@ import 'package:petcare_app/design/themes.dart';
 
 class BuyMe extends StatefulWidget {
   final String photoPet;
-
-  const BuyMe({super.key, required this.photoPet});
+  final dynamic userData;
+  const BuyMe({super.key, required this.photoPet, this.userData});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -28,7 +28,8 @@ class _BuyMeState extends State<BuyMe> {
       photoPet = 'assets/images/logo_petcare.png';
     } else {
       photoPet = widget.photoPet;
-      statement = '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
+      statement =
+          '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
     }
   }
 
@@ -54,6 +55,7 @@ class _BuyMeState extends State<BuyMe> {
                 style: PetCareThemes.statementTextStyle,
               ),
             ),
+            
             Form(
                 key: _formBuyMeKey,
                 child: Column(
@@ -83,21 +85,21 @@ class _BuyMeState extends State<BuyMe> {
                           if (_formBuyMeKey.currentState!.validate()) {
                             // ignore: avoid_print
                             showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Donación Enviada ✅'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Cerrar'),
-                          ), 
-                        ],
-                      );
-                    },
-                  );
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Donación Enviada ✅'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cerrar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                             //luego cambiar pushNamed por pushReplacementNamed para evitar volver
                           }
                           //Acción al presionar el botón

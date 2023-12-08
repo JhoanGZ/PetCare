@@ -82,16 +82,17 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
         bool userAuth = responseData['auth'] == true;
 
         // Navega a la pantalla de inicio y pasa los datos necesarios
-        if (userAuth) {print('LOGIN EXITOSO');
-          Navigator.of(context).pushNamed(AppRoutes.home, arguments: {userName, userToken});
+        if (userAuth) {
+          print('LOGIN EXITOSO');
+          Navigator.of(context)
+              .pushNamed(AppRoutes.home, arguments: {userName, userToken});
         }
       } else {
         // El registro falló
         print('Error en la autenticación: ${response.body}');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content:
-                Text('Error en el registro. Verificar conexión.'),
+            content: Text('Error en el registro. Verificar conexión.'),
             duration: Duration(seconds: 3),
           ),
         );
@@ -102,7 +103,9 @@ Future<void> registrationService(DataRegistrationTransfer data, BuildContext con
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.', textAlign: TextAlign.center,),
+            'Error al conectar con la API. Por favor, inténtalo de nuevo.',
+            textAlign: TextAlign.center,
+          ),
           duration: Duration(seconds: 3),
         ),
       );

@@ -37,7 +37,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
       },
     );
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +108,12 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           labelText: 'Fecha de Nacimiento',
                         ).regularInput,
                         onTap: () async {
-                          DateTime? pickedDate = await DateFormatter.selectDate(context);
+                          DateTime? pickedDate =
+                              await DateFormatter.selectDate(context);
                           if (pickedDate != null) {
                             setState(() {
-                              _dateBirthController.text = DateFormatter.formatDate(pickedDate);
+                              _dateBirthController.text =
+                                  DateFormatter.formatDate(pickedDate);
                             });
                           }
                         },
@@ -187,18 +188,30 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                 // key: const Key('button_register_step_two'),
                 onPressed: () async {
                   // COMMENT: Se comenta código de validación por implementación
-                  if(_formRegisterStepTwoKey.currentState!.validate() && isMale || isFemale){
+                  if (_formRegisterStepTwoKey.currentState!.validate() &&
+                          isMale ||
+                      isFemale) {
                     widget.storageData.address = _addressController.text;
                     widget.storageData.phone = _phoneController.text;
                     widget.storageData.dateBirth = _dateBirthController.text;
                     widget.storageData.female = isFemale.toString();
                     widget.storageData.male = isMale.toString();
 
-                    Navigator.push( context, MaterialPageRoute(builder: (context) =>  RegisterStepThree(storageData: widget.storageData),),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            RegisterStepThree(storageData: widget.storageData),
+                      ),
                     );
-                  }  else {
+                  } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar( content: Text('Seleccione una opción de género 🐶! ', textAlign: TextAlign.center,),),
+                      const SnackBar(
+                        content: Text(
+                          'Seleccione una opción de género 🐶! ',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     );
                   }
                 },

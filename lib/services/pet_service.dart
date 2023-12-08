@@ -31,25 +31,26 @@ Future<void> petRegistration(
 
   if (formKey.currentState!.validate()) {
     // Datos del usuario del formulario usando controladores
-    String name = nameController.text; 
-    String vaccine = vaccineController.text;  
-    String race = raceController.text;  
-    String weight = weightController.text;  
-    String gender = genderController.text;  
-    String age = ageController.text;  
-    String description = descriptionController.text; 
+    String name = nameController.text;
+    String vaccine = vaccineController.text;
+    String race = raceController.text;
+    String weight = weightController.text;
+    String gender = genderController.text;
+    String age = ageController.text;
+    String description = descriptionController.text;
     try {
       // Realizar el envío a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/login'), //TODO: ::LN:: Asignar Endpoint
+        Uri.parse(
+            'http://127.0.0.1:8000/api/login'), //TODO: ::LN:: Asignar Endpoint
         body: {
-          'name' : name, 
-          'vaccine' : vaccine,  
-          'race' : race,  
-          'weight' : weight,  
-          'gender' : gender,  
-          'age' : age,  
-          'description' : description, 
+          'name': name,
+          'vaccine': vaccine,
+          'race': race,
+          'weight': weight,
+          'gender': gender,
+          'age': age,
+          'description': description,
         },
       );
 

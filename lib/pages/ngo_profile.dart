@@ -8,7 +8,8 @@ import 'package:petcare_app/widgets/expandable_text.dart';
 class NgoProfile extends StatefulWidget {
   final dynamic userData;
   final String foundationIdClick;
-  const NgoProfile({super.key, required this.userData, required this.foundationIdClick});
+  const NgoProfile(
+      {super.key, required this.userData, required this.foundationIdClick});
 
   @override
   NgoProfileState createState() => NgoProfileState();
@@ -43,7 +44,8 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.userData['foundation_id'] != '0' && widget.userData['foundation_id'] == widget.foundationIdClick;
+    bool showButtons = widget.userData['foundation_id'] != '0' &&
+        widget.userData['foundation_id'] == widget.foundationIdClick;
 
     return Scaffold(
       appBar: AppBar(
@@ -166,16 +168,18 @@ class NgoProfileState extends State<NgoProfile> {
                   margin: const EdgeInsets.only(top: 20, bottom: 20, left: 14),
                   child: ElevatedButton(
                     onPressed: () {
-
-                          // Navigator.of(context).pushNamed(
-                          // AppRoutes.petProfile,
-                          // arguments: {
-                          //   'foundationId': widget.userData,
-                          // },
-                        // );
-                                       Navigator.of(context).pushNamed(AppRoutes.petProfile, 
-                             arguments: {'userData': widget.userData,
-                             }, );
+                      // Navigator.of(context).pushNamed(
+                      // AppRoutes.petProfile,
+                      // arguments: {
+                      //   'foundationId': widget.userData,
+                      // },
+                      // );
+                      Navigator.of(context).pushNamed(
+                        AppRoutes.petProfile,
+                        arguments: {
+                          'userData': widget.userData,
+                        },
+                      );
                     },
                     style: PetCareLittleButtonStyles.elevatedButtonStyle,
                     child: const Text('Agregar nuevo'),

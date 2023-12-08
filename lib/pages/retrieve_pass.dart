@@ -117,7 +117,8 @@ class RetrievePassState extends State<RetrievePass> {
                               // Realizar acciones con recoveryCode si se ingresaron 5 dígitos
                               // ignore: avoid_print
                               print('Código de recuperación: $recoveryCode');
-                              Navigator.of(context).pushNamed(AppRoutes.retrievePassChange);
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.retrievePassChange);
 
                               //FIXME: recoveryCode es la variable que otorga el codigo de verificacions
                             }
@@ -144,8 +145,7 @@ class RetrievePassState extends State<RetrievePass> {
             ElevatedButton(
               onPressed: () {
                 if (_formRetrievePassKey.currentState!.validate()) {
-
-                  //FIXME: Aqui se verifica que el formulario este validado 
+                  //FIXME: Aqui se verifica que el formulario este validado
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -157,7 +157,7 @@ class RetrievePassState extends State<RetrievePass> {
                               Navigator.pop(context);
                             },
                             child: const Text('Cerrar'),
-                          ), 
+                          ),
                         ],
                       );
                     },

@@ -149,16 +149,8 @@ class _UserProfileState extends State<UserProfile> {
               margin: const EdgeInsets.only(top: 20, bottom: 26),
               child: ElevatedButton(
                 onPressed: () async {
-Navigator.of(context).pushNamed(AppRoutes.retrievePassChange);
-                  // await registrationService(
-                  //   _formUserProfileKey,
-                  //   _nameController,
-                  //   _apellidoController,
-                  //   _emailController,
-                  //   _phoneController,
-                  //   context,
-                  // );
-                  //FIXME: ::JG:: Trabajado en ello
+              Navigator.of(context).pushNamed(AppRoutes.retrievePassChange);
+
                 },
                 style: PetCareButtonStyles.elevatedButtonStyle,
                 child: const Text('Cambiar contraseña'),
