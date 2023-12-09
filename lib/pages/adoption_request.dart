@@ -14,98 +14,49 @@ class AdoptionRequest extends StatefulWidget {
 
 class _AdoptionRequestState extends State<AdoptionRequest> {
   late TextEditingController _nameController;
-  late TextEditingController _uploadController;
   late final String? nameDocument;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController();
-    _uploadController = TextEditingController();
     _nameController.text = widget.itemID; //texto del contenedor
-    _uploadController.text = 'formulario_de_adopcion.pdf';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.itemID),
+          title: const Text('Proceso de Adopción', style: PetCareThemes.statementItalicTextStyle,),
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(25, 0, 25, 25),
           child: Column(
             children: [
+              //crear un container donde se muestre en pantalla la foto de la mascota
               const Row(
                 children: [
-                  Text('Adopción', style: PetCareThemes.titleTextStyle),
+                  Text('Adoptame', style: PetCareThemes.titleTextStyle),
                   SizedBox(
-                    width: 200,
+                    width: 100,
                   )
                 ],
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 14.82, bottom: 30.63),
-                child: TextFormField(
-                  controller: _nameController,
-
-                  readOnly: true, //esto hace que sea de solo lectura
-                  decoration: PetCareInputStyle(labelText: '').regularInput,
-                ),
-              ),
-              Center(
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 50,
-                    ),
-                    Image.asset(
-                      'assets/images/icon_pdf.png',
-                      width: 30,
-                      height: 30,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        print('todo bien');
-                        //TODO: aqui se debe descargar pdf
-                        //logica del text buton Logic:
-                      },
-                      child: const Text(
-                        'Formulario_de_adopción.pdf',
-                        style: PetCareThemes.linkTextStyle,
-                      ),
-                    ),
-                  ],
-                ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'Por favor, descarga el formulario, llenalo y adjuntalo en la siguiente casilla para enviarlo a la fundación responsable.',
+                Container(
+                margin: const EdgeInsets.only(top: 30, bottom: 30),
+                child: Image.asset(
+                  'assets/images/Bruno.jpg',
+                  width: 200, // Ancho deseado
+                  height: 200, // Alto deseado
+                ),
+              ),
+              Text(
+                '${widget.itemID} está muy feliz por tu interes. \nTener la posibilidad de encontrar un hogar es grandioso',
                 style: PetCareThemes.statementTextStyle,
                 textAlign: TextAlign.center,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 220,
-                    child: TextFormField(
-                      controller: _uploadController,
-                      textAlign: TextAlign.left,
-                      decoration: PetCareInputStyle(labelText: '').regularInput,
-                    ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.only(top: 20, bottom: 20, left: 14),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: PetCareLittleButtonStyles.elevatedButtonStyle,
-                      child: const Text('Adjuntar'),
-                    ),
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 50,
@@ -117,11 +68,12 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
                     Navigator.of(context).pushNamed(AppRoutes.adoptionConfirm);
                   },
                   style: PetCareButtonStyles.elevatedButtonStyle,
-                  child: const Text('Enviar'),
+                  child: const Text('Solicitar Adopción'),
                 ),
               ),
             ],
           ),
-        ));
+      )
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/models/user_manager.dart';
 
 // Define una función para manejar la lógica de autenticación
 Future<void> authenticationLogin(
@@ -30,6 +31,8 @@ Future<void> authenticationLogin(
           // La autenticación fue exitosa
           Map<String, dynamic> responseData = json.decode(response.body);
 
+          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
+          print('Respuesta de la API: $responseData');
           // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
 

@@ -3,20 +3,15 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
+import 'package:petcare_app/models/user_manager.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
-import 'package:petcare_app/pages/buy_me.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
-  final dynamic userData;
-  // Cambia el tipo de datos según tus necesidades//TODO::SE SUPONE ESTO SE RECIBE DE DB, ACA ESTÁ HARDCODE PARA TRABAJAR OFFLINE.
 
-  const Home({
-    super.key,
-    required this.userData,
-  });
-
+  Home({super.key, required this.userData});
+  Map<String, dynamic> userData = (UserManager().userStream.first as Map<String, dynamic>);
   @override
   HomeState createState() => HomeState();
 }

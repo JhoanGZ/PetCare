@@ -1,84 +1,66 @@
-// SIN USO, NO SE BORRA POR SI SE NECESITASE<=======
-// class User {
-//   String name;
-//   String token;
-//   int foundationId; // Cambiado a int
+import 'dart:async';
 
-//   User({
-//     required this.name,
-//     required this.token,
-//     required this.foundationId,
-//   });
+class UserManager {
+  static final UserManager _instance = UserManager._internal();
 
-//   factory User.fromJson(Map<String, dynamic> json) {
-//     return User(
-//       name: json['name'],
-//       token: json['token'],
-//       foundationId: json['foundationId'],
-//     );
-//   }
-// }
+  factory UserManager() {
+    return _instance;
+  }
 
-// class NormalUser extends User {
-//   String firstName, lastName, email, phone;
+  UserManager._internal();
 
-//   NormalUser({
-//     required super.name,
-//     required super.token,
-//     required super.foundationId,
-//     required this.firstName,
-//     required this.lastName,
-//     required this.email,
-//     required this.phone,
-//   });
-// }
+  // Un controlador de flujo para emitir actualizaciones del usuario
+  final _userController = StreamController<Map<String, dynamic>>.broadcast();
 
-// class NgoUser extends User {
-//   String organizationName;
+  // Getter para obtener el flujo de actualizaciones del usuario
+  Stream<Map<String, dynamic>> get userStream => _userController.stream;
 
-//   NgoUser({
-//     required super.name,
-//     required super.token,
-//     required super.foundationId,
-//     required this.organizationName,
-//   });
+  // Método para actualizar el usuario y emitir la actualización
+  void updateUser(Map<String, dynamic> userData) {
+    _userController.add(userData);
+  }
 
-//   
-// }
+  // Método para cerrar el controlador de flujo cuando ya no se necesite
+  void dispose() {
+    _userController.close();
+  }
+}
 
-// // class UserLoader {
-// //   static Future<User> loadUser() async {
-// //     datos de la base de datos
-// //     Map<String, dynamic> userData = {
-// //       'name': 'Nombre del Usuario',
-// //       'token': 'TokenUsuario123',
-// //       'organizationName': 'Nombre de la Organización', // Solo para NgoUser
-// //     };
+class UserDataFormatter {
+  Map<String, dynamic> formatUserData(Map<String, dynamic> userData) {
+    Map<String, dynamic> formattedData = {
+      'user': {
+        'id': userData['user']['id'],
+        'rut': userData['user']['rut'],
+        'email': userData['user']['email'],
+        'nombre': userData['user']['nombre'],
+        'apellido': userData['user']['apellido'],
+        'fnac': userData['user']['fnac'],
+        'direccion': userData['user']['direccion'],
+        'sexo': userData['user']['sexo'],
+        'celular': userData['user']['celular'],
+        'imagen': userData['user']['imagen'],
+        'codigoVerificacion': userData['user']['codigoVerificacion'],
+        'aceptaTerminosDeUso': userData['user']['aceptaTerminosDeUso'],
+        'usuarioActivo': userData['user']['usuarioActivo'],
+        'email_verified_at': userData['user']['email_verified_at'],
+        'created_at': userData['user']['created_at'],
+        'updated_at': userData['user']['updated_at'],
+        'foundation': userData['user']['foundation'],
+      },
+      'foundation_id': userData['foundation_id'],
+      'auth': userData['auth'],
+    };
 
-// //     // Determina si el usuario es un User normal o un NgoUser
-// //     if (userData.containsKey('organizationName')) {
-// //       return NgoUser(
-// //         name: userData['name'],
-// //         token: userData['token'],
-// //         organizationName: userData['organizationName'], userType: '',
-// //       );
-// //     } else {
-// //       return User(
-// //         name: userData['name'],
-// //         token: userData['token'], userType: '',
-// //       );
-// //     }
-// //   }
-// // }
+    return formattedData;
+  }
+}
 
 
-// class UserManager {
-//   static User? _currentUser;
+// // Importa tu UserManager
+// import 'path_to_user_manager/user_manager.dart';
 
-//   // ignore: unnecessary_getters_setters - MIENTRAS SE IMPLEMENTA -
-//   static User? get currentUser => _currentUser;
-
-//   static set currentUser(User? user) {
-//     _currentUser = user;
-//   }
-// }
+// // Escucha actualizaciones del usuario
+// UserManager().userStream.listen((userData) {
+//   // Actualiza la interfaz de usuario según sea necesario con los datos del usuario
+// });

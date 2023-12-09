@@ -20,6 +20,7 @@ import 'package:petcare_app/pages/retrieve_pass_change.dart';
 import 'package:petcare_app/pages/terms.dart';
 import 'package:petcare_app/pages/user_profile.dart';
 import 'package:petcare_app/pages/users_saved_pets.dart';
+import 'package:petcare_app/models/user_manager.dart';
 
 class PetCareApp extends StatelessWidget {
   const PetCareApp({super.key});
@@ -27,20 +28,16 @@ class PetCareApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //COMMENT: DESACTIVADO DEBUG BANNER
+      
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            // Asegurarse `settings.arguments` es un Map<String, dynamic>
-            Map<String, dynamic>? arguments =
-                settings.arguments as Map<String, dynamic>?;
-
-            return MaterialPageRoute(
-              builder: (context) => Home(
-                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
-                userData: arguments?['userData'] ?? 'Invitado',
-              ),
-            );
-
+            return MaterialPageRoute(builder: (context) { 
+              final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+              return Home(userData: arguments['userData']);
+              // return Home(userData: arguments['userData'] ?? {});
+            });
+            
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(
               builder: (context) => RegisterStepOne(
@@ -82,8 +79,7 @@ class PetCareApp extends StatelessWidget {
             );
 
           case AppRoutes.userSavedPets:
-            final Map<String, dynamic> args =
-                settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -122,11 +118,12 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => const DonationConfirm());
 
           case AppRoutes.ngoProfile:
-          // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
-            settings.arguments as Map<String, dynamic>?;
+                settings.arguments as Map<String, dynamic>?;
 
-            final String foundationIdClick = arguments?['foundationIdClick'] ?? '';
+            final String foundationIdClick =
+                arguments?['foundationIdClick'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => NgoProfile(
@@ -150,14 +147,13 @@ class PetCareApp extends StatelessWidget {
 
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());
-            
+
           case AppRoutes.buyMe:
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
 
-            final String photoPet =
-                arguments?['photoPet'] ?? '';
+            final String photoPet = arguments?['photoPet'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => BuyMe(
@@ -166,14 +162,15 @@ class PetCareApp extends StatelessWidget {
                 photoPet: photoPet,
               ),
             );
+
           // case AppRoutes.buyMe:
           //   String? photoPet = settings.arguments as String?;
-
           //   return MaterialPageRoute(
           //       builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-            return MaterialPageRoute(builder: (context) => LogInPage());
+            return MaterialPageRoute(
+                builder: (context) => const LogInPage());
         }
       },
     );

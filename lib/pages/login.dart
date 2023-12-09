@@ -7,30 +7,7 @@ import 'package:petcare_app/widgets/checkbox.dart';
 
 // ignore: must_be_immutable
 class LogInPage extends StatefulWidget {
-  Map<String, dynamic> userData = {
-    "user": {
-      "id": '2',
-      "rut": "261740002",
-      "email": "luivin@gmail.com",
-      "nombre": "Luigui",
-      "apellido": "Vinci",
-      "fnac": "1997-01-01",
-      "direccion": "Paradisi",
-      "sexo": '0',
-      "celular": "1234567",
-      "imagen": "assets/images/fundacion perfil.png",
-      "codigoVerificacion": "",
-      "aceptaTerminosDeUso": "1",
-      "usuarioActivo": '1',
-      "email_verified_at": null,
-      "created_at": "2023-12-05T19:16:26.000000Z",
-      "updated_at": "2023-12-06T19:21:28.000000Z",
-      "foundation": null
-    },
-    "foundation_id": "0",
-    "auth": true
-  };
-  LogInPage({super.key});
+  const LogInPage({super.key});
 
   @override
   State<LogInPage> createState() => _LogInPageState();
@@ -317,7 +294,7 @@ class _LogInPageState extends State<LogInPage> {
                       onPressed: () {
                         Navigator.of(context).pushReplacementNamed(
                           AppRoutes.home,
-                          arguments: {'userData': widget.userData},
+                          // arguments: {'userData': widget.userData},
                         );
                         //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS
                         //logica del text buton contactanos Logic:

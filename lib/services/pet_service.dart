@@ -5,40 +5,44 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
 
-// Define una función para manejar la lógica de autenticación
 Future<void> petRegistration(
-    GlobalKey<FormState> formKey,
-    File petPhoto,
-    TextEditingController nameController,
-    TextEditingController vaccineController,
-    TextEditingController raceController,
-    TextEditingController weightController,
-    TextEditingController genderController,
-    TextEditingController ageController,
-    TextEditingController descriptionController,
-    BuildContext context) async {
-  // Verificar que los campos del formulario estén completos
+  GlobalKey<FormState> formKey,
+  File petPhoto,
+  TextEditingController nameController,
+  TextEditingController vaccineController,
+  TextEditingController raceController,
+  TextEditingController chipController,
+  TextEditingController weightController,
+  TextEditingController sterilizationController,
+  TextEditingController genderController,
+  TextEditingController ageController,
+  TextEditingController descriptionController,
+  BuildContext context
+
+) async {
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
   print('Name: ${nameController.text}');
   print('Vaccine: ${vaccineController.text}');
   print('Race: ${raceController.text}');
+  print('Chip: ${chipController.text}');
   print('Weight: ${weightController.text}');
+  print('Sterilization: ${sterilizationController.text}');
   print('Gender: ${genderController.text}');
   print('Age: ${ageController.text}');
   print('Description: ${descriptionController.text}');
 
   if (formKey.currentState!.validate()) {
-    // Datos del usuario del formulario usando controladores
     String name = nameController.text;
     String vaccine = vaccineController.text;
     String race = raceController.text;
+    String chip = chipController.text;
     String weight = weightController.text;
-    String gender = genderController.text;
+    String sterilization = sterilizationController.text;
+    String gender = genderController.text;  
     String age = ageController.text;
     String description = descriptionController.text;
     try {
-      // Realizar el envío a la API
       final response = await http.post(
         Uri.parse('http://127.0.0.1:8000/api/pets/store'),
         headers: {
@@ -49,14 +53,15 @@ Future<void> petRegistration(
           'name': name,
           'vaccine': vaccine,
           'race': race,
+          'chip': chip,
           'weight': weight,
+          'sterilization': sterilization,
           'gender': gender,
           'age': age,
           'description': description,
         },
       );
 
-      // Por scaffold no se puede crear una instancia que no se va a usar siempre, mejora el rendimiento.  Se usa microtask
       Future.microtask(() {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           var responseData = jsonDecode(response.body);
@@ -66,7 +71,6 @@ Future<void> petRegistration(
           String userData = responseData['user'];
           bool userAuth = responseData['auth'] == true;
 
-          // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
             Navigator.of(context).pushNamed(
               AppRoutes.home,
