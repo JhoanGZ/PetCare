@@ -51,10 +51,9 @@ Future<void> authenticationLogin(
           if (userAuth) {
             print('LOGIN EXITOSO!');
             // ignore: use_build_context_synchronously
-            Navigator.of(context).pushNamed(
-              AppRoutes.home,
-              arguments: userData,
-            );
+            Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
+              'userData': userData
+            },);
           }
         } else {
           // La autenticación falló, puedes mostrar un mensaje de error al usuario
@@ -62,12 +61,13 @@ Future<void> authenticationLogin(
           // Puedes mostrar un mensaje de error al usuario
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: /*  */
-                  Text('Error en la autenticación. Verifica tus credenciales.'),
-              duration: Duration(seconds: 3),
-            ),
-          );
+              const SnackBar(
+                content: /*  */
+                    Text(
+                        'Error en la autenticación. Verifica tus credenciales.'),
+                duration: Duration(seconds: 3),
+              ),
+              );
         }
       });
     } catch (e) {

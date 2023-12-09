@@ -17,6 +17,7 @@ class UserManager {
 
   // Método para actualizar el usuario y emitir la actualización
   void updateUser(Map<String, dynamic> userData) {
+    print('Updating user data: $userData');
     _userController.add(userData);
   }
 
