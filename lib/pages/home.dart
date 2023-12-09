@@ -3,25 +3,31 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
-import 'package:petcare_app/models/user_manager.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
+  final Map<String, dynamic> userData;
+   // ignore: use_super_parameters
+  const Home({Key? key, required this.userData}) : super(key: key);
 
-  Home({super.key, required this.userData});
-  Map<String, dynamic> userData = (UserManager().userStream.first as Map<String, dynamic>);
   @override
   HomeState createState() => HomeState();
 }
 
 class HomeState extends State<Home> {
   //bool showDonationSection = false;
+  late Map<String, dynamic> userData;
+  @override
+  void initState() {
+    super.initState();
+    userData = widget.userData;
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.userData['foundation_id'] ==
+    bool showButtons = widget.userData['foundation_id'] != null && widget.userData['foundation_id'] == 0;
         '0'; //TODO::LUIGUI::EJEMPLO DE CONSUMO DE DATOS:: AQUI ESTOY ACCEDIENDO A 'foundation_id'
 
     return Scaffold(
@@ -34,20 +40,21 @@ class HomeState extends State<Home> {
         title: Row(
           children: [
             Image.asset(
-              'assets/images/logo_petcare_blanco.png',
+              widget.userData['user']?['imagen'] ?? 'assets/images/default_user_image.png',
               width: 21,
               height: 21,
             ),
 
             Expanded(
-                child: Text(
+              child: Text(
               widget.userData['user']['nombre'],
               style: PetCareThemes.buttonTextStyle,
             )),
             // TODO: AQUÍ VA LA IMAGEN DE USUARIO
             GestureDetector(
               onTap: () {
-                if (widget.userData['foundation_id'] == '0') {
+                //NOTE: cambio de '0' a 0 (int) 
+                if (widget.userData['foundation_id'] != null && widget.userData['foundation_id'] == 0) {
                   Navigator.of(context).pushNamed(
                     AppRoutes.userProfile,
                     arguments: {'userData': widget.userData},
@@ -126,7 +133,9 @@ class HomeState extends State<Home> {
                 if (showButtons)
                   Row(
                     children: [
-                      const SizedBox(width: 4,),
+                      const SizedBox(
+                        width: 4,
+                      ),
                       Container(
                         width: 30,
                         height: 30,
@@ -142,9 +151,13 @@ class HomeState extends State<Home> {
                               //     MaterialPageRoute(
                               //         builder: (context) =>
                               //             BuyMe(photoPet: items[index].photo)));
-                                                          Navigator.of(context).pushNamed(AppRoutes.buyMe, 
-                             arguments: {'userData': widget.userData,
-                             'photoPet': items[index].photo}, );
+                              Navigator.of(context).pushNamed(
+                                AppRoutes.buyMe,
+                                arguments: {
+                                  'userData': widget.userData,
+                                  'photoPet': items[index].photo
+                                },
+                              );
                             },
                             icon: Image.asset(
                               'assets/images/icon_donation_home.png',
@@ -235,7 +248,9 @@ class HomeState extends State<Home> {
 
                 Row(
                   children: [
-                    const SizedBox(width: 4,),
+                    const SizedBox(
+                      width: 4,
+                    ),
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -248,14 +263,13 @@ class HomeState extends State<Home> {
                 Row(
                   children: [
                     const SizedBox(width: 8),
-                                    ExpandText(
-                  text: items[index].description,
-                  maxLines: 15,
-                ), // D
+                    ExpandText(
+                      text: items[index].description,
+                      maxLines: 15,
+                    ), // D
                   ],
                 ),
                 // Utilizando el widget ExpandableTextWidget
-
               ],
             ),
           );
