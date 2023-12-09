@@ -10,7 +10,7 @@ Map<String, dynamic> _petData = {
   'peso': 10,
   'chip': 123456789,
   'sexo':
-      1, // 1 para masculino, 0 para femenino (ajustar según la convención de tu API)
+      1, // 0 para masculino, 1 para femenino (ajustar según la convención de tu API)
   'esteril':
       0, // 1 para esterilizado, 0 para no esterilizado (ajustar según la convención de tu API)
   'edad': 3,

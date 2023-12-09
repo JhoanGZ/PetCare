@@ -40,8 +40,11 @@ Future<void> petRegistration(
     try {
       // Realizar el envío a la API
       final response = await http.post(
-        Uri.parse(
-            'http://127.0.0.1:8000/api/pets/index'), //TODO: ::LN:: Asignar Endpoint
+        Uri.parse('http://127.0.0.1:8000/api/pets/store'),
+        headers: {
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }, //TODO: ::LN:: Asignar Endpoint
         body: {
           'name': name,
           'vaccine': vaccine,

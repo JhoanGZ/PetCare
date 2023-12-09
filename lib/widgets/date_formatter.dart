@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class DateFormatter {
   // Widget Formato Calendar;
   static String formatDate(DateTime dateTime) {
-    return "${dateTime.day.toString().padLeft(2, '0')}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.year}";
+    return "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+    // return "${dateTime.day.toString().padLeft(2, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.year}";
   }
 
   static DateTime parseDate(String formattedDate) {
-    List<String> parts = formattedDate.split('/');
+    List<String> parts = formattedDate.split('-');
     int day = int.parse(parts[0]);
     int month = int.parse(parts[1]);
     int year = int.parse(parts[2]);
-    return DateTime(year, month, day);
+    return DateTime(day, month, year);
   }
 
   static Future<DateTime?> selectDate(BuildContext context) async {
@@ -22,6 +23,7 @@ class DateFormatter {
       lastDate: DateTime(2101),
     );
   }
+
   static void handleDateController(
     TextEditingController dateController,
     BuildContext context,
@@ -34,7 +36,8 @@ class DateFormatter {
         if (_isUnderage(parsedDate)) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('La fecha de nacimiento indica que es menor de edad.'),
+              content:
+                  Text('La fecha de nacimiento indica que es menor de edad.'),
             ),
           );
         }
@@ -47,7 +50,12 @@ class DateFormatter {
 
   static bool _isUnderage(DateTime date) {
     final currentDate = DateTime.now();
-    final age = currentDate.year - date.year - (currentDate.month > date.month || (currentDate.month == date.month && currentDate.day >= date.day) ? 0 : 1);
+    final age = currentDate.year -
+        date.year -
+        (currentDate.month > date.month ||
+                (currentDate.month == date.month && currentDate.day >= date.day)
+            ? 0
+            : 1);
     return age < 18;
   }
 }

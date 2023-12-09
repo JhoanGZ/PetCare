@@ -27,38 +27,38 @@ Future<void> authenticationLogin(
       // Por scaffold no se debe crear una instancia que no se va a usar siempre, mejora el rendimiento. Se usa microtask
       Future.microtask(() {
         if (response.statusCode >= 200 && response.statusCode < 300) {
-        // La autenticación fue exitosa
-        var responseData = jsonDecode(response.body);
+          // La autenticación fue exitosa
+          Map<String, dynamic> responseData = json.decode(response.body);
 
-        // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
-        print('Respuesta de la API: $responseData');
+          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
+          print('Respuesta de la API: $responseData');
 
-        // Guarda los datos que necesitas o realiza otras acciones
-        String userData = responseData['user'];
-        bool userAuth = responseData['auth'] == true;
+          // Guarda los datos que necesitas o realiza otras acciones
+          dynamic userData = responseData['user'];
+          bool userAuth = responseData['auth'] == true;
 
-        // Navega a la pantalla de inicio y pasa los datos necesarios
-        if (userAuth) {
-          print('LOGIN EXITOSO!');
+          // Navega a la pantalla de inicio y pasa los datos necesarios
+          if (userAuth) {
+            print('LOGIN EXITOSO!');
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pushNamed(
+              AppRoutes.home,
+              arguments: userData,
+            );
+          }
+        } else {
+          // La autenticación falló, puedes mostrar un mensaje de error al usuario
+          print('Error en la autenticación: ${response.body}');
+          // Puedes mostrar un mensaje de error al usuario
           // ignore: use_build_context_synchronously
-          Navigator.of(context).pushNamed(
-            AppRoutes.home,
-            arguments: {userData},
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: /*  */
+                  Text('Error en la autenticación. Verifica tus credenciales.'),
+              duration: Duration(seconds: 3),
+            ),
           );
         }
-      } else {
-        // La autenticación falló, puedes mostrar un mensaje de error al usuario
-        print('Error en la autenticación: ${response.body}');
-        // Puedes mostrar un mensaje de error al usuario
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: /*  */
-                Text('Error en la autenticación. Verifica tus credenciales.'),
-            duration: Duration(seconds: 3),
-          ),
-        );
-      }
       });
     } catch (e) {
       // Manejar errores de conexión o de la API
