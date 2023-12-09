@@ -46,7 +46,7 @@ class UserDataFormatter {
         'email_verified_at': userData['user']['email_verified_at'],
         'created_at': userData['user']['created_at'],
         'updated_at': userData['user']['updated_at'],
-        'foundation': userData['user']['foundation'],
+        // 'foundation': userData['user']['foundation'],
       },
       'foundation_id': userData['foundation_id'],
       'auth': userData['auth'],

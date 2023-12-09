@@ -34,8 +34,8 @@ class PetCareApp extends StatelessWidget {
           case AppRoutes.home:
             return MaterialPageRoute(builder: (context) { 
               final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-              return Home(userData: arguments['userData']);
-              // return Home(userData: arguments['userData'] ?? {});
+              // return Home(userData: arguments['userData']);
+              return Home(userData: arguments['userData'] ?? {});
             });
             
           case AppRoutes.registerStepOne:

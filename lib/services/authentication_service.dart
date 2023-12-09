@@ -37,8 +37,15 @@ Future<void> authenticationLogin(
           print('Respuesta de la API: $responseData');
 
           // Guarda los datos que necesitas o realiza otras acciones
-          dynamic userData = responseData['user'];
+          // dynamic userData = responseData['user'];
           bool userAuth = responseData['auth'] == true;
+
+          UserDataFormatter formatter = UserDataFormatter();
+          Map<String, dynamic> userData =
+              formatter.formatUserData(responseData);
+
+          UserManager().updateUser(userData);
+          print('Aceptación de Términos: $userData');
 
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
