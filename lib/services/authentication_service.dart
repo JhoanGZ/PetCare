@@ -33,19 +33,21 @@ Future<void> authenticationLogin(
 
           // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
-          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
-          print('Respuesta de la API: $responseData');
-
+          
           // Guarda los datos que necesitas o realiza otras acciones
           // dynamic userData = responseData['user'];
           bool userAuth = responseData['auth'] == true;
+
 
           UserDataFormatter formatter = UserDataFormatter();
           Map<String, dynamic> userData =
               formatter.formatUserData(responseData);
 
+          print('Print de formatter antes de usar UserManager(): $formatter');
+
           UserManager().updateUser(userData);
-          print('Aceptación de Términos: $userData');
+
+          print('User data en Authentication_Service: $userData');
 
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
@@ -55,6 +57,7 @@ Future<void> authenticationLogin(
               'userData': userData
             },);
           }
+          print('User Data después de LOGIN EXITOSO: $userData');
         } else {
           // La autenticación falló, puedes mostrar un mensaje de error al usuario
           print('Error en la autenticación: ${response.body}');

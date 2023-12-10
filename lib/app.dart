@@ -28,15 +28,21 @@ class PetCareApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //COMMENT: DESACTIVADO DEBUG BANNER
-      
+
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            final Map<String, dynamic>? arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-            return MaterialPageRoute(builder: (context) { 
-              return Home(userData: arguments?['userData'] ?? {});
-            });
-            
+          final Map<String, dynamic>? arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          print('en App.Dart ${arguments}userData');
+          if (arguments != null) {
+            print('User Data before passing to Home: $arguments');
+          } else {
+            print('User Data is null in app.dart!!!');
+          }
+          return MaterialPageRoute(builder: (context) {
+            return Home(userData: arguments?['userData'] ?? {});
+          });
+
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(
               builder: (context) => RegisterStepOne(
@@ -78,7 +84,8 @@ class PetCareApp extends StatelessWidget {
             );
 
           case AppRoutes.userSavedPets:
-            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -168,8 +175,7 @@ class PetCareApp extends StatelessWidget {
           //       builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-            return MaterialPageRoute(
-                builder: (context) => const LogInPage());
+            return MaterialPageRoute(builder: (context) => const LogInPage());
         }
       },
     );

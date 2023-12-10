@@ -31,7 +31,7 @@
 //     var user = widget.userData?['user'];
 //     var nombre = user?['nombre'] ?? 'Nombre no disponible';
 //     print('userData in build: ${widget.userData}');
-//     print('Nombre: $nombre'); 
+//     print('Nombre: $nombre');
 //     bool showButtons = widget.userData['foundation_id'] != null &&
 //         widget.userData['foundation_id'] == 0;
 //     '0'; //TODO::LUIGUI::EJEMPLO DE CONSUMO DE DATOS:: AQUI ESTOY ACCEDIENDO A 'foundation_id'
@@ -298,7 +298,7 @@ import 'package:petcare_app/widgets/expandable_text.dart';
 class Home extends StatefulWidget {
   final Map<String, dynamic> userData;
 
-  const Home({Key? key, required this.userData}) : super(key: key);
+  const Home({super.key, required this.userData});
 
   @override
   HomeState createState() => HomeState();
@@ -310,20 +310,37 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    userData = widget.userData;
-    print('userData in initState: $userData');
+    // userData = widget.userData;
+    // print('Nombre: ${userData['user']['nombre']}');
+    // print('ID Foundation: ${userData['foundation_id']}');
+    // print('User Data: $userData');
+    // Verifica si widget.userData es nulo o no tiene la clave "user"
+
+    // ignore: unnecessary_null_comparison
+    if (widget.userData != null && widget.userData.containsKey('user')) {
+      // Si tiene la clave "user", asigna ese valor
+      userData = widget.userData['user'];
+      print('Nombre: ${userData['nombre']}');
+      print('ID Foundation: ${widget.userData['foundation_id']}');
+      print('User Data: ${widget.userData}');
+    } else {
+      // Si no tiene la clave "user", asigna el valor por defecto o realiza alguna acción
+      userData = {'nombre': 'Usuario no disponible'};
+      print('No se encontró el usuario en los datos recibidos');
+    }
+    
   }
 
   @override
   Widget build(BuildContext context) {
-    dynamic user = userData?['user'];
-    dynamic nombre = user?['nombre'] ?? 'Nombre no disponible';
-    dynamic userImage = user?['imagen'] ?? 'assets/images/default_user_image.png';
-    print('userData in build: $userData');
+    dynamic user = userData['user'] ?? 'Usuario no disponible';
+    dynamic nombre = userData['nombre'] ?? 'Nombre no disponible';
+    dynamic userImage = userData['imagen'] ?? 'assets/images/pic_default_user.png';
+    print('userData in home_build : $userData');
     print('Nombre: $nombre');
+    print('user: $user');
 
-    bool showButtons = userData['foundation_id'] != null &&
-        userData['foundation_id'] == 0;
+    bool showButtons = userData['foundation_id'] == '0' ? false : true ;
 
     return Scaffold(
       appBar: AppBar(
@@ -347,10 +364,8 @@ class HomeState extends State<Home> {
             ),
             GestureDetector(
               onTap: () {
-                if (user != null &&
-                    user['imagen'] != null &&
-                    user['foundation_id'] != null &&
-                    user['foundation_id'] == 0) {
+                if (user['foundation_id'] != null &&
+                    user['foundation_id'] == '0') {
                   Navigator.of(context).pushNamed(
                     AppRoutes.userProfile,
                     arguments: {'userData': userData},
