@@ -1,38 +1,38 @@
 import 'dart:async';
 
-class UserManager {
-  static final UserManager _instance = UserManager._internal();
+class HomeManager {
+  static final HomeManager _instance = HomeManager._internal();
 
-  factory UserManager() {
+  factory HomeManager() {
     return _instance;
   }
 
-  UserManager._internal();
+  HomeManager._internal();
 
   // Un controlador de flujo para emitir actualizaciones del usuario
-  final _userController = StreamController<Map<String, dynamic>>.broadcast();
+  final _homeController = StreamController<Map<String, dynamic>>.broadcast();
 
   // Getter para obtener el flujo de actualizaciones del usuario
-  Stream<Map<String, dynamic>> get userStream => _userController.stream;
+  Stream<Map<String, dynamic>> get userStream => _homeController.stream;
 
   // Método para actualizar el usuario y emitir la actualización
   // Añadi if para saber si tenemos el data stream cerrado
   void updateUser(Map<String, dynamic> userData) {
     print('en user_manager: $userData');
-    if (_userController.isClosed) {
-      _userController.addError('Stream closed');
+    if (_homeController.isClosed) {
+      _homeController.addError('Stream closed');
     } else {
-      _userController.add(userData);
+      _homeController.add(userData);
     }
   }
 
   // Método para cerrar el controlador de flujo cuando ya no se necesite
   void dispose() {
-    _userController.close();
+    _homeController.close();
   }
 }
 
-class UserDataFormatter {
+class HomeDataFormatter {
   Map<String, dynamic> formatUserData(Map<String, dynamic> userData) {
     Map<String, dynamic> formattedData = {
       'user': {

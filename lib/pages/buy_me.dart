@@ -31,6 +31,7 @@ class _BuyMeState extends State<BuyMe> {
       statement =
           '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
     }
+
   }
 
   @override
@@ -55,7 +56,6 @@ class _BuyMeState extends State<BuyMe> {
                 style: PetCareThemes.statementTextStyle,
               ),
             ),
-            
             Form(
                 key: _formBuyMeKey,
                 child: Column(

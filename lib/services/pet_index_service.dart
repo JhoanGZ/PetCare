@@ -12,8 +12,8 @@ class PetIndexService {
       if (response.statusCode == 200) {
         // 3. Si la solicitud es exitosa, devuelve la lista de pets
         var responseData = json.decode(response.body);
-        print(
-            responseData); // Imprime en consola para visualizar la recepción de los datos.
+        print('Respuesta de la API: $responseData'); // Imprime en consola para visualizar la recepción de los datos.
+        
         return responseData; // Retorna los datos obtenidos y tratados
       } else {
         // 4. Si la solicitud falla, arroja una excepción

@@ -2,28 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/home_list.dart'; // Importa la lista items
-import 'package:petcare_app/models/user_manager.dart';
+import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
+import 'package:petcare_app/services/pet_index_service.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
-// ignore: must_be_immutable
 class Home extends StatefulWidget {
-  Home({super.key, required this.userData});
-  Map<String, dynamic> userData =
-      (UserManager().userStream.first as Map<String, dynamic>);
+  final dynamic userData;
+
+  const Home({super.key, required this.userData});
+
   @override
   HomeState createState() => HomeState();
 }
 
 class HomeState extends State<Home> {
-  //bool showDonationSection = false;
+  late List<dynamic> petData; // Variable para almacenar los datos de pets
+  @override
+  void initState() {
+    super.initState();
+    // Llama a la función que obtiene los datos de pets al iniciar la pantalla
+    fetchPetData();
+  }
+
+  void fetchPetData() async {
+    try {
+      var petService = PetIndexService();
+      petData = await petService.getPetList();
+      setState(() {
+        // Actualiza el estado para que la interfaz de usuario refleje los cambios
+      });
+    } catch (e) {
+      print('Error al obtener los datos de pets: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.userData['foundation_id'] ==
-        '0'; //TODO::LUIGUI::EJEMPLO DE CONSUMO DE DATOS:: AQUI ESTOY ACCEDIENDO A 'foundation_id'
-
+    dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
+    dynamic nombre = widget.userData['nombre'] ?? 'Nombre no disponible';
+    dynamic userImage =
+        widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
+    print('userData in home_build : $widget.userData');
+    print('Nombre: $nombre');
+    print('user: $user');
+    print('Los datos de pets son: $petData');
+    bool showButtons = widget.userData['foundation_id'] == 0 ? false : true;
+    print('aqui se muestra toda la wea ${widget.userData}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -34,20 +59,20 @@ class HomeState extends State<Home> {
         title: Row(
           children: [
             Image.asset(
-              'assets/images/logo_petcare_blanco.png',
+              (userImage),
               width: 21,
               height: 21,
             ),
-
             Expanded(
-                child: Text(
-              widget.userData['user']['nombre'],
-              style: PetCareThemes.buttonTextStyle,
-            )),
-            // TODO: AQUÍ VA LA IMAGEN DE USUARIO
+              child: Text(
+                user?['nombre'] ?? 'Nombre no disponible',
+                style: PetCareThemes.buttonTextStyle,
+              ),
+            ),
             GestureDetector(
               onTap: () {
-                if (widget.userData['foundation_id'] == '0') {
+                if (user['foundation_id'] != null &&
+                    user['foundation_id'] == '0') {
                   Navigator.of(context).pushNamed(
                     AppRoutes.userProfile,
                     arguments: {'userData': widget.userData},
@@ -57,11 +82,10 @@ class HomeState extends State<Home> {
                     AppRoutes.ngoProfile,
                     arguments: {
                       'userData': widget.userData,
-                      'foundationIdClick': widget.userData['foundation_id']
+                      'foundationIdClick': user['foundation_id']
                     },
                   );
                 }
-                // Coloca aquí la lógica que deseas ejecutar al hacer clic en el botón
               },
               child: Image.asset(
                 widget.userData['user']['imagen'],
@@ -70,7 +94,7 @@ class HomeState extends State<Home> {
               ),
             )
           ],
-        ), // Widget del título del AppBar
+        ),
         backgroundColor: PetCareColors.brandPrimaryColor,
         toolbarHeight: 28,
         centerTitle: true,
@@ -83,7 +107,6 @@ class HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Elementos en fila: icono de perfil y título
                 Row(
                   children: [
                     GestureDetector(
@@ -97,32 +120,28 @@ class HomeState extends State<Home> {
                         );
                       },
                       child: Image.asset(
-                        items[index].profileIcon, // Icono de perfil
+                        items[index].profileIcon,
                         width: 38,
                         height: 38,
                       ),
                     ),
                     const SizedBox(
                       width: 8,
-                    ), // Espacio entre el icono y el texto
+                    ),
                     Text(
                       items[index].title,
                       style: PetCareThemes.nameProfileTextStyle,
-                    ), // Título del elemento // Título del elemento
+                    ),
                   ],
                 ),
-                const SizedBox(
-                    height: 8), // Espacio entre el título y la imagen
-                // Imagen principal
+                const SizedBox(height: 8),
                 Image.asset(
-                  items[index].photo, // Ruta de la imagen
-                  width: double.infinity, // Ancho completo
-                  height: 500, // Altura fija
-                  fit: BoxFit.cover, // Ajuste de la imagen
+                  items[index].photo,
+                  width: double.infinity,
+                  height: 500,
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(
-                    height: 8), // Espacio entre la imagen y la descripción
-                //======================================================botones
+                const SizedBox(height: 8),
                 if (showButtons)
                   Row(
                     children: [
@@ -139,11 +158,6 @@ class HomeState extends State<Home> {
                         child: GestureDetector(
                           child: IconButton(
                             onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             BuyMe(photoPet: items[index].photo)));
                               Navigator.of(context).pushNamed(
                                 AppRoutes.buyMe,
                                 arguments: {
@@ -160,15 +174,13 @@ class HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      //otro boton
                       const SizedBox(width: 4),
                       Container(
                         width: 30,
                         height: 30,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: PetCareColors
-                              .brandPrimaryColor, // Color de fondo del botón
+                          color: PetCareColors.brandPrimaryColor,
                         ),
                         child: GestureDetector(
                           child: IconButton(
@@ -177,27 +189,26 @@ class HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AdoptionRequest(
-                                      itemID: items[index].idPet),
+                                    itemID: items[index].idPet,
+                                  ),
                                 ),
                               );
-                              // Acción al presionar el botón
                             },
                             icon: Image.asset(
-                                'assets/images/icon_adoption_home.png',
-                                width: 30,
-                                height: 30),
+                              'assets/images/icon_adoption_home.png',
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                       ),
-                      //otro boton
                       const SizedBox(width: 4),
                       Container(
                         width: 30,
                         height: 30,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: PetCareColors
-                              .brandPrimaryColor, // Color de fondo del botón
+                          color: PetCareColors.brandPrimaryColor,
                         ),
                         child: GestureDetector(
                           child: IconButton(
@@ -205,24 +216,23 @@ class HomeState extends State<Home> {
                               // Acción al presionar el botón
                             },
                             icon: Image.asset(
-                                'assets/images/icon_share_home.png',
-                                width: 30,
-                                height: 30),
+                              'assets/images/icon_share_home.png',
+                              width: 30,
+                              height: 30,
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(
                         width: 256,
                       ),
-
                       Expanded(
                         child: Container(
                           width: 30,
                           height: 30,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: PetCareColors
-                                .brandPrimaryColor, // Color de fondo del botón
+                            color: PetCareColors.brandPrimaryColor,
                           ),
                           child: IconButton(
                             onPressed: () {
@@ -238,7 +248,6 @@ class HomeState extends State<Home> {
                       ),
                     ],
                   ),
-
                 Row(
                   children: [
                     const SizedBox(
@@ -259,10 +268,9 @@ class HomeState extends State<Home> {
                     ExpandText(
                       text: items[index].description,
                       maxLines: 15,
-                    ), // D
+                    ),
                   ],
                 ),
-                // Utilizando el widget ExpandableTextWidget
               ],
             ),
           );
