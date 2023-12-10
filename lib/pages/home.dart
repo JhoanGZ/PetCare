@@ -9,9 +9,9 @@ import 'package:petcare_app/widgets/expandable_text.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
-
   Home({super.key, required this.userData});
-  Map<String, dynamic> userData = (UserManager().userStream.first as Map<String, dynamic>);
+  Map<String, dynamic> userData =
+      (UserManager().userStream.first as Map<String, dynamic>);
   @override
   HomeState createState() => HomeState();
 }

@@ -33,12 +33,16 @@ Future<void> authenticationLogin(
 
           // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
-          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
-          print('Respuesta de la API: $responseData');
 
           // Guarda los datos que necesitas o realiza otras acciones
-          dynamic userData = responseData['user'];
+          dynamic _userData = responseData['user'];
+          dynamic userData = responseData['user']['id'];
           bool userAuth = responseData['auth'] == true;
+
+          print('------------------');
+          print('------------------');
+          print(userData);
+          print(' ');
 
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {

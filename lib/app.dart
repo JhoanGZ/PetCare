@@ -28,16 +28,25 @@ class PetCareApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //COMMENT: DESACTIVADO DEBUG BANNER
-      
+
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case AppRoutes.home:
-            return MaterialPageRoute(builder: (context) { 
-              final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-              return Home(userData: arguments['userData']);
-              // return Home(userData: arguments['userData'] ?? {});
+            return MaterialPageRoute(builder: (context) {
+              final Map<String, dynamic>? arguments = ModalRoute.of(context)
+                  ?.settings
+                  .arguments as Map<String, dynamic>?;
+
+              if (arguments != null && arguments.containsKey('userData')) {
+                return Home();
+              } else {
+                // Muestra un mensaje de error si no se proporciona userData.
+                return const Center(
+                  child: Text('Pinche puto no pasó el dato'),
+                );
+              }
             });
-            
+
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(
               builder: (context) => RegisterStepOne(
@@ -79,7 +88,8 @@ class PetCareApp extends StatelessWidget {
             );
 
           case AppRoutes.userSavedPets:
-            final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+            final Map<String, dynamic> args =
+                settings.arguments as Map<String, dynamic>;
             final String foundationId = args['foundationId'];
             final String userName = args['userName'];
 
@@ -169,8 +179,7 @@ class PetCareApp extends StatelessWidget {
           //       builder: (context) => BuyMe(photoPet: photoPet ?? ''));
 
           default:
-            return MaterialPageRoute(
-                builder: (context) => const LogInPage());
+            return MaterialPageRoute(builder: (context) => const LogInPage());
         }
       },
     );

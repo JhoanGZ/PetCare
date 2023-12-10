@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/services/pet_service.dart';
+import 'package:petcare_app/services/pet_registration_service.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 import 'package:petcare_app/widgets/droplists.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
@@ -218,8 +218,9 @@ class _PetProfileState extends State<PetProfile> {
                           return null;
                         },
                         keyboardType: TextInputType.number,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Peso, entregar en (Kgs)').regularInput,
+                        decoration: PetCareInputStyle(
+                                labelText: ' Peso, entregar en (Kgs)')
+                            .regularInput,
                       ),
                     ),
                     Padding(
@@ -293,8 +294,9 @@ class _PetProfileState extends State<PetProfile> {
                           return null;
                         },
                         keyboardType: TextInputType.number,
-                        decoration:
-                            PetCareInputStyle(labelText: ' Edad, menor a un año, dejar en 0').regularInput,
+                        decoration: PetCareInputStyle(
+                                labelText: ' Edad, menor a un año, dejar en 0')
+                            .regularInput,
                       ),
                     ),
                     const SizedBox(
