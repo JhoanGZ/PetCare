@@ -28,7 +28,8 @@ class HomeState extends State<Home> {
   void fetchPetData() async {
     try {
       var petService = PetIndexService();
-      petData = await petService.getPetList();
+      petData = await petService.getPetList(widget.userData['user'][
+          'apiToken']); //TODO::LUIGUI:: HAY QUE PONER AQUI userData['user']['apiToken']
       setState(() {
         // Actualiza el estado para que la interfaz de usuario refleje los cambios
       });

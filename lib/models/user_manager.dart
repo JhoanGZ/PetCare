@@ -41,7 +41,7 @@ class UserDataFormatter {
         'email': userData['user']['email'],
         'nombre': userData['user']['nombre'],
         'apellido': userData['user']['apellido'],
-        'fnac': userData['user']['fnac'], 
+        'fnac': userData['user']['fnac'],
         'direccion': userData['user']['direccion'],
         'sexo': userData['user']['sexo'],
         'celular': userData['user']['celular'],
@@ -49,14 +49,16 @@ class UserDataFormatter {
         'codigoVerificacion': userData['user']['codigoVerificacion'],
         'aceptaTerminosDeUso': userData['user']['aceptaTerminosDeUso'],
         'usuarioActivo': userData['user']['usuarioActivo'],
-        'email_verified_at': userData['user']['email_verified_at'], 
-        'created_at': userData['user']['created_at'], 
-        'updated_at': userData['user']['updated_at'], 
+        'email_verified_at': userData['user']['email_verified_at'],
+        'api_token': userData['user']['api_token'],
+        'created_at': userData['user']['created_at'],
+        'updated_at': userData['user']['updated_at'],
       },
       'foundation_id': userData['foundation_id'],
       'auth': userData['auth'],
     };
 
+    print('COCHAYUYA:: $formattedData');
     return formattedData;
   }
 }
