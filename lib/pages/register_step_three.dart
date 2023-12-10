@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/register_data_transfer.dart';
-import 'package:petcare_app/services/registration_service.dart';
+import 'package:petcare_app/services/user_registration_service.dart';
 import 'package:petcare_app/utils/validators.dart';
 
 class RegisterStepThree extends StatefulWidget {
@@ -135,7 +135,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
               child: ElevatedButton(
                 key: const Key('button_register_step_three'),
                 onPressed: () async {
-                  if (_formRegisterStepThreeKey.currentState!.validate()) {
+                  if (_formRegisterStepThreeKey.currentState!.validate() && _termAcceptanceController.text != '') {
                     widget.storageData.password = _passwordController.text;
                     widget.storageData.passwordCheck = _passwordCheckController.text;
                     widget.storageData.termAcceptance = _termAcceptanceController.text;

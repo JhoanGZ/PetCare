@@ -28,10 +28,8 @@ Future<void> authenticationLogin(
       // Por scaffold no se debe crear una instancia que no se va a usar siempre, mejora el rendimiento. Se usa microtask
       Future.microtask(() {
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          // La autenticación fue exitosa
           Map<String, dynamic> responseData = json.decode(response.body);
 
-          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
 
           bool userAuth = responseData['auth'] == true;
@@ -49,8 +47,6 @@ Future<void> authenticationLogin(
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
             print('LOGIN EXITOSO!');
-
-
             Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
                 'userData': userData,
               },

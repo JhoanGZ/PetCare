@@ -67,42 +67,32 @@ Future<void> registrationService(
         },
       );
 
-      // Verificar la respuesta de la API y manejarla según sea necesario
       // Por scaffold y snackbar no se debe crear una instancia que no se va a usar siempre, mejora el rendimiento. Se usa microtask
       Future.microtask(() {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           // La autenticación fue exitosa
           var responseData = jsonDecode(response.body);
-
-          // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
 
-          // Guarda los datos que necesitas o realiza otras acciones
-          String userName = responseData['name']
-              .toString(); // Ajusta la clave según la respuesta real
-          String userToken = responseData['token']
-              .toString(); // Ajusta la clave según la respuesta real
-          bool userAuth = responseData['auth'] == true;
-
-          // Navega a la pantalla de inicio y pasa los datos necesarios
-          if (userAuth) {
-            print('LOGIN EXITOSO');
-            Navigator.of(context)
-                .pushNamed(AppRoutes.home, arguments: {userName, userToken});
-          }
-        } else {
-          // El registro falló
-          print('Error en la autenticación: ${response.body}');
+          print('Registro Exítoso');
+          Navigator.of(context).pushNamed(AppRoutes.logIn);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Error en el registro. Verificar conexión.'),
-              duration: Duration(seconds: 3),
+              content: Text('¡Felicitaciones! ¡Ya estás registrado!'),
+              duration: Duration(seconds: 4),
+            ),
+          );
+        } else {
+          print('Error en la autenticación: ${response.body}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error en el registro. $response'),
+              duration: const Duration(seconds: 3),
             ),
           );
         }
       });
     } catch (e) {
-      // Manejar errores de conexión o de la API
       Future.microtask(() {
         print('Error al conectar con la API: $e');
         ScaffoldMessenger.of(context).showSnackBar(
