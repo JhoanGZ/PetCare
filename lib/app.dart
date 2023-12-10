@@ -31,17 +31,30 @@ class PetCareApp extends StatelessWidget {
 
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          
           case AppRoutes.home:
-          final Map<String, dynamic>? arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-          print('en App.Dart ${arguments}userData');
-          if (arguments != null) {
-            print('User Data before passing to Home: $arguments');
-          } else {
-            print('User Data is null in app.dart!!!');
-          }
-          return MaterialPageRoute(builder: (context) {
-            return Home(userData: arguments?['userData'] ?? {});
-          });
+            // Asegurarse `settings.arguments` es un Map<String, dynamic>
+            Map<String, dynamic>? arguments =
+                settings.arguments as Map<String, dynamic>?;
+           print('en App.Dart ${arguments}userData');
+            return MaterialPageRoute(
+              builder: (context) => Home(
+                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
+                userData: arguments?['userData'] ?? 'Invitado',
+              ),
+            );
+
+          // case AppRoutes.home:
+          // final Map<String, dynamic>? arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          // print('en App.Dart ${arguments}userData');
+          // if (arguments != null) {
+          //   print('User Data before passing to Home: $arguments');
+          // } else {
+          //   print('User Data is null in app.dart!!!');
+          // }
+          // return MaterialPageRoute(builder: (context) {
+          //   return Home(userData: arguments?['userData'] ?? {});
+          // });
 
           case AppRoutes.registerStepOne:
             return MaterialPageRoute(

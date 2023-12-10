@@ -33,11 +33,10 @@ Future<void> authenticationLogin(
 
           // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
-          
+
           // Guarda los datos que necesitas o realiza otras acciones
           // dynamic userData = responseData['user'];
           bool userAuth = responseData['auth'] == true;
-
 
           UserDataFormatter formatter = UserDataFormatter();
           Map<String, dynamic> userData =
@@ -53,9 +52,13 @@ Future<void> authenticationLogin(
           if (userAuth) {
             print('LOGIN EXITOSO!');
             // ignore: use_build_context_synchronously
+            // Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
+            //   'userData': userData
+            // },);
             Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
-              'userData': userData
-            },);
+                'userData': userData,
+              },
+            );
           }
           print('User Data después de LOGIN EXITOSO: $userData');
         } else {
@@ -64,13 +67,12 @@ Future<void> authenticationLogin(
           // Puedes mostrar un mensaje de error al usuario
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: /*  */
-                    Text(
-                        'Error en la autenticación. Verifica tus credenciales.'),
-                duration: Duration(seconds: 3),
-              ),
-              );
+            const SnackBar(
+              content: /*  */
+                  Text('Error en la autenticación. Verifica tus credenciales.'),
+              duration: Duration(seconds: 3),
+            ),
+          );
         }
       });
     } catch (e) {
