@@ -67,6 +67,12 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <style id="splash-screen-style">
     .flutter-loader {
       z-index: 999999;
@@ -81,7 +87,7 @@
         z-index: 999998;
         opacity: 1;
         /* animation type and duration */
-        transition: opacity 0.25s;
+        transition: opacity 0.5s;
         background-color: #FFFFFF;
               -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
@@ -153,7 +159,7 @@
       setTimeout(function () {
         splashElement.remove();
         document.getElementById("splash-screen-script")?.remove();
-      }, 750 /* animation time + wait rendering and others(500ms) */);
+      }, 1000 /* animation time + wait rendering and others(500ms) */);
     }
   </script>
 </head>
@@ -165,6 +171,9 @@
         <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
     </picture>
   </div>
+  
+  
+  
   
   
   
