@@ -78,7 +78,7 @@ Future<void> registrationService(
           Navigator.of(context).pushNamed(AppRoutes.logIn);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('¡Felicitaciones! ¡Ya estás registrado!'),
+              content: Text('¡Felicitaciones! ¡Ya estás registrado!👍'),
               duration: Duration(seconds: 4),
             ),
           );
@@ -86,7 +86,7 @@ Future<void> registrationService(
           print('Error en la autenticación: ${response.body}');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Error en el registro. $response'),
+              content: Text('Error en el registro 😶. $response'),
               duration: const Duration(seconds: 3),
             ),
           );
@@ -98,7 +98,7 @@ Future<void> registrationService(
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.',
+              'Error al conectar con la API. Por favor, inténtalo de nuevo.😶‍🌫️',
               textAlign: TextAlign.center,
             ),
             duration: Duration(seconds: 3),

@@ -145,7 +145,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Para registrarse debe aceptar los términos y condiciones',
+                          'Todos los datos deben estar llenos y sin avisos de llenado 😺',
                           textAlign: TextAlign.center,
                         ),
                       ),
