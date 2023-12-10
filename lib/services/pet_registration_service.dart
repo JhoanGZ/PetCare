@@ -1,54 +1,103 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:petcare_app/config/app_routes.dart';
 
-Map<String, dynamic> _petData = {
-  // EJEMPLO DE CÓMO SE VEN LOS DATOS QUE SE ENVÍAN
-// ESTA ES LA ESTRUCTURA Y DATOS QUE DEBEN SER ENVIADOS A LA API..
-  'vacunas': 'Vacuna contra la rabia',
-  'nombre': 'Firulais',
-  'raza': 'Labrador Retriever',
-  'peso': 10,
-  'chip': 123456789,
-  'sexo':
-      1, // 0 para masculino, 1 para femenino (ajustar según la convención de tu API)
-  'esteril':
-      0, // 1 para esterilizado, 0 para no esterilizado (ajustar según la convención de tu API)
-  'edad': 3,
-  'anotaciones': 'Es un perro muy juguetón',
-};
+Future<void> petRegistration(
+    GlobalKey<FormState> formKey,
+    File petPhoto,
+    TextEditingController nameController,
+    TextEditingController vaccineController,
+    TextEditingController raceController,
+    TextEditingController chipController,
+    TextEditingController weightController,
+    TextEditingController sterilizationController,
+    TextEditingController genderController,
+    TextEditingController ageController,
+    TextEditingController descriptionController,
+    BuildContext context) async {
+  print('Datos recibidos en petRegistration:');
+  print('Pet Photo: ${petPhoto.path}');
+  print('Name: ${nameController.text}');
+  print('Vaccine: ${vaccineController.text}');
+  print('Race: ${raceController.text}');
+  print('Chip: ${chipController.text}');
+  print('Weight: ${weightController.text}');
+  print('Sterilization: ${sterilizationController.text}');
+  print('Gender: ${genderController.text}');
+  print('Age: ${ageController.text}');
+  print('Description: ${descriptionController.text}');
 
-class PetRegistrationService {
-  Future<void> registerPet(Map<String, dynamic> petData) async {
+  if (formKey.currentState!.validate()) {
+    String name = nameController.text;
+    String vaccine = vaccineController.text;
+    String race = raceController.text;
+    String chip = chipController.text;
+    String weight = weightController.text;
+    String sterilization = sterilizationController.text;
+    String gender = genderController.text;
+    String age = ageController.text;
+    String description = descriptionController.text;
     try {
       final response = await http.post(
         Uri.parse('http://127.0.0.1:8000/api/pets/store'),
         headers: {
           'Accept': 'application/json',
           'Access-Control-Allow-Origin': '*',
+        }, //TODO: ::LN:: Asignar Endpoint
+        body: {
+          'vacuna': vaccine,
+          'nombre': name,
+          'raza': race,
+          'peso': weight,
+          'chip': chip,
+          'sexo': gender,
+          'esteril': sterilization,
+          'edad': age,
+          'anotaciones': description,
         },
-        body:
-            _petData, //TODO::LUIGUI:: Esto usa los datos falsos de la línea 4, debe cambiarse por la variable petData para recibir los datos por parámetros.
       );
 
       Future.microtask(() {
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          // El registro fue exitoso
           var responseData = jsonDecode(response.body);
+
           print('Respuesta de la API: $responseData');
 
-          // Puedes realizar acciones adicionales con la respuesta, si es necesario
+          String userData = responseData['user'];
+          bool userAuth = responseData['auth'] == true;
+
+          if (userAuth) {
+            Navigator.of(context).pushNamed(
+              AppRoutes.home,
+              arguments: {userData},
+            );
+          }
         } else {
-          // El registro falló
           print('Error en el registro: ${response.body}');
-          // Puedes manejar el error según tus necesidades
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Error con la conexión.',
+                textAlign: TextAlign.center,
+              ),
+              duration: Duration(seconds: 3),
+            ),
+          );
         }
       });
     } catch (e) {
-      // Manejar errores de conexión o de la API
-      Future.microtask(() {
-        print('Error al conectar con la API: $e');
-        // Puedes manejar el error según tus necesidades
-      });
+      print('Error al conectar con la API: $e');
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
   }
 }
