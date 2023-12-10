@@ -34,8 +34,6 @@ Future<void> authenticationLogin(
           // Puedes hacer algo con la respuesta, por ejemplo, almacenar un token
           print('Respuesta de la API: $responseData');
 
-          // Guarda los datos que necesitas o realiza otras acciones
-          // dynamic userData = responseData['user'];
           bool userAuth = responseData['auth'] == true;
 
           UserDataFormatter formatter = UserDataFormatter();
@@ -51,10 +49,8 @@ Future<void> authenticationLogin(
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
             print('LOGIN EXITOSO!');
-            // ignore: use_build_context_synchronously
-            // Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
-            //   'userData': userData
-            // },);
+
+
             Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
                 'userData': userData,
               },

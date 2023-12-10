@@ -4,6 +4,7 @@ import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
+import 'package:petcare_app/services/pet_index_service.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class Home extends StatefulWidget {
@@ -16,9 +17,24 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  late List<dynamic> petData; // Variable para almacenar los datos de pets
   @override
   void initState() {
     super.initState();
+    // Llama a la función que obtiene los datos de pets al iniciar la pantalla
+    fetchPetData();
+  }
+
+  void fetchPetData() async {
+    try {
+      var petService = PetIndexService();
+      petData = await petService.getPetList();
+      setState(() {
+        // Actualiza el estado para que la interfaz de usuario refleje los cambios
+      });
+    } catch (e) {
+      print('Error al obtener los datos de pets: $e');
+    }
   }
 
   @override
@@ -30,7 +46,7 @@ class HomeState extends State<Home> {
     print('userData in home_build : $widget.userData');
     print('Nombre: $nombre');
     print('user: $user');
-
+    print('Los datos de pets son: $petData');
     bool showButtons = widget.userData['foundation_id'] == 0 ? false : true;
     print('aqui se muestra toda la wea ${widget.userData}');
     return Scaffold(
