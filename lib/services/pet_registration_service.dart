@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/config/app_urls.dart';
 
 Future<void> petRegistration(
     GlobalKey<FormState> formKey,
@@ -18,7 +19,7 @@ Future<void> petRegistration(
     TextEditingController ageController,
     TextEditingController descriptionController,
     BuildContext context
-    
+
   ) async {
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
@@ -44,7 +45,7 @@ Future<void> petRegistration(
     String description = descriptionController.text;
     try {
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/pets/store'),
+        Uri.parse('${AppUrls.baseUrlLocal}/api/pets/store'),
         headers: {
           'Accept': 'application/json',
           'Access-Control-Allow-Origin': '*',

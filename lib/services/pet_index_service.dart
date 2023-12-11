@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:petcare_app/config/app_urls.dart';
+
 class PetIndexService {
   Future<List<dynamic>> getPetList(apiToken) async {
     // Obtener el token de tu lugar de almacenamiento (preferiblemente seguro)
@@ -10,7 +12,8 @@ class PetIndexService {
     try {
       // 1. Realiza una solicitud GET a la URL proporcionada
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:8000/api/pets/index'),
+        
+        Uri.parse('${AppUrls.baseUrlLocal}/api/pets/index'),
         headers: {
           'Authorization': 'Bearer $apiToken',
           'Accept': 'application/json',
