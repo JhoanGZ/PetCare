@@ -119,10 +119,11 @@ class HomeState extends State<Home> {
                           AppRoutes.ngoProfile,
                           arguments: {
                             'userData': widget.userData,
-                            'foundationIdClick':
-                                petData[index]['idFundacion'].toString()
+                            'foundationIdClick': petData[index]['idFundacion'],
+                            'petData': petData
                           },
                         );
+
                         print('todo bien');
                       },
                       child: Image.asset(

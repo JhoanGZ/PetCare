@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class NgoProfile extends StatefulWidget {
@@ -21,21 +20,32 @@ class NgoProfile extends StatefulWidget {
 
 class NgoProfileState extends State<NgoProfile> {
   late TextEditingController _searchController;
-  List<ItemData> filteredItems = [];
+  List<dynamic> filteredPets = [];
 
   @override
-  void initState() {
+    void initState() {
     super.initState();
     _searchController = TextEditingController();
-    filteredItems = items; // Inicialmente, muestra todos los elementos
+    filterPetsByFoundation();
     _searchController.addListener(onSearchChanged);
+  }
+
+  void filterPetsByFoundation() {
+    setState(() {
+      filteredPets = widget.petData
+          .where((pet) =>
+              pet['foundation']['id'] == widget.foundationIdClick)
+          .toList();
+    });
   }
 
   void onSearchChanged() {
     String query = _searchController.text.toLowerCase();
     setState(() {
-      filteredItems = items
-          .where((item) => item.idPet.toLowerCase().contains(query))
+      filteredPets = widget.petData
+          .where((pet) =>
+              pet['nombre'].toLowerCase().contains(query) &&
+              pet['foundation']['id'] == widget.foundationIdClick)
           .toList();
     });
   }
@@ -215,22 +225,22 @@ class NgoProfileState extends State<NgoProfile> {
                 crossAxisSpacing: 2.0,
                 mainAxisSpacing: 2.0,
               ),
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                final item = filteredItems[index];
+            itemCount: filteredPets.length,
+            itemBuilder: (context, index) {
+            final pet = filteredPets[index];
                 return GestureDetector(
                   onTap: () {
                     // Acción cuando se toca un elemento
                   },
-                  child: GridTile(
-                    footer: GridTileBar(
-                      backgroundColor: Colors.black45,
-                      title: Text(item.idPet),
-                    ),
-                    child: Image.asset(
-                      item.photo,
-                      fit: BoxFit.cover,
-                    ),
+            child: GridTile(
+              footer: GridTileBar(
+                backgroundColor: Colors.black45,
+                title: Text(pet['nombre']),
+              ),
+              child: Image.asset(
+                pet['imagen'],
+                fit: BoxFit.cover,
+              ),
                   ),
                 );
               },
