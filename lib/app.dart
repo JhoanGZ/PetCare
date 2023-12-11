@@ -104,11 +104,18 @@ class PetCareApp extends StatelessWidget {
                 builder: (context) => const RetrievePassChange());
 
           case AppRoutes.adoptionRequest:
-            String? itemID = settings.arguments as String?;
+            Map<String, dynamic>? arguments = settings.arguments as Map<String, dynamic>?;
+
+            // Cambia el tipo de petData de List<dynamic> a Map<String, dynamic>
+            Map<String, dynamic> petData = arguments?['petData'] ?? <String, dynamic>{};
 
             return MaterialPageRoute(
-              builder: (context) => AdoptionRequest(itemID: itemID ?? ''),
+              builder: (context) => AdoptionRequest(
+                userData: arguments?['userData'] ?? 'Invitado',
+                petData: petData,
+              ),
             );
+
 
           case AppRoutes.adoptionConfirm:
             return MaterialPageRoute(
@@ -161,7 +168,7 @@ class PetCareApp extends StatelessWidget {
                 settings.arguments as Map<String, dynamic>?;
 
             final String photoPet = arguments?['photoPet'] ?? '';
-            final String idPet = arguments?['idPet'] ?? '';
+            final int idPet = arguments?['idPet'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => BuyMe(

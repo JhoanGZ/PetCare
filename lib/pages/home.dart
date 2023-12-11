@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/services/pet_index_service.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
@@ -40,7 +39,9 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final showButtons = widget.userData['user']['foundation']['id'] != null ? true : false; //TODO: CAMBIAR ESTO EN EL ESTADO FINAL A == null (ahora se usa para testing)
+    final showButtons = widget.userData['user']['foundation']['id'] != null
+        ? true
+        : false; //TODO: CAMBIAR ESTO EN EL ESTADO FINAL A == null (ahora se usa para testing)
     dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
     dynamic userImage =
         widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
@@ -50,7 +51,8 @@ class HomeState extends State<Home> {
     print('Los datos de pets son: $petData');
 
     print('aqui se muestra toda la wea ${widget.userData}');
-    print('widget.userData fundacion${widget.userData['user']['foundation']['id']}');
+    print(
+        'widget.userData fundacion${widget.userData['user']['foundation']['id']}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -73,21 +75,20 @@ class HomeState extends State<Home> {
             ),
             GestureDetector(
               onTap: () {
-                
                 if (user['foundation']['id'] == null) {
                   Navigator.of(context).pushNamed(
                     AppRoutes.userProfile,
-                    arguments: {'userData': widget.userData,
-  
+                    arguments: {
+                      'userData': widget.userData,
                     },
                   );
                 } else {
-                 
                   Navigator.of(context).pushNamed(
                     AppRoutes.ngoProfile,
                     arguments: {
                       'userData': widget.userData,
-                      'foundationIdClick': widget.userData['user']['foundation']['id'],
+                      'foundationIdClick': widget.userData['user']['foundation']
+                          ['id'],
                       'petData': petData
                     },
                   );
@@ -169,12 +170,14 @@ class HomeState extends State<Home> {
                         child: GestureDetector(
                           child: IconButton(
                             onPressed: () {
+                              print(
+                                  'este dato se quiere enviar a buyMe: ${petData[index]['id']}');
                               Navigator.of(context).pushNamed(
                                 AppRoutes.buyMe,
                                 arguments: {
                                   'userData': widget.userData,
                                   'photoPet': petData[index]['imagen'],
-                                  'idPet' : petData[index]['id']
+                                  'idPet': petData[index]['id']
                                 },
                               );
                             },
@@ -197,14 +200,16 @@ class HomeState extends State<Home> {
                         child: GestureDetector(
                           child: IconButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AdoptionRequest(
-                                    itemID: petData[index]['id'],
-                                  ),
-                                ),
-                              );
+                              print(
+                                  'este dato se quiere enviar a adoptionrequest: ${petData[index]}');
+                            Navigator.of(context).pushNamed(
+                              AppRoutes.adoptionRequest,
+                              arguments: {
+                                'userData': widget.userData,
+                                'petData': petData[index],
+                              },
+                            );
+
                             },
                             icon: Image.asset(
                               'assets/images/icon_adoption_home.png',
