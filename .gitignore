@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 #Related to url
-#/lib/config/app_urls.dart
+/lib/config/app_urls.dart
