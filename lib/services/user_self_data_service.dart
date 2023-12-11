@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:petcare_app/config/app_urls.dart';
+
 Future<void> userSelfData(
   int userId,
 ) async {
   try {
     final response = await http.post(
-      // URL no cel
-       Uri.parse('http://127.0.0.1:8000/api/user/show/$userId'), 
-      // URL cel JG      
-      //Uri.parse('http://192.168.0.16:8000/api/user/show/$userId'),
+      Uri.parse('${AppUrls.baseUrlLocal}/api/user/show/$userId'),
     );
 
     Future.microtask(() {

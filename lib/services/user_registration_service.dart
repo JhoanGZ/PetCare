@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/config/app_urls.dart';
 import 'package:petcare_app/models/register_data_transfer.dart';
 
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -44,7 +45,8 @@ Future<void> registrationService(
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/register'),
+        //URL 
+        Uri.parse('${AppUrls.baseUrlLocal}/api/register'),
         headers: {
           'Accept': 'application/json',
           'Access-Control-Allow-Origin': '*',

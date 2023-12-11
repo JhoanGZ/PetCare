@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:petcare_app/config/app_routes.dart';
+import 'package:petcare_app/config/app_urls.dart';
 import 'package:petcare_app/models/user_manager.dart';
 
 // Define una función para manejar la lógica de autenticación
@@ -19,10 +20,7 @@ Future<void> authenticationLogin(
     try {
       // Realizar la solicitud a la API
       final response = await http.post(
-        // URL no cel
-        Uri.parse('http://127.0.0.1:8000/api/login'), 
-        // URL cel JG
-        //Uri.parse('http://192.168.0.16:8000/api/login'), 
+        Uri.parse('${AppUrls.baseUrlLocal}/api/login'), 
         body: {
           'email': email,
           'password': password,

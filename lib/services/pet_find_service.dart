@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:petcare_app/config/app_urls.dart';
 
 class PetFindService {
   // Asynchronous method that takes a petId as an argument.
@@ -8,7 +9,7 @@ class PetFindService {
     try {
       // Sending an HTTP GET request to the server.
       final response = await http
-          .get(Uri.parse('http://127.0.0.1:8000/api/pets/show/$petId'));
+        .get(Uri.parse('${AppUrls.baseUrlLocal}/api/pets/show/$petId'));
 
       // If the HTTP request is successful (status code 200),
       // it proceeds to parse the JSON response.
