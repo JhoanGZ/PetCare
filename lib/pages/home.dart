@@ -61,8 +61,8 @@ class HomeState extends State<Home> {
         ),
         title: Row(
           children: [
-            Image.asset(
-              (userImage),
+Image.asset(
+              'assets/images/logo_petcare_blanco.png',
               width: 21,
               height: 21,
             ),
