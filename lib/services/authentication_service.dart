@@ -20,9 +20,9 @@ Future<void> authenticationLogin(
       // Realizar la solicitud a la API
       final response = await http.post(
         // URL no cel
-        // Uri.parse('http://127.0.0.1:8000/api/login'), 
+        Uri.parse('http://127.0.0.1:8000/api/login'), 
         // URL cel JG
-        Uri.parse('http://192.168.0.16:8000/api/login'), 
+        //Uri.parse('http://192.168.0.16:8000/api/login'), 
         body: {
           'email': email,
           'password': password,
