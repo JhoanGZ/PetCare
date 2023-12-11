@@ -7,9 +7,13 @@ import 'package:petcare_app/widgets/expandable_text.dart';
 
 class NgoProfile extends StatefulWidget {
   final dynamic userData;
-  final String foundationIdClick;
+  final int foundationIdClick;
+  final List<dynamic> petData;
   const NgoProfile(
-      {super.key, required this.userData, required this.foundationIdClick});
+      {super.key,
+      required this.userData,
+      required this.foundationIdClick,
+      required this.petData});
 
   @override
   NgoProfileState createState() => NgoProfileState();
@@ -44,9 +48,9 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.userData['foundation_id'] != '0' &&
-        widget.userData['foundation_id'] == widget.foundationIdClick;
-
+    bool showButtons = widget.userData['user']['foundation']['id'] != null &&
+        widget.userData['user']['foundation']['id'] == widget.foundationIdClick;
+    print('petData en ngoProfile: ${widget.petData}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -66,6 +70,7 @@ class NgoProfileState extends State<NgoProfile> {
               width: 21,
               height: 21,
             ),
+            Text('${widget.foundationIdClick}')
           ],
         ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
