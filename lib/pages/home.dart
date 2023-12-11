@@ -28,7 +28,7 @@ class HomeState extends State<Home> {
     try {
       var petService = PetIndexService();
       petData = await petService.getPetList(widget.userData['user'][
-          'api_token']); //TODO::LUIGUI:: HAY QUE PONER AQUI userData['user']['apiToken']
+          'api_token']); 
       setState(() {
         // Actualiza el estado para que la interfaz de usuario refleje los cambios
       });
@@ -268,7 +268,7 @@ class HomeState extends State<Home> {
                   children: [
                     const SizedBox(width: 8),
                     ExpandText(
-                      text: '${petData[index]['nombre'] ?? ''}\nRaza: ${petData[index]['raza'] ?? ''}\nEdad: ${petData[index]['edad'] ?? ''}\nEsterilizacion: ${petData[index]['esteril'] ?? ''}\nVacunas: ${petData[index]['vacunas'] ?? ''}\nPeso ${petData[index]['peso'] ?? ''}',
+                      text: '${petData[index]['nombre'] ?? ''}\nRaza: ${petData[index]['raza'] ?? ''}\nEdad: ${petData[index]['edad'] ?? ''} años\nEsterilizacion: ${petData[index]['esteril'] == 0 ? 'No' : 'Si' }\nVacunas: ${petData[index]['vacunas'] ?? ''}\nPeso ${petData[index]['peso'] ?? ''} kg\n ${petData[index]['anotaciones'] ?? ''} ',
                       maxLines: 15,
                     ),
                   ],
