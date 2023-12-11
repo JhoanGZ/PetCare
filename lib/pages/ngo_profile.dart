@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
 
 class NgoProfile extends StatefulWidget {
   final dynamic userData;
-  final String foundationIdClick;
+  final int foundationIdClick;
+  final List<dynamic> petData;
   const NgoProfile(
-      {super.key, required this.userData, required this.foundationIdClick});
+      {super.key,
+      required this.userData,
+      required this.foundationIdClick,
+      required this.petData});
 
   @override
   NgoProfileState createState() => NgoProfileState();
@@ -17,21 +20,32 @@ class NgoProfile extends StatefulWidget {
 
 class NgoProfileState extends State<NgoProfile> {
   late TextEditingController _searchController;
-  List<ItemData> filteredItems = [];
+  List<dynamic> filteredPets = [];
 
   @override
-  void initState() {
+    void initState() {
     super.initState();
     _searchController = TextEditingController();
-    filteredItems = items; // Inicialmente, muestra todos los elementos
+    filterPetsByFoundation();
     _searchController.addListener(onSearchChanged);
+  }
+
+  void filterPetsByFoundation() {
+    setState(() {
+      filteredPets = widget.petData
+          .where((pet) =>
+              pet['foundation']['id'] == widget.foundationIdClick)
+          .toList();
+    });
   }
 
   void onSearchChanged() {
     String query = _searchController.text.toLowerCase();
     setState(() {
-      filteredItems = items
-          .where((item) => item.idPet.toLowerCase().contains(query))
+      filteredPets = widget.petData
+          .where((pet) =>
+              pet['nombre'].toLowerCase().contains(query) &&
+              pet['foundation']['id'] == widget.foundationIdClick)
           .toList();
     });
   }
@@ -44,9 +58,9 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
-    bool showButtons = widget.userData['foundation_id'] != '0' &&
-        widget.userData['foundation_id'] == widget.foundationIdClick;
-
+    bool showButtons = widget.userData['user']['foundation']['id'] != null &&
+        widget.userData['user']['foundation']['id'] == widget.foundationIdClick;
+    print('petData en ngoProfile: ${widget.petData}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -66,6 +80,7 @@ class NgoProfileState extends State<NgoProfile> {
               width: 21,
               height: 21,
             ),
+            Text('${widget.foundationIdClick}')
           ],
         ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
@@ -210,22 +225,22 @@ class NgoProfileState extends State<NgoProfile> {
                 crossAxisSpacing: 2.0,
                 mainAxisSpacing: 2.0,
               ),
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                final item = filteredItems[index];
+            itemCount: filteredPets.length,
+            itemBuilder: (context, index) {
+            final pet = filteredPets[index];
                 return GestureDetector(
                   onTap: () {
                     // Acción cuando se toca un elemento
                   },
-                  child: GridTile(
-                    footer: GridTileBar(
-                      backgroundColor: Colors.black45,
-                      title: Text(item.idPet),
-                    ),
-                    child: Image.asset(
-                      item.photo,
-                      fit: BoxFit.cover,
-                    ),
+            child: GridTile(
+              footer: GridTileBar(
+                backgroundColor: Colors.black45,
+                title: Text(pet['nombre']),
+              ),
+              child: Image.asset(
+                pet['imagen'],
+                fit: BoxFit.cover,
+              ),
                   ),
                 );
               },

@@ -126,15 +126,17 @@ class PetCareApp extends StatelessWidget {
             // Asegurarse `settings.arguments` es un Map<String, dynamic>
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
-
-            final String foundationIdClick =
+            List<dynamic> petData = arguments?['petData'] ?? <dynamic>[];
+            final int foundationIdClick =
                 arguments?['foundationIdClick'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => NgoProfile(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userData: arguments?['userData'] ?? 'Invitado',
-                foundationIdClick: foundationIdClick,
+                foundationIdClick: foundationIdClick, 
+                petData: petData,
+                
               ),
             );
 
@@ -159,12 +161,14 @@ class PetCareApp extends StatelessWidget {
                 settings.arguments as Map<String, dynamic>?;
 
             final String photoPet = arguments?['photoPet'] ?? '';
+            final String idPet = arguments?['idPet'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => BuyMe(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userData: arguments?['userData'] ?? 'Invitado',
                 photoPet: photoPet,
+                idPet: idPet
               ),
             );
 

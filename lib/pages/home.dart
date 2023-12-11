@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   late List<dynamic> petData; // Variable para almacenar los datos de pets
+
   @override
   void initState() {
     super.initState();
@@ -27,8 +28,8 @@ class HomeState extends State<Home> {
   void fetchPetData() async {
     try {
       var petService = PetIndexService();
-      petData = await petService.getPetList(widget.userData['user'][
-          'api_token']); 
+      petData =
+          await petService.getPetList(widget.userData['user']['api_token']);
       setState(() {
         // Actualiza el estado para que la interfaz de usuario refleje los cambios
       });
@@ -39,15 +40,17 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final showButtons = widget.userData['user']['foundation']['id'] != null ? true : false; //TODO: CAMBIAR ESTO EN EL ESTADO FINAL A == null (ahora se usa para testing)
     dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
-    dynamic nombre = widget.userData['nombre'] ?? 'Nombre no disponible';
-    dynamic userImage = widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
-    print('userData in home_build : $widget.userData');
-    print('Nombre: $nombre');
+    dynamic userImage =
+        widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
+    print('userData in home_build : ${widget.userData}');
+
     print('user: $user');
     print('Los datos de pets son: $petData');
-    bool showButtons = widget.userData['foundation_id'] == 0 ? false : true;
+
     print('aqui se muestra toda la wea ${widget.userData}');
+    print('widget.userData fundacion${widget.userData['user']['foundation']['id']}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -70,18 +73,22 @@ class HomeState extends State<Home> {
             ),
             GestureDetector(
               onTap: () {
-                if (user['foundation_id'] != null &&
-                    user['foundation_id'] == '0') {
+                
+                if (user['foundation']['id'] == null) {
                   Navigator.of(context).pushNamed(
                     AppRoutes.userProfile,
-                    arguments: {'userData': widget.userData},
+                    arguments: {'userData': widget.userData,
+  
+                    },
                   );
                 } else {
+                 
                   Navigator.of(context).pushNamed(
                     AppRoutes.ngoProfile,
                     arguments: {
                       'userData': widget.userData,
-                      'foundationIdClick': user['foundation_id']
+                      'foundationIdClick': widget.userData['user']['foundation']['id'],
+                      'petData': petData
                     },
                   );
                 }
@@ -114,13 +121,16 @@ class HomeState extends State<Home> {
                           AppRoutes.ngoProfile,
                           arguments: {
                             'userData': widget.userData,
-                            'foundationIdClick': petData[index]['idFundacion'].toString()
+                            'foundationIdClick': petData[index]['idFundacion'],
+                            'petData': petData
                           },
                         );
+
                         print('todo bien');
                       },
                       child: Image.asset(
-                        petData[index]['foundation']['imagen'] ?? 'assets/images/fundacion perfil.png',
+                        petData[index]['foundation']['imagen'] ??
+                            'assets/images/fundacion perfil.png',
                         width: 38,
                         height: 38,
                       ),
@@ -129,7 +139,8 @@ class HomeState extends State<Home> {
                       width: 8,
                     ),
                     Text(
-                      petData[index]['foundation']['nombre'] ?? 'Fundacion incognita',
+                      petData[index]['foundation']['nombre'] ??
+                          'Fundacion incognita',
                       style: PetCareThemes.nameProfileTextStyle,
                     ),
                   ],
@@ -162,7 +173,8 @@ class HomeState extends State<Home> {
                                 AppRoutes.buyMe,
                                 arguments: {
                                   'userData': widget.userData,
-                                  'photoPet': petData[index]['imagen']
+                                  'photoPet': petData[index]['imagen'],
+                                  'idPet' : petData[index]['id']
                                 },
                               );
                             },
@@ -266,7 +278,8 @@ class HomeState extends State<Home> {
                   children: [
                     const SizedBox(width: 8),
                     ExpandText(
-                      text: '${petData[index]['nombre'] ?? ''}\nRaza: ${petData[index]['raza'] ?? ''}\nEdad: ${petData[index]['edad'] ?? ''} años\nEsterilizacion: ${petData[index]['esteril'] == 0 ? 'No' : 'Si' }\nVacunas: ${petData[index]['vacunas'] ?? ''}\nPeso ${petData[index]['peso'] ?? ''} kg\n ${petData[index]['anotaciones'] ?? ''} ',
+                      text:
+                          '${petData[index]['nombre'] ?? ''}\nRaza: ${petData[index]['raza'] ?? ''}\nEdad: ${petData[index]['edad'] ?? ''} años\nEsterilizacion: ${petData[index]['esteril'] == 0 ? 'No' : 'Si'}\nVacunas: ${petData[index]['vacunas'] ?? ''}\nPeso ${petData[index]['peso'] ?? ''} kg\n ${petData[index]['anotaciones'] ?? ''} ',
                       maxLines: 15,
                     ),
                   ],

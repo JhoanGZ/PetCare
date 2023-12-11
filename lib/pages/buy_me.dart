@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class BuyMe extends StatefulWidget {
-  final String photoPet;
   final dynamic userData;
-  const BuyMe({super.key, required this.photoPet, this.userData});
+  final String photoPet;
+  final String? idPet;
+  const BuyMe(
+      {super.key, required this.photoPet, this.userData, this.idPet});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -31,7 +33,6 @@ class _BuyMeState extends State<BuyMe> {
       statement =
           '🐕 Gracias por ayudar a nuestros animalitos, haremos llegar tu aporte a la mascota que seleccionaste 🐈‍⬛';
     }
-
   }
 
   @override
@@ -43,6 +44,7 @@ class _BuyMeState extends State<BuyMe> {
             child: Padding(
           padding: const EdgeInsets.fromLTRB(35, 67, 30, 0),
           child: Column(children: <Widget>[
+            Text(widget.idPet ?? 'hola nene'),
             Image.asset(
               photoPet,
               width: 200, // Ancho deseado

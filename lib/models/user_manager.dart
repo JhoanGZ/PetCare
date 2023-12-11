@@ -53,6 +53,7 @@ class UserDataFormatter {
         'api_token': userData['user']['api_token'],
         'created_at': userData['user']['created_at'],
         'updated_at': userData['user']['updated_at'],
+        'foundation': userData['user']['foundation'],
       },
       'foundation_id': userData['foundation_id'],
       'auth': userData['auth'],
