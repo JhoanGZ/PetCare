@@ -161,12 +161,14 @@ class PetCareApp extends StatelessWidget {
                 settings.arguments as Map<String, dynamic>?;
 
             final String photoPet = arguments?['photoPet'] ?? '';
+            final String idPet = arguments?['idPet'] ?? '';
 
             return MaterialPageRoute(
               builder: (context) => BuyMe(
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userData: arguments?['userData'] ?? 'Invitado',
                 photoPet: photoPet,
+                idPet: idPet
               ),
             );
 

@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   late List<dynamic> petData; // Variable para almacenar los datos de pets
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,7 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final showButtons = widget.userData['user']['foundation']['id'] != null ? true : false; //TODO: CAMBIAR ESTO EN EL ESTADO FINAL A == null (ahora se usa para testing)
     dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
     dynamic userImage =
         widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
@@ -46,7 +48,7 @@ class HomeState extends State<Home> {
 
     print('user: $user');
     print('Los datos de pets son: $petData');
-    bool showButtons = widget.userData['foundation_id'] == 0 ? false : true;
+
     print('aqui se muestra toda la wea ${widget.userData}');
     print('widget.userData fundacion${widget.userData['user']['foundation']['id']}');
     return Scaffold(
@@ -171,7 +173,8 @@ class HomeState extends State<Home> {
                                 AppRoutes.buyMe,
                                 arguments: {
                                   'userData': widget.userData,
-                                  'photoPet': petData[index]['imagen']
+                                  'photoPet': petData[index]['imagen'],
+                                  'idPet' : petData[index]['id']
                                 },
                               );
                             },
