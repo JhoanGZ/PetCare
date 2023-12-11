@@ -17,7 +17,9 @@ Future<void> petRegistration(
     TextEditingController genderController,
     TextEditingController ageController,
     TextEditingController descriptionController,
-    BuildContext context) async {
+    BuildContext context
+    
+  ) async {
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
   print('Name: ${nameController.text}');
