@@ -293,7 +293,7 @@ class _LogInPageState extends State<LogInPage> {
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacementNamed(
-                          AppRoutes.home,
+                          AppRoutes.contact,
                           // arguments: {'userData': widget.userData},
                         );
                         //TODO: SE CAMBIO ESTO PARA FINES DESARROLLATIVOS

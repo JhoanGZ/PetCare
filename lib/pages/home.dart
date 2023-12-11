@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/models/home_list.dart';
 import 'package:petcare_app/pages/adoption_request.dart';
 import 'package:petcare_app/services/pet_index_service.dart';
 import 'package:petcare_app/widgets/expandable_text.dart';
@@ -29,7 +28,7 @@ class HomeState extends State<Home> {
     try {
       var petService = PetIndexService();
       petData = await petService.getPetList(widget.userData['user'][
-          'api_token']); //TODO::LUIGUI:: HAY QUE PONER AQUI userData['user']['api_token']
+          'api_token']); //TODO::LUIGUI:: HAY QUE PONER AQUI userData['user']['apiToken']
       setState(() {
         // Actualiza el estado para que la interfaz de usuario refleje los cambios
       });
@@ -100,7 +99,7 @@ class HomeState extends State<Home> {
         centerTitle: true,
       ),
       body: ListView.builder(
-        itemCount: items.length,
+        itemCount: petData.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(top: 13),
@@ -115,12 +114,15 @@ class HomeState extends State<Home> {
                           AppRoutes.ngoProfile,
                           arguments: {
                             'userData': widget.userData,
-                            'foundationIdClick': items[index].idfoundation
+                            'foundationIdClick': petData[index]['idFundacion'].toString()
+                           
                           },
+                          
                         );
+                        print('todo bien');
                       },
                       child: Image.asset(
-                        items[index].profileIcon,
+                        petData[index]['foundation']['imagen'] ?? 'assets/images/fundacion perfil.png',
                         width: 38,
                         height: 38,
                       ),
@@ -129,14 +131,14 @@ class HomeState extends State<Home> {
                       width: 8,
                     ),
                     Text(
-                      items[index].title,
+                      petData[index]['foundation']['nombre'] ?? 'Fundacion incognita',
                       style: PetCareThemes.nameProfileTextStyle,
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Image.asset(
-                  items[index].photo,
+                  petData[index]['imagen'] ?? '',
                   width: double.infinity,
                   height: 500,
                   fit: BoxFit.cover,
@@ -162,7 +164,7 @@ class HomeState extends State<Home> {
                                 AppRoutes.buyMe,
                                 arguments: {
                                   'userData': widget.userData,
-                                  'photoPet': items[index].photo
+                                  'photoPet': petData[index]['imagen']
                                 },
                               );
                             },
@@ -189,7 +191,7 @@ class HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AdoptionRequest(
-                                    itemID: items[index].idPet,
+                                    itemID: petData[index]['id'],
                                   ),
                                 ),
                               );
@@ -256,7 +258,7 @@ class HomeState extends State<Home> {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        items[index].title,
+                        petData[index]['foundation']['nombre'] ?? '',
                         style: PetCareThemes.nameProfileTextStyle,
                       ),
                     ),
@@ -266,7 +268,7 @@ class HomeState extends State<Home> {
                   children: [
                     const SizedBox(width: 8),
                     ExpandText(
-                      text: items[index].description,
+                      text: '${petData[index]['nombre'] ?? ''}\nRaza: ${petData[index]['raza'] ?? ''}\nEdad: ${petData[index]['edad'] ?? ''}\nEsterilizacion: ${petData[index]['esteril'] ?? ''}\nVacunas: ${petData[index]['vacunas'] ?? ''}\nPeso ${petData[index]['peso'] ?? ''}',
                       maxLines: 15,
                     ),
                   ],
