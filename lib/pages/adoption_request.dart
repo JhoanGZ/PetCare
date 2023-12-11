@@ -3,10 +3,10 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class AdoptionRequest extends StatefulWidget {
-  final String itemID;
   final dynamic userData;
+  final Map<String, dynamic> petData;
 
-  const AdoptionRequest({super.key, required this.itemID, this.userData});
+  const AdoptionRequest({super.key, this.userData, required this.petData,});
 
   @override
   State<AdoptionRequest> createState() => _AdoptionRequestState();
@@ -20,14 +20,19 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
   void initState() {
     super.initState();
     _nameController = TextEditingController();
-    _nameController.text = widget.itemID; //texto del contenedor
+    _nameController.text =widget.petData['nombre']; //texto del contenedor
   }
 
   @override
   Widget build(BuildContext context) {
+    print(
+        'petData recibido${widget.petData}\nuserData recibido ${widget.userData}');
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Proceso de Adopción', style: PetCareThemes.statementItalicTextStyle,),
+          title: const Text(
+            'Proceso de Adopción',
+            style: PetCareThemes.statementItalicTextStyle,
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(25, 0, 25, 25),
@@ -45,7 +50,7 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
               const SizedBox(
                 height: 20,
               ),
-                Container(
+              Container(
                 margin: const EdgeInsets.only(top: 30, bottom: 30),
                 child: Image.asset(
                   'assets/images/Bruno.jpg',
@@ -54,7 +59,7 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
                 ),
               ),
               Text(
-                '${widget.itemID} está muy feliz por tu interes. \nTener la posibilidad de encontrar un hogar es grandioso',
+                '${widget.petData['nombre']} está muy feliz por tu interes. \nTener la posibilidad de encontrar un hogar es grandioso',
                 style: PetCareThemes.statementTextStyle,
                 textAlign: TextAlign.center,
               ),
@@ -73,7 +78,6 @@ class _AdoptionRequestState extends State<AdoptionRequest> {
               ),
             ],
           ),
-      )
-    );
+        ));
   }
 }

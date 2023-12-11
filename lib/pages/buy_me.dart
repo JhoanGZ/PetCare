@@ -8,8 +8,9 @@ import 'package:petcare_app/services/donation_petcare_service.dart';
 class BuyMe extends StatefulWidget {
   final dynamic userData;
   final String photoPet;
-  final String? idPet;
-  const BuyMe({super.key, required this.photoPet, this.userData, this.idPet});
+  final int? idPet;
+  const BuyMe(
+      {super.key, required this.photoPet, this.userData, this.idPet});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -48,7 +49,7 @@ class _BuyMeState extends State<BuyMe> {
             child: Padding(
           padding: const EdgeInsets.fromLTRB(35, 67, 30, 0),
           child: Column(children: <Widget>[
-            Text(widget.idPet ?? 'hola nene'),
+            Text('${widget.idPet ?? 'hola nene'}'),
             Image.asset(
               photoPet,
               width: 200, // Ancho deseado
