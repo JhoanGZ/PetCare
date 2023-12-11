@@ -51,8 +51,7 @@ class HomeState extends State<Home> {
     print('Los datos de pets son: $petData');
 
     print('aqui se muestra toda la wea ${widget.userData}');
-    print(
-        'widget.userData fundacion${widget.userData['user']['foundation']['id']}');
+    print('widget.userData fundacion${widget.userData['user']['foundation']['id']}');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(

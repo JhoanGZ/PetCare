@@ -23,7 +23,7 @@ class NgoProfileState extends State<NgoProfile> {
   List<dynamic> filteredPets = [];
 
   @override
-    void initState() {
+  void initState() {
     super.initState();
     _searchController = TextEditingController();
     filterPetsByFoundation();
@@ -33,8 +33,7 @@ class NgoProfileState extends State<NgoProfile> {
   void filterPetsByFoundation() {
     setState(() {
       filteredPets = widget.petData
-          .where((pet) =>
-              pet['foundation']['id'] == widget.foundationIdClick)
+          .where((pet) => pet['foundation']['id'] == widget.foundationIdClick)
           .toList();
     });
   }
@@ -58,9 +57,22 @@ class NgoProfileState extends State<NgoProfile> {
 
   @override
   Widget build(BuildContext context) {
+    print('estos son los datos de petData en ngoProfile ${widget.petData}');
+    dynamic foundFoundation;
+    for (var pet in widget.petData) {
+      // Verifica si el valor asociado a la clave 'foundation' es un Map y tiene el id 2
+      if (pet['foundation'] is Map &&
+          pet['foundation']['id'] == widget.foundationIdClick) {
+        foundFoundation = pet['foundation'];
+        break; // Sale del bucle si encuentra la fundación
+      }
+    }
+    print('fundacion encontrada: $foundFoundation');
     bool showButtons = widget.userData['user']['foundation']['id'] != null &&
         widget.userData['user']['foundation']['id'] == widget.foundationIdClick;
     print('petData en ngoProfile: ${widget.petData}');
+    final String description = foundFoundation['descripcion'];
+    final int maxLines = (description.length / 2).toInt();
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -80,7 +92,7 @@ class NgoProfileState extends State<NgoProfile> {
               width: 21,
               height: 21,
             ),
-            Text('${widget.foundationIdClick}')
+
           ],
         ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
@@ -104,7 +116,7 @@ class NgoProfileState extends State<NgoProfile> {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
-                  widget.userData['user']['imagen'],
+                  foundFoundation['imagen'],
                   width: 64,
                   height: 64,
                   fit: BoxFit.cover,
@@ -112,7 +124,7 @@ class NgoProfileState extends State<NgoProfile> {
               ),
               Expanded(
                   child: Text(
-                widget.userData['user']['nombre'],
+                foundFoundation['nombre'],
                 style: PetCareThemes.nameProfileTextStyle,
                 textAlign: TextAlign.center,
               )),
@@ -141,14 +153,14 @@ class NgoProfileState extends State<NgoProfile> {
           Row(children: [
             Container(
                 margin: const EdgeInsets.only(left: 46, right: 100, top: 20),
-                child: const Text(
-                  '96',
+                child: Text(
+                  '${foundFoundation['cantPublicActiva']}',
                   style: PetCareThemes.nameProfileTextStyle,
                 )),
             Container(
                 margin: const EdgeInsets.only(top: 20),
-                child: const Text(
-                  '120',
+                child: Text(
+                  '${foundFoundation['cantAdopciones']}',
                   style: PetCareThemes.nameProfileTextStyle,
                 )),
           ]),
@@ -170,10 +182,9 @@ class NgoProfileState extends State<NgoProfile> {
           // Utilizando el widget ExpandableTextWidget
           Container(
               margin: const EdgeInsets.only(right: 100, left: 20, bottom: 20),
-              child: const ExpandText(
-                text:
-                    'Fundación Esperanza Animal es una organización sin fines de lucro que se forma con el objetivo de mejorar la calidad de vida de las mascotas abandonadas o nacidas en la calle y a la vez disminuir la sobrepoblación a través de la educación y concientizar sobre la temática de Tenencia Responsable en nuestro país.',
-                maxLines: 100,
+              child: ExpandText(
+                text: foundFoundation['descripcion'],
+                maxLines: (maxLines),
               )),
 
           Row(
@@ -225,22 +236,22 @@ class NgoProfileState extends State<NgoProfile> {
                 crossAxisSpacing: 2.0,
                 mainAxisSpacing: 2.0,
               ),
-            itemCount: filteredPets.length,
-            itemBuilder: (context, index) {
-            final pet = filteredPets[index];
+              itemCount: filteredPets.length,
+              itemBuilder: (context, index) {
+                final pet = filteredPets[index];
                 return GestureDetector(
                   onTap: () {
                     // Acción cuando se toca un elemento
                   },
-            child: GridTile(
-              footer: GridTileBar(
-                backgroundColor: Colors.black45,
-                title: Text(pet['nombre']),
-              ),
-              child: Image.asset(
-                pet['imagen'],
-                fit: BoxFit.cover,
-              ),
+                  child: GridTile(
+                    footer: GridTileBar(
+                      backgroundColor: Colors.black45,
+                      title: Text(pet['nombre']),
+                    ),
+                    child: Image.asset(
+                      pet['imagen'],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 );
               },
