@@ -35,6 +35,7 @@ class ValidatorPassword {
   }
 }
 
+//Validador de campos mínimo de 2 carácteres
 class ValidatorLengthField {
 
   static bool isValidFieldLength(String field){

@@ -106,11 +106,6 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                                     ),
                             ),
                             //NOTE: Testear sin el, dar deadline
-                            // if (_image != null)
-                            //   CircleAvatar(
-                            //     backgroundImage: FileImage(_image!),
-                            //     radius: 90.0,
-                            //   ),
                           ],
                         ),
                       ),

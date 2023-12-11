@@ -5,6 +5,7 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/colors.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/pet_registration_service.dart';
+import 'package:petcare_app/utils/validators.dart';
 import 'package:petcare_app/widgets/checkbox.dart';
 import 'package:petcare_app/widgets/droplists.dart';
 import 'package:petcare_app/widgets/up_load_image.dart';
@@ -93,7 +94,6 @@ class _PetProfileState extends State<PetProfile> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    // ignore: unused_local_variable
                     File? selectedImage = await Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -101,9 +101,6 @@ class _PetProfileState extends State<PetProfile> {
                           onPhotoSelected: (File? photo) {
                             setState(() {
                               _image = photo;
-                              // if (_image != null) {
-                              //   petPhoto = _image!;
-                              // }
                             });
                           },
                         ),
@@ -137,11 +134,6 @@ class _PetProfileState extends State<PetProfile> {
                                           fit: BoxFit.cover,
                                         ),
                                 ),
-                                // if (_image != null)
-                                //   CircleAvatar(
-                                //     backgroundImage: FileImage(_image!),
-                                //     radius: 90.0,
-                                //   ),
                               ],
                             ),
                           ),
@@ -163,6 +155,9 @@ class _PetProfileState extends State<PetProfile> {
                         validator: (name) {
                           if (name == null || name.isEmpty) {
                             return 'Campo requerido';
+                          }
+                          if (!ValidatorLengthField.isValidFieldLength(name)) {
+                            return 'Debe tener al menos 3 carácteres';
                           }
                           return null;
                         },
@@ -197,6 +192,9 @@ class _PetProfileState extends State<PetProfile> {
                         validator: (race) {
                           if (race == null || race.isEmpty) {
                             return 'Campo requerido';
+                          }
+                          if (!ValidatorLengthField.isValidFieldLength(race)) {
+                            return 'Debe tener al menos 3 carácteres';
                           }
                           return null;
                         },
