@@ -41,8 +41,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
     dynamic nombre = widget.userData['nombre'] ?? 'Nombre no disponible';
-    dynamic userImage =
-        widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
+    dynamic userImage = widget.userData['imagen'] ?? 'assets/images/pic_default_user.png';
     print('userData in home_build : $widget.userData');
     print('Nombre: $nombre');
     print('user: $user');

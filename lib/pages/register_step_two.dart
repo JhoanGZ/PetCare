@@ -3,6 +3,7 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/models/register_data_transfer.dart';
 import 'package:petcare_app/pages/register_step_three.dart';
+import 'package:petcare_app/utils/validators.dart';
 import 'package:petcare_app/widgets/date_formatter.dart';
 
 class RegisterStepTwo extends StatefulWidget {
@@ -66,6 +67,9 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           if (phone == null || phone.isEmpty) {
                             return 'Celular requerido';
                           }
+                          if (!ValidatorLengthField.isValidFieldLength(phone)) {
+                            return 'el celular debe ser mínimo 3 números';
+                          }
                           return null;
                         },
                         keyboardType: TextInputType.number,
@@ -81,6 +85,9 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           if (address == null || address.isEmpty) {
                             return 'Dirección requerida';
                           }
+                          if(!ValidatorLengthField.isValidFieldLength(address)){
+                            return 'La dirección debe tener al menos 3 carácteres';
+                          }
                           return null;
                         },
                         decoration: PetCareInputStyle(labelText: ' Dirección')
@@ -89,18 +96,6 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 15),
-                      // child: TextFormField(
-                      //   controller: _dateBirthController,
-                      //   validator: (dateBirth) {
-                      //     if (dateBirth == null || dateBirth.isEmpty) {
-                      //       return 'Fecha de Nacimiento requerida';
-                      //     }
-                      //     return null;
-                      //   },
-                      //   decoration: PetCareInputStyle(
-                      //     labelText: ' Fecha de Nacimiento',
-                      //   ).regularInput,
-                      // ),
                       child: TextFormField(
                         controller: _dateBirthController,
                         readOnly: true,
@@ -108,8 +103,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           labelText: 'Fecha de Nacimiento',
                         ).regularInput,
                         onTap: () async {
-                          DateTime? pickedDate =
-                              await DateFormatter.selectDate(context);
+                          DateTime? pickedDate = await DateFormatter.selectDate(context);
                           if (pickedDate != null) {
                             setState(() {
                               _dateBirthController.text =
@@ -187,10 +181,10 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               child: ElevatedButton(
                 // key: const Key('button_register_step_two'),
                 onPressed: () async {
-                  // COMMENT: Se comenta código de validación por implementación
-                  if (_formRegisterStepTwoKey.currentState!.validate() &&
-                          isMale ||
-                      isFemale) {
+                  print('Fecha de Nacimiento: ${_dateBirthController.text}');
+                  print('isMale: $isMale, isFemale: $isFemale');
+                  
+                  if (_formRegisterStepTwoKey.currentState!.validate() && (isMale || isFemale) && _dateBirthController.text != '') {
                     widget.storageData.address = _addressController.text;
                     widget.storageData.phone = _phoneController.text;
                     widget.storageData.dateBirth = _dateBirthController.text;
@@ -208,7 +202,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Seleccione una opción de género 🐶! ',
+                          'Todos los datos deben estár llenos 🐶! ',
                           textAlign: TextAlign.center,
                         ),
                       ),

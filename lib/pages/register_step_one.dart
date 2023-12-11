@@ -139,6 +139,9 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           if (!ValidatorMailRegister.isValidEmail(email)) {
                             return 'Ingrese un correo valido';
                           }
+                          if (!ValidatorLengthField.isValidFieldLength(email)) {
+                            return 'Debe contener un mínimo de 6 carácteres';
+                          }
                           return null;
                         },
                         decoration:
@@ -172,6 +175,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                           if (firstName == null || firstName.isEmpty) {
                             return 'Nombre Requerido';
                           }
+                          if (!ValidatorLengthField.isValidFieldLength(
+                              firstName)) {
+                            return 'Debe tener al menos 2 carácteres';
+                          }
                           return null;
                         },
                         decoration: PetCareInputStyle(labelText: ' Nombre')
@@ -185,6 +192,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                         validator: (lastName) {
                           if (lastName == null || lastName.isEmpty) {
                             return 'Apellido requerido';
+                          }
+                          if (!ValidatorLengthField.isValidFieldLength(
+                              lastName)) {
+                            return 'Debe tener al menos 2 carácteres';
                           }
                           return null;
                         },

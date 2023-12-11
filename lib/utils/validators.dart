@@ -13,7 +13,7 @@ class ValidatorsRutRegister {
   }
   // Constraints - Casos especiales
   static bool _isValidRutConstraints(String rut) {
-    final List<String> invalidRuts = ['0000000-0', '1111111-1', '5555555-5', '1-9', '7777777', '5555555'];
+    final List<String> invalidRuts = ['0.000.000-0', '1.111.111-1', '5.555.555-5', '1-9', '7.777.777-7'];
     return !invalidRuts.contains(rut.trim());
   }
 }
@@ -32,5 +32,13 @@ class ValidatorPassword {
   static bool isValidPassword(String password) {
     const minimumLengthPassword = 6;
     return password.length >= minimumLengthPassword;
+  }
+}
+
+class ValidatorLengthField {
+
+  static bool isValidFieldLength(String field){
+    const minimumLengthField = 2;
+    return field.length >= minimumLengthField;
   }
 }

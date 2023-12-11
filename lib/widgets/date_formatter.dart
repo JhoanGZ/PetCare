@@ -24,6 +24,17 @@ class DateFormatter {
     );
   }
 
+  static bool _isUnderage(DateTime date) {
+    final currentDate = DateTime.now();
+    final age = currentDate.year -
+        date.year -
+        (currentDate.month > date.month ||
+                (currentDate.month == date.month && currentDate.day >= date.day)
+            ? 0
+            : 1);
+    return age < 18;
+  }
+  
   static void handleDateController(
     TextEditingController dateController,
     BuildContext context,
@@ -41,6 +52,7 @@ class DateFormatter {
             ),
           );
         }
+      
         if (onDateSelected != null) {
           onDateSelected(parsedDate);
         }
@@ -48,14 +60,5 @@ class DateFormatter {
     });
   }
 
-  static bool _isUnderage(DateTime date) {
-    final currentDate = DateTime.now();
-    final age = currentDate.year -
-        date.year -
-        (currentDate.month > date.month ||
-                (currentDate.month == date.month && currentDate.day >= date.day)
-            ? 0
-            : 1);
-    return age < 18;
-  }
+  
 }
