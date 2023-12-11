@@ -7,20 +7,21 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/config/app_urls.dart';
 
 Future<void> petRegistration(
-    GlobalKey<FormState> formKey,
-    File petPhoto,
-    TextEditingController nameController,
-    TextEditingController vaccineController,
-    TextEditingController raceController,
-    TextEditingController chipController,
-    TextEditingController weightController,
-    TextEditingController sterilizationController,
-    TextEditingController genderController,
-    TextEditingController ageController,
-    TextEditingController descriptionController,
-    BuildContext context
+  GlobalKey<FormState> formKey,
+  File petPhoto,
+  TextEditingController nameController,
+  TextEditingController vaccineController,
+  TextEditingController raceController,
+  TextEditingController chipController,
+  TextEditingController weightController,
+  TextEditingController sterilizationController,
+  TextEditingController genderController,
+  TextEditingController ageController,
+  TextEditingController descriptionController,
+  String apiToken,
+  BuildContext context
 
-  ) async {
+) async {
   print('Datos recibidos en petRegistration:');
   print('Pet Photo: ${petPhoto.path}');
   print('Name: ${nameController.text}');
@@ -32,6 +33,7 @@ Future<void> petRegistration(
   print('Gender: ${genderController.text}');
   print('Age: ${ageController.text}');
   print('Description: ${descriptionController.text}');
+  print('ApiToken: $apiToken');
 
   if (formKey.currentState!.validate()) {
     String name = nameController.text;
@@ -60,6 +62,7 @@ Future<void> petRegistration(
           'esteril': sterilization,
           'edad': age,
           'anotaciones': description,
+          'api_token': apiToken
         },
       );
 
@@ -73,8 +76,17 @@ Future<void> petRegistration(
           bool userAuth = responseData['auth'] == true;
 
           if (userAuth) {
-            Navigator.of(context).pushNamed(
-              AppRoutes.home,
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Mascota Registrada 🤩',
+                  textAlign: TextAlign.center,
+                ),
+                duration: Duration(seconds: 3),
+              ),
+            );
+            Navigator.of(context).pushReplacementNamed(
+              AppRoutes.ngoProfile,
               arguments: {userData},
             );
           }

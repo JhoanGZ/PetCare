@@ -46,7 +46,7 @@ class PetCareCheckBoxState extends State<PetCareCheckBox> {
         ),
         Text(
           widget.labelText,
-          style: PetCareThemes.statementTextStyle,// Estilos del texto
+          style: PetCareThemes.statementTextStyle,
         ),
       ],
     );

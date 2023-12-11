@@ -51,7 +51,7 @@ class _LogInPageState extends State<LogInPage> {
                 Container(
                   margin: const EdgeInsets.only(top: 37, bottom: 45.82),
                   child: const Text(
-                    'PetCare es financiada de aportes voluntarios y estatales para lograr dar hogar a mascotas en situación de rescate.',
+                    'PetCare se financia con contribuciones voluntarias y estatales para conseguir dar hogar a las mascotas en situación de rescate.',
                     textAlign: TextAlign.center,
                     style: PetCareThemes.statementTextStyle,
                   ),
