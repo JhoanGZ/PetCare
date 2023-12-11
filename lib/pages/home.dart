@@ -115,9 +115,7 @@ class HomeState extends State<Home> {
                           arguments: {
                             'userData': widget.userData,
                             'foundationIdClick': petData[index]['idFundacion'].toString()
-                           
                           },
-                          
                         );
                         print('todo bien');
                       },
