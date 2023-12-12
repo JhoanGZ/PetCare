@@ -12,9 +12,13 @@ import 'package:petcare_app/widgets/up_load_image.dart';
 
 class PetProfile extends StatefulWidget {
   final dynamic userData;
+  final int foundationIdClick;
+  final List<dynamic> petData;
   const PetProfile({
     super.key,
     required this.userData,
+    required this.foundationIdClick,
+    required this.petData,
   });
 
   @override
@@ -53,7 +57,9 @@ class _PetProfileState extends State<PetProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final String apitoken = widget.userData['user']['api_token']; //Gracias Francis! te pase userData completo jhoan, esta es la ruta para acceder al apitoken
+    final String apitoken = widget.userData['user'][
+        'api_token']; //Gracias Francis! te pase userData completo jhoan, esta es la ruta para acceder al apitoken
+    print('este es el apitoken en pet_profile $apitoken');
     return Scaffold(
         appBar: AppBar(
           shape: const RoundedRectangleBorder(
@@ -339,14 +345,29 @@ class _PetProfileState extends State<PetProfile> {
                         apitoken,
                         context,
                       );
+                      print(
+                          'esto es widget.userData[foundation_id] ${widget.userData['foundation_id']}');
+                      print('esto es widget.userData ${widget.userData}');
 
                       Future.microtask(() {
-                        Navigator.of(context)
-                            .popAndPushNamed(AppRoutes.ngoProfile, arguments: {
-                          'userData': widget.userData,
-                          'foundationIdClick': widget.userData['foundation_id']
-                        });
+                        Navigator.of(context).pushNamed(
+                          AppRoutes.ngoProfile,
+                          arguments: {
+                            'userData': widget.userData,
+                            'foundationIdClick': widget.foundationIdClick,
+                            'petData': widget.petData
+                          },
+                        );
                       });
+                      //                     Navigator.of(context).pushNamed(
+                      // AppRoutes.ngoProfile,
+                      // arguments: {
+                      //   'userData': widget.userData,
+                      //   'foundationIdClick': widget.userData['user']['foundation']
+                      //       ['id'],
+                      //   'petData': petData
+                      // },
+                      // );
                     }
                   },
                   style: PetCareButtonStyles.elevatedButtonStyle,

@@ -201,12 +201,14 @@ class NgoProfileState extends State<NgoProfile> {
                       //   'foundationId': widget.userData,
                       // },
                       // );
-                      Navigator.of(context).pushNamed(
-                        AppRoutes.petProfile,
-                        arguments: {
-                          'userData': widget.userData,
-                        },
-                      );
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.petProfile,
+                    arguments: {
+                      'userData': widget.userData,
+                      'foundationIdClick': widget.foundationIdClick,
+                      'petData': widget.petData
+                    },
+                  );
                     },
                     style: PetCareLittleButtonStyles.elevatedButtonStyle,
                     child: const Text('Agregar nuevo'),
