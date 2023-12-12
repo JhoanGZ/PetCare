@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/design/themes.dart';
 import 'package:petcare_app/services/donation_pet_service.dart';
 import 'package:petcare_app/services/donation_petcare_service.dart';
@@ -94,23 +93,23 @@ class _BuyMeState extends State<BuyMe> {
                                 donationAmount,
                                 context,
                               );
-                              Future.microtask(() {
-                                Navigator.of(context).popAndPushNamed(
-                                  AppRoutes.logIn,
-                                );
-                              });
+                              // Future.microtask(() {
+                              //   Navigator.of(context).popAndPushNamed(
+                              //     AppRoutes.logIn,
+                              //   );
+                              // });
                             } else {
                               await sendDonationPet(_formBuyMeKey,
                                   donationAmount, idPet, idUser, context);
-                              Future.microtask(() {
-                                Navigator.of(context).popAndPushNamed(
-                                    AppRoutes.home,
-                                    arguments: {
-                                      'userData': widget.userData,
-                                      'foundationIdClick':
-                                          widget.userData['foundation_id']
-                                    });
-                              });
+                              // Future.microtask(() {
+                              //   Navigator.of(context).popAndPushNamed(
+                              //       AppRoutes.home,
+                              //       arguments: {
+                              //         'userData': widget.userData,
+                              //         'foundationIdClick':
+                              //             widget.userData['foundation_id']
+                              //       });
+                              // });
                               // ignore: use_build_context_synchronously
                               Future.microtask(() {
                                   showDialog(

@@ -72,7 +72,7 @@ class NgoProfileState extends State<NgoProfile> {
         widget.userData['user']['foundation']['id'] == widget.foundationIdClick;
     print('petData en ngoProfile: ${widget.petData}');
     final String description = foundFoundation['descripcion'];
-    final int maxLines = (description.length / 2).toInt();
+    final int maxLines = description.length ~/ 2; //NOTE::FR:: Se cambio de (description.length / 2).toInt();
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(

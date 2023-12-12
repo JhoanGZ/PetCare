@@ -48,7 +48,8 @@ Future<void> authenticationLogin(
           // Navega a la pantalla de inicio y pasa los datos necesarios
           if (userAuth) {
             print('LOGIN EXITOSO!');
-            Navigator.of(context).pushNamed(AppRoutes.home, arguments: {
+            //NOTE: se cambio pushName a pushReplacementNamed()
+            Navigator.of(context).pushReplacementNamed(AppRoutes.home, arguments: {
                 'userData': userData,
               },
             );

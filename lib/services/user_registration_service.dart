@@ -77,7 +77,11 @@ Future<void> registrationService(
           print('Respuesta de la API: $responseData');
 
           print('Registro Exítoso');
-          Navigator.of(context).pushNamed(AppRoutes.logIn);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.logIn,
+            (route) => false,
+          );
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('¡Felicitaciones! ¡Ya estás registrado!👍'),
