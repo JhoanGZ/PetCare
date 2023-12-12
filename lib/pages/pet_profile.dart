@@ -59,65 +59,7 @@ class _PetProfileState extends State<PetProfile> {
   @override
   Widget build(BuildContext context) {
     final String apitoken = widget.userData['user']['api_token'];
-    final dynamic estadoMascota = widget.petData['estadoMascota'];
-
-  //   "PetData-":[
-  //  {
-  //     "id":1,
-  //     "imagen":"assets/images/Bruno.jpg",
-  //     "vacunas":Vacuna1,
-  //     Vacuna2,
-  //     "nombre":"Peludito",
-  //     "raza":"Labrador",
-  //     "peso":15,
-  //     "chip":1,
-  //     "sexo":1,
-  //     "esteril":0,
-  //     "edad":2,
-  //     "anotaciones":"Juguetón y cariñoso",
-  //     "idAdoptante":0,
-  //     "idFundacion":1,
-  //     "estadoMascota":1,
-  //     "created_at":"2023-12-10T20":"30":48.000000Z,
-  //     "updated_at":"2023-12-10T20":"30":48.000000Z,
-  //     "adoptante":null,
-  //     "foundation":{
-  //        "id":1,
-  //        "idUser":1,
-  //        "rut":11-1111111,
-  //        "email":fundacion1@example.com,
-  //        "nombre":"Fundación Pata Feliz",
-  //        "cantPublicActiva":50,
-  //        "cantAdopciones":20,
-  //        "descripcion":"Somos una fundación dedicada al cuidado y adopción de mascotas.",
-  //        "imagen":"assets/images/fundacion perfil.png",
-  //        "direccion":"Calle de las Mascotas",
-  //        123,
-  //        "usuarioActivo":1,
-  //        "created_at":"2023-12-10T20":"23":11.000000Z,
-  //        "updated_at":"2023-12-10T20":"23":11.000000Z
-  //     }
-  //  },
-  
-   {
-      // "id":2,
-      // "imagen":"assets/images/gatitos luigui.png",
-      // "vacunas":Vacuna1,
-      // "nombre":"Firulais",
-      // "raza":"Bulldog",
-      // "peso":20,
-      // "chip":1,
-      // "sexo":1,
-      // "esteril":1,
-      // "edad":3,
-      // "anotaciones":"Le encanta dormir",
-      // "idAdoptante":0,
-      // "idFundacion":2,
-      // "estadoMascota":1,
-      // "created_at":"2023-12-10T20":3
-
-    print('este es el apitoken en pet_profile $apitoken');
-
+    final int estadoMascota = widget.petData[13];
     return Scaffold(
         appBar: AppBar(
           shape: const RoundedRectangleBorder(

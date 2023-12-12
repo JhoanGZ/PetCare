@@ -20,8 +20,10 @@ Future<void> petRegistration(
     TextEditingController descriptionController,
     String apiToken,
     int foundationId,
+    int estadoMascota,
+    BuildContext context
     
-    BuildContext context) async {
+  ) async {
   // print('Datos recibidos en petRegistration:');
   // print('Pet Photo: ${petPhoto.path}');
   // print('Name: ${nameController.text}');
