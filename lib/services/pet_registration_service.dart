@@ -7,33 +7,36 @@ import 'package:petcare_app/config/app_routes.dart';
 import 'package:petcare_app/config/app_urls.dart';
 
 Future<void> petRegistration(
-  GlobalKey<FormState> formKey,
-  File petPhoto,
-  TextEditingController nameController,
-  TextEditingController vaccineController,
-  TextEditingController raceController,
-  TextEditingController chipController,
-  TextEditingController weightController,
-  TextEditingController sterilizationController,
-  TextEditingController genderController,
-  TextEditingController ageController,
-  TextEditingController descriptionController,
-  String apiToken,
-  BuildContext context
+    GlobalKey<FormState> formKey,
+    File petPhoto,
+    TextEditingController nameController,
+    TextEditingController vaccineController,
+    TextEditingController raceController,
+    TextEditingController chipController, //int
+    TextEditingController weightController,
+    TextEditingController sterilizationController, //int
+    TextEditingController genderController, //int
+    TextEditingController ageController,
+    TextEditingController descriptionController,
+    String apiToken,
+    int foundationId,
+    
+    BuildContext context) async {
+  // print('Datos recibidos en petRegistration:');
+  // print('Pet Photo: ${petPhoto.path}');
+  // print('Name: ${nameController.text}');
+  // print('Vaccine: ${vaccineController.text}');
+  // print('Race: ${raceController.text}');
+  // print('Chip: ${chipController.text}');
+  // print('Weight: ${weightController.text}');
+  // print('Sterilization: ${sterilizationController.text}');
+  // print('Gender: ${genderController.text}');
+  // print('Age: ${ageController.text}');
+  // print('Description: ${descriptionController.text}');
+  // print('ApiToken: $apiToken');
+  // print('ApiToken: $foundationId');
 
-) async {
-  print('Datos recibidos en petRegistration:');
-  print('Pet Photo: ${petPhoto.path}');
-  print('Name: ${nameController.text}');
-  print('Vaccine: ${vaccineController.text}');
-  print('Race: ${raceController.text}');
-  print('Chip: ${chipController.text}');
-  print('Weight: ${weightController.text}');
-  print('Sterilization: ${sterilizationController.text}');
-  print('Gender: ${genderController.text}');
-  print('Age: ${ageController.text}');
-  print('Description: ${descriptionController.text}');
-  print('ApiToken: $apiToken');
+  String foundationIdConv = foundationId.toString();
 
   if (formKey.currentState!.validate()) {
     String name = nameController.text;
@@ -45,6 +48,20 @@ Future<void> petRegistration(
     String gender = genderController.text;
     String age = ageController.text;
     String description = descriptionController.text;
+    
+    //Convertions 
+
+    String sterilizationConv = sterilization == 'false' ? '0' : '1';
+    int sterilizationConvToInt = int.parse(sterilizationConv);
+    String chipConv = chip == 'false' ? '0' : '1';
+    int chipConvToInt = int.parse(chipConv);
+    String genderConv = gender == 'true' ? '0' : '1';
+    int genderContToInt = int.parse(genderConv);
+
+    print('tipo de dato chipConv ${chipConvToInt.runtimeType}');
+    print('tipo de dato sterilization ${sterilizationConvToInt.runtimeType}');
+    print('tipo de dato sterilization ${genderContToInt.runtimeType}');
+
     try {
       final response = await http.post(
         Uri.parse('${AppUrls.baseUrlLocal}/api/pets/store'),
@@ -58,12 +75,13 @@ Future<void> petRegistration(
           'nombre': name,
           'raza': race,
           'peso': weight,
-          'chip': chip,
-          'sexo': gender,
-          'esteril': sterilization,
+          'chip': chipConvToInt,
+          'sexo': genderContToInt,
+          'esteril': sterilizationConvToInt,
           'edad': age,
           'anotaciones': description,
-          'api_token': apiToken
+          'api_token': apiToken,
+          'foundationId': foundationIdConv
         },
       );
 

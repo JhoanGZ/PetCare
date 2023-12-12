@@ -57,9 +57,9 @@ class _PetProfileState extends State<PetProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final String apitoken = widget.userData['user'][
-        'api_token']; //Gracias Francis! te pase userData completo jhoan, esta es la ruta para acceder al apitoken
+    final String apitoken = widget.userData['user']['api_token'];
     print('este es el apitoken en pet_profile $apitoken');
+    
     return Scaffold(
         appBar: AppBar(
           shape: const RoundedRectangleBorder(
@@ -343,6 +343,7 @@ class _PetProfileState extends State<PetProfile> {
                         _ageController,
                         _descriptionController,
                         apitoken,
+                        widget.foundationIdClick,
                         context,
                       );
                       print(
