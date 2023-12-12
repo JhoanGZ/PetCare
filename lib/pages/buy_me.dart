@@ -7,9 +7,9 @@ import 'package:petcare_app/services/app_donation_service.dart';
 class BuyMe extends StatefulWidget {
   final dynamic userData;
   final String photoPet;
-  final int? idPet;
+  final int idPet;
   const BuyMe(
-      {super.key, required this.photoPet, this.userData, this.idPet});
+      {super.key, required this.photoPet, this.userData, required this.idPet});
 
   @override
   State<BuyMe> createState() => _BuyMeState();
@@ -20,8 +20,6 @@ class _BuyMeState extends State<BuyMe> {
   late String photoPet;
   late String statement;
   late String donationAmount;
-  late String idUser;
-  late String idPet;
 
   @override
   void initState() {
@@ -41,14 +39,18 @@ class _BuyMeState extends State<BuyMe> {
 
   @override
   Widget build(BuildContext context) {
+    print('En buyme, idPet: ${widget.idPet.runtimeType}');
+    print('En buyme, idUser: ${widget.userData['user']['id'].runtimeType}');
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Center(
             child: Padding(
           padding: const EdgeInsets.fromLTRB(35, 67, 30, 0),
+          // ignore: unnecessary_string_interpolations
           child: Column(children: <Widget>[
-            Text('${widget.idPet ?? 'hola nene'}'),
+            Text('${widget.idPet}'),
             Image.asset(
               photoPet,
               width: 200, // Ancho deseado
@@ -86,6 +88,11 @@ class _BuyMeState extends State<BuyMe> {
                       margin: const EdgeInsets.only(top: 20, bottom: 26),
                       child: ElevatedButton(
                         onPressed: () async {
+                          print('En buyme, idPet: ${widget.idPet}');
+                          print(
+                              'En buyme, idUser: ${widget.userData['user']['id']}');
+                          print('En buyme, donationAmount: $donationAmount');
+                          print('En buyme, userData: ${widget.userData}');
                           if (_formBuyMeKey.currentState!.validate()) {
                             if (widget.photoPet.isEmpty) {
                               await sendDonationApp(
@@ -94,14 +101,13 @@ class _BuyMeState extends State<BuyMe> {
                                 context,
                               );
                             } else {
-                            await sendDonationPet(
-                              _formBuyMeKey,
-                                donationAmount, 
-                                idPet, 
-                                idUser, 
-                                widget.userData,
-                                context
-                              );
+                              await sendDonationPet(
+                                  _formBuyMeKey,
+                                  donationAmount,
+                                  widget.idPet,
+                                  widget.userData['user']['id'],
+                                  widget.userData,
+                                  context);
                             }
                           }
                         },
