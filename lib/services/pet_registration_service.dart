@@ -60,9 +60,11 @@ Future<void> petRegistration(
     String genderConv = gender == 'true' ? '0' : '1';
     int genderContToInt = int.parse(genderConv);
 
+
     print('tipo de dato chipConv ${chipConvToInt.runtimeType}');
     print('tipo de dato sterilization ${sterilizationConvToInt.runtimeType}');
-    print('tipo de dato sterilization ${genderContToInt.runtimeType}');
+    print('tipo de dato gender ${genderContToInt.runtimeType}');
+    print('tipo de dato ESTADOMASCOTA ${estadoMascota.runtimeType}');
 
     try {
       final response = await http.post(
@@ -73,6 +75,7 @@ Future<void> petRegistration(
           'Access-Control-Allow-Origin': '*',
         }, //TODO: ::LN:: Asignar Endpoint
         body: {
+          'imagen': petPhoto,
           'vacuna': vaccine,
           'nombre': name,
           'raza': race,
@@ -82,7 +85,7 @@ Future<void> petRegistration(
           'esteril': sterilizationConvToInt,
           'edad': age,
           'anotaciones': description,
-          'api_token': apiToken,
+          'estadoMascota': estadoMascota,
           'foundationId': foundationIdConv
         },
       );
@@ -130,7 +133,9 @@ Future<void> petRegistration(
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Error al conectar con la API. Por favor, inténtalo de nuevo.'),
+            'Error al conectar con la API. Por favor, inténtalo de nuevo.😶‍🌫️',
+            textAlign: TextAlign.center,
+          ),
           duration: Duration(seconds: 3),
         ),
       );

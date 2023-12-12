@@ -59,7 +59,9 @@ class _PetProfileState extends State<PetProfile> {
   @override
   Widget build(BuildContext context) {
     final String apitoken = widget.userData['user']['api_token'];
-    final int estadoMascota = widget.petData[13];
+    final Map<String, dynamic> petDataPetProfile = widget.petData[1];
+    final int estadoMascota = petDataPetProfile['estadoMascota'];
+    
     return Scaffold(
         appBar: AppBar(
           shape: const RoundedRectangleBorder(

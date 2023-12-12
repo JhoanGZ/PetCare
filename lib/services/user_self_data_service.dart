@@ -47,8 +47,9 @@ Future<void> userSelfData(
     ScaffoldMessenger.of(context as BuildContext).showSnackBar(
       const SnackBar(
         content: Text(
-          'Error al conectar con la API. Por favor, inténtalo de nuevo.',
-        ),
+              'Error al conectar con la API. Por favor, inténtalo de nuevo.😶‍🌫️',
+              textAlign: TextAlign.center,
+            ),
         duration: Duration(seconds: 3),
       ),
     );
