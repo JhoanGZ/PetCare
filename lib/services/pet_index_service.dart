@@ -36,6 +36,7 @@ class PetIndexService {
     } catch (e) {
       // 5. Captura cualquier excepción durante la solicitud HTTP
       print('Error en la solicitud HTTP: $e');
+      
       throw Exception('Error al cargar la lista de pets. Detalles: $e');
     }
   }
