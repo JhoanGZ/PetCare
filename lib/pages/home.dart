@@ -43,7 +43,7 @@ class HomeState extends State<Home> {
         ? true
         : false; //TODO: CAMBIAR ESTO EN EL ESTADO FINAL A == null (ahora se usa para testing)
     dynamic user = widget.userData['user'] ?? 'Usuario no disponible';
-    dynamic userImage = widget.userData['imagen'] ?? 'assets/images/pic_default_user.png'; //BUG::FS:: Revisar mákina
+
     print('userData in home_build : ${widget.userData}');
 
     print('user: $user');
@@ -60,7 +60,7 @@ class HomeState extends State<Home> {
         ),
         title: Row(
           children: [
-Image.asset(
+          Image.asset(
               'assets/images/logo_petcare_blanco.png',
               width: 21,
               height: 21,
