@@ -49,6 +49,7 @@ Future<void> petRegistration(
       final response = await http.post(
         Uri.parse('${AppUrls.baseUrlLocal}/api/pets/store'),
         headers: {
+          'Authorization': 'Bearer $apiToken',
           'Accept': 'application/json',
           'Access-Control-Allow-Origin': '*',
         }, //TODO: ::LN:: Asignar Endpoint

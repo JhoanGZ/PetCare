@@ -72,7 +72,9 @@ class NgoProfileState extends State<NgoProfile> {
         widget.userData['user']['foundation']['id'] == widget.foundationIdClick;
     print('petData en ngoProfile: ${widget.petData}');
     final String description = foundFoundation['descripcion'];
-    final int maxLines = description.length ~/ 2; //NOTE::FR:: Se cambio de (description.length / 2).toInt();
+    final int maxLines = description.length ~/
+        2; //NOTE::FR:: Se cambio de (description.length / 2).toInt();
+    final int post = filteredPets.length;
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -92,7 +94,6 @@ class NgoProfileState extends State<NgoProfile> {
               width: 21,
               height: 21,
             ),
-
           ],
         ), // Widget del título del AppBar
         backgroundColor: PetCareColors.brandPrimaryColor,
@@ -154,7 +155,7 @@ class NgoProfileState extends State<NgoProfile> {
             Container(
                 margin: const EdgeInsets.only(left: 46, right: 100, top: 20),
                 child: Text(
-                  '${foundFoundation['cantPublicActiva']}',
+                  '$post',
                   style: PetCareThemes.nameProfileTextStyle,
                 )),
             Container(
