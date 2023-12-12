@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petcare_app/design/themes.dart';
-import 'package:petcare_app/services/donation_pet_service.dart';
-import 'package:petcare_app/services/donation_petcare_service.dart';
+import 'package:petcare_app/services/pet_donation_service.dart';
+import 'package:petcare_app/services/app_donation_service.dart';
 
 class BuyMe extends StatefulWidget {
   final dynamic userData;
@@ -29,7 +29,7 @@ class _BuyMeState extends State<BuyMe> {
     // Revisa si la variable está vacía al iniciar la pantalla
     if (widget.photoPet.isEmpty) {
       statement =
-          'PetCare se financia mediante contribuciones estatales y voluntarias para ayudar a las mascotas en situación de rescate. ¡Gracias por tu aporte 🐶!';
+          'PetCare se financia mediante contribuciones estatales y voluntarias para ayudar a las mascotas en situación de rescate. ¡Agradecemos tu donación de ❤️🐶!';
       // Asigna un valor si la variable está vacía
       photoPet = 'assets/images/logo_petcare.png';
     } else {
@@ -88,47 +88,20 @@ class _BuyMeState extends State<BuyMe> {
                         onPressed: () async {
                           if (_formBuyMeKey.currentState!.validate()) {
                             if (widget.photoPet.isEmpty) {
-                              await sendDonationPetcare(
+                              await sendDonationApp(
                                 _formBuyMeKey,
                                 donationAmount,
                                 context,
                               );
-                              // Future.microtask(() {
-                              //   Navigator.of(context).popAndPushNamed(
-                              //     AppRoutes.logIn,
-                              //   );
-                              // });
                             } else {
-                              await sendDonationPet(_formBuyMeKey,
-                                  donationAmount, idPet, idUser, context);
-                              // Future.microtask(() {
-                              //   Navigator.of(context).popAndPushNamed(
-                              //       AppRoutes.home,
-                              //       arguments: {
-                              //         'userData': widget.userData,
-                              //         'foundationIdClick':
-                              //             widget.userData['foundation_id']
-                              //       });
-                              // });
-                              // ignore: use_build_context_synchronously
-                              Future.microtask(() {
-                                  showDialog(
-                                  context: context,
-                                  builder: (BuildContext context){
-                                    return AlertDialog(
-                                      title: const Text('Donación Enviada ✅'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('Cerrar'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              });
+                            await sendDonationPet(
+                              _formBuyMeKey,
+                                donationAmount, 
+                                idPet, 
+                                idUser, 
+                                widget.userData,
+                                context
+                              );
                             }
                           }
                         },
