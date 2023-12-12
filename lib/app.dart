@@ -121,9 +121,18 @@ class PetCareApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (context) => const AdoptionConfirm());
 
+
           case AppRoutes.adoptionAccept:
+            Map<String, dynamic>? arguments = settings.arguments as Map<String, dynamic>?;
+            List<dynamic> petData = arguments?['petData'] ?? <dynamic>[];
+            final int foundationIdClick =
+                arguments?['foundationIdClick'] ?? '';
             return MaterialPageRoute(
-                builder: (context) => const AdoptionAccept());
+                builder: (context) => AdoptionAccept(
+                  userData: arguments?['userData'] ?? 'Invitado',
+                  petData: petData,
+                  foundationIdClick: foundationIdClick, 
+                ));
 
           case AppRoutes.donationConfirm:
             return MaterialPageRoute(
@@ -152,17 +161,17 @@ class PetCareApp extends StatelessWidget {
             Map<String, dynamic>? arguments =
                 settings.arguments as Map<String, dynamic>?;
             List<dynamic> petData = arguments?['petData'] ?? <dynamic>[];
-              final int foundationIdClick =
+            final int foundationIdClick =
                 arguments?['foundationIdClick'] ?? '';
+
             return MaterialPageRoute(
               builder: (context) => PetProfile(
-                // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userData: arguments?['userData'] ?? 'Invitado',
                 foundationIdClick: foundationIdClick, 
-                petData: petData
+                petData: petData,
               ),
             );
-
+          
           case AppRoutes.contact:
             return MaterialPageRoute(builder: (context) => const Contact());
 
@@ -179,7 +188,6 @@ class PetCareApp extends StatelessWidget {
                 // Usar ?? para proporcionar valores predeterminados si las variables no están presentes
                 userData: arguments?['userData'] ?? 'Invitado',
                 photoPet: photoPet,
-
                 idPet: idPet
               ),
             );
