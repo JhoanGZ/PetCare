@@ -8,7 +8,7 @@ import 'package:petcare_app/config/app_urls.dart';
 
 Future<void> sendDonationApp(
   GlobalKey<FormState> formKey,
-  String donationAmount, 
+  int donationAmount, 
   BuildContext context
 ) async {
   print('Se recibe dato en donation_petcara_service:$donationAmount');

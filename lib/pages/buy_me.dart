@@ -17,14 +17,15 @@ class BuyMe extends StatefulWidget {
 
 class _BuyMeState extends State<BuyMe> {
   final _formBuyMeKey = GlobalKey<FormState>();
+  late TextEditingController _donationAmount;
   late String photoPet;
   late String statement;
-  late String donationAmount;
+  late int donationAmount;
 
   @override
   void initState() {
     super.initState();
-    // Revisa si la variable está vacía al iniciar la pantalla
+    _donationAmount = TextEditingController();
     if (widget.photoPet.isEmpty) {
       statement =
           'PetCare se financia mediante contribuciones estatales y voluntarias para ayudar a las mascotas en situación de rescate. ¡Agradecemos tu donación de ❤️🐶!';
@@ -69,6 +70,7 @@ class _BuyMeState extends State<BuyMe> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _donationAmount,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter
                             .digitsOnly, //NOTE Solo dígitos
@@ -77,7 +79,7 @@ class _BuyMeState extends State<BuyMe> {
                         if (amount == null || amount.isEmpty) {
                           return 'Ingrese el monto a enviar';
                         }
-                        donationAmount = amount;
+                        donationAmount = int.parse(amount);
                         return null;
                       },
                       keyboardType: TextInputType.number,
@@ -88,9 +90,9 @@ class _BuyMeState extends State<BuyMe> {
                       margin: const EdgeInsets.only(top: 20, bottom: 26),
                       child: ElevatedButton(
                         onPressed: () async {
+                          donationAmount = _donationAmount.text as int;
                           print('En buyme, idPet: ${widget.idPet}');
-                          print(
-                              'En buyme, idUser: ${widget.userData['user']['id']}');
+                          print('En buyme, idUser: ${widget.userData['user']['id']}');
                           print('En buyme, donationAmount: $donationAmount');
                           print('En buyme, userData: ${widget.userData}');
                           if (_formBuyMeKey.currentState!.validate()) {
@@ -102,12 +104,13 @@ class _BuyMeState extends State<BuyMe> {
                               );
                             } else {
                               await sendDonationPet(
-                                  _formBuyMeKey,
-                                  donationAmount,
-                                  widget.idPet,
-                                  widget.userData['user']['id'],
-                                  widget.userData,
-                                  context);
+                                _formBuyMeKey,
+                                donationAmount,
+                                widget.idPet,
+                                widget.userData['user']['id'],
+                                widget.userData,
+                                context
+                              );
                             }
                           }
                         },

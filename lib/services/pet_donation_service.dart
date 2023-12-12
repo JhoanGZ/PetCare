@@ -7,11 +7,11 @@ import 'package:petcare_app/config/app_urls.dart';
 
 Future<void> sendDonationPet(
 GlobalKey<FormState> formKey,
-String donationAmount,
-int idPet,
-String idUser,
-dynamic userData,
-BuildContext context) async {
+  int donationAmount,
+  int idPet,
+  String idUser,
+  dynamic userData,
+  BuildContext context) async {
 
   print('Se recibe dato en donation_pet_service:$donationAmount');
   print('Se recibe dato en donation_pet_service:$idPet');
