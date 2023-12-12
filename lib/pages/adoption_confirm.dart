@@ -44,8 +44,7 @@ class AdoptionConfirm extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutes.home); //TODO: se debe enviar user, token
+                    Navigator.of(context).pushNamed(AppRoutes.home); //TODO: se debe enviar user, token
                   },//BUG: Type of String cuando se manda el pushNamed
                   style: PetCareButtonStyles.elevatedButtonStyle,
                   child: const Text('Entendido'),

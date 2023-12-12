@@ -75,6 +75,7 @@ class NgoProfileState extends State<NgoProfile> {
     final int maxLines = description.length ~/
         2; //NOTE::FR:: Se cambio de (description.length / 2).toInt();
     final int post = filteredPets.length;
+    print('esto es filterdPets $filteredPets');
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -140,7 +141,13 @@ class NgoProfileState extends State<NgoProfile> {
                   ),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AppRoutes.adoptionAccept);
+                      // Navigator.of(context).pushNamed(AppRoutes.adoptionAccept);
+                      Navigator.of(context)
+                          .pushNamed(AppRoutes.adoptionAccept, arguments: {
+                        'userData': widget.userData,
+                        'foundationIdClick': widget.foundationIdClick,
+                        'petData': widget.petData
+                      });
                     },
                     icon: Image.asset(
                       'assets/images/icon_notification.png',
@@ -201,14 +208,14 @@ class NgoProfileState extends State<NgoProfile> {
                       //   'foundationId': widget.userData,
                       // },
                       // );
-                  Navigator.of(context).pushNamed(
-                    AppRoutes.petProfile,
-                    arguments: {
-                      'userData': widget.userData,
-                      'foundationIdClick': widget.foundationIdClick,
-                      'petData': widget.petData
-                    },
-                  );
+                      Navigator.of(context).pushNamed(
+                        AppRoutes.petProfile,
+                        arguments: {
+                          'userData': widget.userData,
+                          'foundationIdClick': widget.foundationIdClick,
+                          'petData': widget.petData
+                        },
+                      );
                     },
                     style: PetCareLittleButtonStyles.elevatedButtonStyle,
                     child: const Text('Agregar nuevo'),
