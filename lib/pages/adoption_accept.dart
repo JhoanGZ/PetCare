@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/design/themes.dart';
 
 class AdoptionAccept extends StatefulWidget {
-  const AdoptionAccept({super.key});
+  final dynamic userData;
+  final int foundationIdClick;
+  final List<dynamic> petData;
+  const AdoptionAccept(
+      {super.key,
+      this.userData,
+      required this.foundationIdClick,
+      required this.petData});
 
   @override
   State<AdoptionAccept> createState() => _AdoptionAcceptState();
 }
 
 class _AdoptionAcceptState extends State<AdoptionAccept> {
-  late TextEditingController _nameController;
 
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController();
 
-    _nameController.text = " Francisco Soto: Bruno(123)"; //texto del contenedor
-  }
 
   @override
   Widget build(BuildContext context) {
+    print('esto es userdata ${widget.userData}');
+    print('esto es foundationidClick ${widget.foundationIdClick}');
+    print('esto es petData ${widget.petData}');
+    final Map<String, dynamic> mapjason = widget.petData[1];
+    print('este es el mapjson $mapjason');
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -37,41 +42,10 @@ class _AdoptionAcceptState extends State<AdoptionAccept> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 60,
-              margin: const EdgeInsets.only(top: 14.82, bottom: 30.63),
-              child: TextFormField(
-                controller: _nameController,
-
-                readOnly: true, //esto hace que sea de solo lectura
-                decoration: PetCareInputStyle(labelText: '').regularInput,
-              ),
-            ),
-            Center(
+            const Center(
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Image.asset(
-                    'assets/images/icon_pdf.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      print('todo bien');
-                      //TODO: aqui se debe descargar pdf
-                      //logica del text buton Logic:
-                    },
-                    child: const Text(
-                      'Formulario_de_adopción.pdf',
-                      style: PetCareThemes.linkTextStyle,
-                    ),
-                  ),
+                  
                 ],
               ),
             ),
@@ -86,20 +60,7 @@ class _AdoptionAcceptState extends State<AdoptionAccept> {
             const SizedBox(
               height: 20,
             ),
-            const MyButtonsRow(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MyButtonsRow extends StatelessWidget {
-  const MyButtonsRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
+            Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(
@@ -131,8 +92,13 @@ class MyButtonsRow extends StatelessWidget {
           child: const Text('Aceptar'),
         ),
       ],
+      )
+          ],
+        ),
+      ),
     );
   }
+}
 
   void _showConfirmationDialog(BuildContext context, String action) {
     showDialog(
@@ -143,6 +109,7 @@ class MyButtonsRow extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               onPressed: () {
+                //aqui se actualizan los datoooooooooooooooos
                 Navigator.of(context).pop();
               },
               child: const Text('Cancelar'),
@@ -164,4 +131,4 @@ class MyButtonsRow extends StatelessWidget {
       },
     );
   }
-}
+
