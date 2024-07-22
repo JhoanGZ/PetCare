@@ -1,6 +1,6 @@
-<p align="center">
-  <h1><strong>PetCare - Flutter Application</strong></h1>
-</p>
+
+<h1 align="center"><strong>PetCare - Flutter Application</strong></h1>
+
 
 <p align="center">
   <img src="https://github.com/JhoanGZ/PetCare_FrontEnd/blob/main/assets/images/logo_petcare.png?raw=true" alt="PetCare Logo" />
