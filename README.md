@@ -1,5 +1,5 @@
 <p align="center">
-   <strong>PetCare - Flutter Application</strong>
+  <h1><strong>PetCare - Flutter Application</strong></h1>
 </p>
 
 <p align="center">
