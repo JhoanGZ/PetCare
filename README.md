@@ -7,7 +7,8 @@
 </p>
 
 
-PetCare is a comprehensive Flutter application designed to help pet owners manage their pets' health and well-being. This project was collaboratively developed as part of a university module in software engineering, focusing on the development of mobile applications.
+PetCare is a comprehensive Flutter application designed to help pet foundations to manage their pets' profiles and give a donors and new adopting owners the opportunity to help a pet needed for home. 
+This project was collaboratively developed as part of a university module in software engineering, we, as a team, chose to develope this project in Flutter/Laravel.
 
 ## Features
 
@@ -32,7 +33,7 @@ Before you begin, ensure you have met the following requirements:
 
 - You have installed the latest version of [Flutter](https://flutter.dev/docs/get-started/install)
 - You have a compatible IDE such as [Android Studio](https://developer.android.com/studio) or [Visual Studio Code](https://code.visualstudio.com/)
-- You have set up a Firebase project and added the necessary configuration files
+- You have set up the PetCare - BackEnd Project and added the necessary configuration files
 
 ### Installation
 
