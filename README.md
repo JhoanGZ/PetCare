@@ -1,6 +1,8 @@
 # PetCare - Flutter Application
 
-![PetCare Logo](https://github.com/JhoanGZ/PetCare_FrontEnd/blob/main/assets/images/logo_petcare.png?raw=true)
+<p align="center">
+  <img src="https://github.com/JhoanGZ/PetCare_FrontEnd/blob/main/assets/images/logo_petcare.png?raw=true" alt="PetCare Logo" />
+</p>
 
 
 PetCare is a comprehensive Flutter application designed to help pet owners manage their pets' health and well-being. This project was collaboratively developed as part of a university module in software engineering, focusing on the development of mobile applications.
