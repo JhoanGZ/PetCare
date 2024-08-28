@@ -33,6 +33,7 @@ Before you begin, ensure you have met the following requirements:
 
 - You have installed the latest version of [Flutter](https://flutter.dev/docs/get-started/install)
 - You have a compatible IDE such as [Android Studio](https://developer.android.com/studio) or [Visual Studio Code](https://code.visualstudio.com/)
+- You have Android Studio for Mobile Virtualization Management and features
 - You have set up the PetCare - BackEnd Project and added the necessary configuration files
 
 ### Installation
