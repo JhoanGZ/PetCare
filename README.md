@@ -100,10 +100,10 @@ dev_dependencies:
     sdk: flutter
 
 ```
-License
+## License
 This project is licensed under the Apache License, Version 2.0. See the LICENSE file for more details.
 
-Acknowledgements
+## Acknowledgements
 Special thanks to my partners and friend from my university and professors for their support and guidance for this midterm studies project.
 Thanks to the Flutter communities for their excellent resources and support.
 
