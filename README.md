@@ -8,7 +8,8 @@
 
 
 PetCare is a comprehensive Flutter application designed to help pet foundations to manage their pets' profiles and give a donors and new adopting owners the opportunity to help a pet needed for home. 
-This project was collaboratively developed as part of a university module in software engineering, we, as a team, chose to develope this project in Flutter/Laravel.
+This project was collaboratively developed as part of a university module in software engineering. 
+We, as a team, chose to develope this project in Flutter/Laravel.
 
 ## Features
 
