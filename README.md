@@ -24,7 +24,8 @@ We, as a team, chose to develope this project in Flutter/Laravel.
 
 - **Flutter**: For building the cross-platform mobile application
 - **Dart**: Programming language for Flutter development
-- **Laravel - SQL / Laragon**: Backend services for authentication, database, and notifications
+- **SQL**: Relational database management system
+- **Laravel - Laragon**: Backend services for authentication and notifications (API)
 
 ## Getting Started
 
